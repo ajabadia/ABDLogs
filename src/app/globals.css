@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../node_modules/@abd/styles/dist/**/*.js";
+@import "tw-animate-css";
 
 /* 🛠️ Carga del Core de Estilos Unificados de la Suite */
 @import "../../node_modules/@abd/styles/dist/styles/industrial-core.css";
