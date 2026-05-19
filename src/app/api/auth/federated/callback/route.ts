@@ -33,7 +33,28 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      return NextResponse.json({ error: 'Token exchange failed', detail: errorData }, { status: 401 });
+      console.warn('[TOKEN_EXCHANGE_FAILED]', errorData);
+
+      // Check if a valid session cookie already exists (e.g. from a concurrent double-request)
+      const sessionCookie = request.cookies.get('abd_session');
+      if (sessionCookie?.value) {
+        try {
+          const { verifyToken } = await import('@/lib/token-verifier');
+          const payload = await verifyToken(sessionCookie.value);
+          if (payload) {
+            console.log('[TOKEN_EXCHANGE] Found existing valid session, redirecting to state');
+            return NextResponse.redirect(new URL(state, request.url));
+          }
+        } catch (err) {
+          console.error('[TOKEN_EXCHANGE] Failed to verify existing session cookie:', err);
+        }
+      }
+
+      // Redirect to state with error query parameter instead of showing raw JSON
+      const redirectUrl = new URL(state, request.url);
+      redirectUrl.searchParams.set('error', 'auth_failed');
+      redirectUrl.searchParams.set('reason', errorData.error || 'unknown');
+      return NextResponse.redirect(redirectUrl);
     }
 
     const data = await response.json(); // Contiene { token, user }
