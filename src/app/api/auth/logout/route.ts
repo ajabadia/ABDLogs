@@ -28,7 +28,7 @@ export async function GET(request: Request) {
   }
 
   const providerLogoutUrl = `${process.env.AUTH_PROVIDER_URL || 'https://abd-auth.vercel.app'}/api/auth/logout`;
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3500';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3600';
   const redirectUri = `${appUrl}/logout-success`;
   
   const response = NextResponse.redirect(

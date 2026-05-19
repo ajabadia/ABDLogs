@@ -1,8 +1,8 @@
 @echo off
-SET PORT=3500
+SET PORT=3600
 echo.
 echo ==========================================
-echo    ABD GOBERNANZA - INICIO LOCAL (ROOT)
+echo    ABD LOGS - INICIO LOCAL (ROOT)
 echo ==========================================
 echo.
 
@@ -28,7 +28,7 @@ timeout /t 5 /nobreak >nul
 start http://localhost:%PORT%
 
 echo.
-echo ABD Gobernanza listo y corriendo en la raiz.
+echo ABD Logs listo y corriendo en la raiz.
 echo Presiona Ctrl+C en esta ventana para detener el servidor.
 echo.
 pause

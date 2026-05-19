@@ -36,7 +36,7 @@ export async function proxy(request: NextRequest) {
 
     // Block access if subdomain is active but tenant is not found or inactive in central IdP
     if (!tenantInfo || !tenantInfo.active) {
-      const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3500';
+      const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3600';
       return NextResponse.redirect(new URL(`${baseAppUrl}/logout-success?error=tenant_not_found`));
     }
   }
