@@ -222,6 +222,7 @@
     "viewFullHistory": "View Full History",
     "selectedOrganization": "Selected Organization",
     "controlConsole": "Control Console",
+    "logsTitle": "LOGS",
     "auditActivityHistory": "Audit History & SaaS Activity",
     "auditActivityDesc": "Detailed historical record of administration operations synchronized with the log server in real-time.",
     "organizaciones": "Organizations",

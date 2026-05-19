@@ -30,7 +30,7 @@ export default async function AdminPortalPage({ params }: { params: Promise<{ lo
             </div>
             
             <h1 className="text-3xl font-black uppercase italic tracking-tight text-foreground leading-none">
-              ABD <span className="text-primary">LOGS</span>
+              ABD <span className="text-primary">{t('logsTitle')}</span>
             </h1>
             
             <p className="text-sm text-muted-foreground font-sans mt-2 leading-relaxed">

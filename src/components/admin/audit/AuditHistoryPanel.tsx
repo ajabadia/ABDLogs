@@ -80,7 +80,7 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
     <div className="space-y-4">
       {/* Filtros Interactivos por Aplicación del Ecosistema */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border pb-3">
-        <button 
+        <button aria-label={t('filterAllLabel', { defaultMessage: 'Filtrar todos los logs' })}
           onClick={() => setFilter('ALL')}
           className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
             filter === 'ALL'
@@ -90,7 +90,7 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
         >
           {t('audit_filter_all', { defaultMessage: 'Todos los Logs' })}
         </button>
-        <button 
+        <button aria-label={t('filterAuthLabel', { defaultMessage: 'Filtrar por logs de autenticación' })}
           onClick={() => setFilter('AUTH')}
           className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
             filter === 'AUTH'
@@ -100,7 +100,7 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
         >
           ABD Auth
         </button>
-        <button 
+        <button aria-label={t('filterQuizLabel', { defaultMessage: 'Filtrar por logs de evaluación' })}
           onClick={() => setFilter('QUIZ')}
           className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
             filter === 'QUIZ'
@@ -110,7 +110,7 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
         >
           ABD Quiz
         </button>
-        <button 
+        <button aria-label={t('filterGobernanzaLabel', { defaultMessage: 'Filtrar por logs de gobernanza' })}
           onClick={() => setFilter('GOBERNANZA')}
           className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
             filter === 'GOBERNANZA'
