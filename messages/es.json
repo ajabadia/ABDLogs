@@ -40,16 +40,16 @@
     "historyMenu": "Historial & Analíticas"
   },
   "home": {
-    "status": "Estado del Sistema: Operativo",
-    "tagline": "Consola central de gobernanza de tenants, administración de espacios corporativos y personalización en tiempo real con inyección SSR Zero-FOUC.",
-    "accessControlPlane": "ACCEDER AL CONTROL PLANE",
+    "status": "Servicio de Logs: Activo",
+    "tagline": "Consola centralizada de ingesta, auditoría técnica y trazabilidad de operaciones para todo el ecosistema ABD.",
+    "accessControlPlane": "ACCEDER AL PANEL DE AUDITORÍA",
     "engine": "Motor OMEGA",
     "style": "Tech-Noir v1.2",
     "version": "v1.0.0-PROD",
     "coreLabel": "Núcleo",
     "logicLabel": "Lógica",
     "styleLabel": "Estilo",
-    "tenants": "TENANTS"
+    "tenants": "LOGS"
   },
   "results": {
     "passed": "MISIÓN CUMPLIDA",

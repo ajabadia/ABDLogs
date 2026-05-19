@@ -53,58 +53,57 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         {/* Tactical Key Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6" role="region" aria-label="System Capabilities">
           
-          {/* Feature 1: Execution Engine */}
+          {/* Feature 1: Log Ingestion API */}
           <div className="p-6 bg-card border border-border rounded-xl flex flex-col gap-4">
             <div className="p-2.5 bg-secondary/10 border border-border text-primary w-fit rounded-lg">
-              <Palette className="w-5 h-5" />
+              <Cpu className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black uppercase tracking-wider text-foreground">
-              {locale === 'es' ? 'Marca Blanca en Caliente' : 'Hot White-Labeling'}
+              {locale === 'es' ? 'API de Ingesta' : 'Ingestion API'}
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {locale === 'es'
-                ? 'Generación dinámica de variables HSL y YIQ Contrast en el servidor de Next.js, logrando inyección directa instantánea.'
-                : 'Dynamic generation of HSL and YIQ Contrast custom tokens rendered during server-side SSR loops to secure zero visual flicker.'}
+                ? 'Ingesta ultrarrápida y no bloqueante mediante REST API con validación de seguridad por Bearer tokens inter-servicio.'
+                : 'High-performance, non-blocking ingestion via REST API secured with inter-service Bearer tokens.'}
             </p>
           </div>
 
-          {/* Feature 2: Scoring Systems */}
+          {/* Feature 2: Centralized Audit Trail */}
           <div className="p-6 bg-card border border-border rounded-xl flex flex-col gap-4">
             <div className="p-2.5 bg-secondary/10 border border-border text-primary w-fit rounded-lg">
-              <Layers className="w-5 h-5" />
+              <Database className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black uppercase tracking-wider text-foreground">
-              {locale === 'es' ? 'Jerarquías de Espacio' : 'Space Hierarchies'}
+              {locale === 'es' ? 'Trazabilidad Central' : 'Centralized Audit Trail'}
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {locale === 'es'
-                ? 'Aislamiento lógico perimetral a nivel de repositorio y materialized paths recursivos para aulas y organizaciones.'
-                : 'Logic boundaries and role isolation calculated inside data repositories with recursive materialized subdivisions.'}
+                ? 'Consulta e inspección unificada de logs de actividad técnica y operacional del ecosistema ABD en tiempo real.'
+                : 'Unified real-time query and inspection of technical and operational activity logs across the ABD ecosystem.'}
             </p>
           </div>
 
-          {/* Feature 3: Security & Deduplication */}
+          {/* Feature 3: Dynamic App Filtering */}
           <div className="p-6 bg-card border border-border rounded-xl flex flex-col gap-4">
             <div className="p-2.5 bg-secondary/10 border border-border text-primary w-fit rounded-lg">
-              <ShieldCheck className="w-5 h-5" />
+              <Sliders className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black uppercase tracking-wider text-foreground">
-              {locale === 'es' ? 'Seguridad Criptográfica' : 'Cryptographic Security'}
+              {locale === 'es' ? 'Filtro Dinámico' : 'Dynamic App Filtering'}
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {locale === 'es'
-                ? 'Cifrado simétrico AES-256-CBC nativo de credenciales, tokens y configuraciones de cobro persistidos en base de datos.'
-                : 'Symmetric AES-256-CBC envelope encryption protecting customer configuration and sensitive billing fields in the database.'}
+                ? 'Filtrado interactivo por aplicación de origen (Auth, Quiz, Gobernanza) y organización con agregación automática.'
+                : 'Interactive filtering by source application (Auth, Quiz, Governance) and organization with automatic aggregation.'}
             </p>
           </div>
 
         </div>
 
-        {/* Telemetry Footer */}
         <footer className="flex flex-col items-center gap-6 text-muted-foreground/50 font-mono text-[9px] uppercase tracking-[0.3em] pt-8" role="contentinfo">
           <Separator className="w-24 bg-border" aria-hidden="true" />
           <div className="flex gap-12">
-            <span>Control Plane: {h('version')}</span>
+            <span>{locale === 'es' ? 'Microservicio' : 'Microservice'}: {h('version')}</span>
             <span>Estilo: {h('style')}</span>
           </div>
         </footer>

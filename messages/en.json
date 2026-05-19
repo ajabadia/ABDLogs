@@ -40,16 +40,16 @@
     "historyMenu": "History & Analytics"
   },
   "home": {
-    "status": "System Status: Operational",
-    "tagline": "Central tenant governance console, corporate space administration, and real-time customizer with SSR Zero-FOUC injection.",
-    "accessControlPlane": "ACCESS CONTROL PLANE",
+    "status": "Logs Service: Active",
+    "tagline": "Centralized ingestion, technical auditing, and operations traceability console for the entire ABD ecosystem.",
+    "accessControlPlane": "ACCESS AUDIT PANEL",
     "engine": "OMEGA Engine",
     "style": "Tech-Noir v1.2",
     "version": "v1.0.0-PROD",
     "coreLabel": "Core",
     "logicLabel": "Logic",
     "styleLabel": "Style",
-    "tenants": "TENANTS"
+    "tenants": "LOGS"
   },
   "results": {
     "passed": "MISSION ACCOMPLISHED",
