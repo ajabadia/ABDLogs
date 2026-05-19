@@ -24,19 +24,25 @@ Este documento detalla la planificación estratégica, las fases del ecosistema 
 - **Fase 9: Jerarquía de Espacios & Rutas Materializadas**
   - Integrar el servicio backend `SpaceService` (con actualización recursiva en cascada) con la interfaz de usuario.
   - Modelo de tipología aséptica mediante `customSpaceLabels` derivado de la profundidad de cada nodo raíz.
+- **Fase 9.5: Refinamiento de Permisos Espaciales**
+  - Propagación jerárquica de visibilidad perimetral (`PUBLIC`, `INTERNAL`, `PRIVATE`) y formulario dinámico con herencia recursiva.
+- **Fase 10: Auditoría en Cadena SaaS & Multi-Conexión Mongoose**
+  - Conector secundario Fail-Safe para ingesta y enmascaramiento de logs delta en Atlas.
+  - Panel visual de historial delta (`AuditHistoryPanel.tsx`) y página de auditoría de seguridad desacoplada.
+- **Fase 11: Resiliencia de Sesiones Federadas en Producción & UI Estilizada**
+  - Enrutador de sesión Next.js 16 (`proxy.ts`), mitigación de loops en callback de Vercel y z-index adaptativo en panel lateral.
 
 ### 🟨 En Curso (Active Development)
-- **Fase 9.5: Refinamiento de Permisos Espaciales**
-  - Preparar la gestión de visibilidad (`INTERNAL`, `PRIVATE`, `PUBLIC`) por espacio materializado.
+- **Fase 12: Ingesta en Caliente & Monitoreo de Eventos en Tiempo Real**
+  - Auditoría de streaming de logs reactivos para la consola de control.
 
 ### 🟦 Próximamente (Future Roadmap)
-- **Fase 10: Auditoría en Cadena en MongoDB Atlas**
-  - Registro de auditoría centralizado para capturar cada cambio de marca y espacio.
-  - Visualización del historial de configuraciones por tenant.
+- **Fase 13: Reportes Ejecutivos de Seguridad e Inteligencia de Logs**
+  - Generación de sumarios consolidados de auditoría y análisis de anomalías operativas.
 
 ---
 
 ## 🔗 Enlaces Clave a Módulos Activos
 *   **Consola de Marca**: `/[locale]/admin/branding`
 *   **Gobernanza de Organizaciones**: `/[locale]/admin/tenants`
-*   **Documentación de Lecciones Aprendidas**: [LESSONS_LEARNED.md](file:///d:/desarrollos/ABDtenantGobernance/docs/LESSONS_LEARNED.md)
+*   **Documentación de Lecciones Aprendidas**: [LESSONS_LEARNED.md](file:///d:/desarrollos/ABDLogs/docs/LESSONS_LEARNED.md)

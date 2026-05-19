@@ -6,7 +6,7 @@ Este documento es el manifiesto de estado de gobernanza y sincronización de hit
 
 ## 📊 Estado Actual del Sistema: `SYS_CERTIFIED` ✅
 
-*   **Última Certificación**: 18 de Mayo de 2026 (Certificado bajo Next.js 16, React 19 y SSO Resiliente)
+*   **Última Certificación**: 20 de Mayo de 2026 (Certificado bajo Next.js 16, React 19, SSO Resiliente y UI Estilizada)
 *   **Compilación de Producción (`next build`)**: 100% Exitosa (Webpack y Turbopack optimizados)
 *   **Cumplimiento de Auditoría Industrial**: Cero Errores Técnicos (Audit Pipeline PASSED)
 *   **Puerto Oficial del Ecosistema**: `3600`
@@ -60,6 +60,12 @@ Este documento es el manifiesto de estado de gobernanza y sincronización de hit
 - [X] **Hito 10.7**: Refactorización de la infraestructura de scripts del pipeline de auditoría (`abd-audit.ps1`) erradicando las excepciones de ejecución de PowerShell mediante llamadas nativas, aislamiento de stderr (`2>$null`) y adaptación nativa de `npx` en entornos locales Windows corporativos.
 - [X] **Hito 10.8**: Despliegue oficial en producción en Vercel (`https://abd-tenant-gobernance.vercel.app/`), federación SSO activa con el IdP (`https://abd-auth.vercel.app`) y mapeo de variables de entorno asépticas.
 - [X] **Hito 10.9**: Optimización arquitectónica del Control Plane resolviendo las advertencias de tamaño de archivo (Remediación de límites de más de 200 líneas) mediante la extracción canónica de subcomponentes modulares autocontenidos (`ActionBadge.tsx`, `AuditDeltaViewer.tsx`, `ParentSpaceSelector.tsx` y `BorderRadiusSelector.tsx`), logrando un 100% de cumplimiento en higiene estática de archivos.
+
+### Fase 11: Resiliencia de Sesiones Federadas en Producción & UI Estilizada
+- [X] **Hito 11.1**: Migración y homogeneización canónica de los guards de sesión al proxy Next.js 16 (`proxy.ts`), desactivando y eliminando `middleware.ts`.
+- [X] **Hito 11.2**: Implementación de resiliencia en la desestimación de variables de entorno de desarrollo (`localhost`) en Vercel mediante detección en caliente de `process.env.VERCEL`.
+- [X] **Hito 11.3**: Corrección de superposiciones del z-index del botón de hamburguesa flotante en la interfaz unificada de `@abd/styles` (`TacticalSidebar`), asegurando visibilidad del disparador y cierre por encima del velo oscuro (`z-[55]`).
+- [X] **Hito 11.4**: Diagnóstico y documentación del bucle de redirección en Vercel debido a desalineación de claves criptográficas (`AUTH_JWT_SECRET`).
 
 ---
 

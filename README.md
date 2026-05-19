@@ -54,3 +54,4 @@ pnpm build
 | **`AUTH_URL`** | `http://localhost:3600` | `https://abd-logs.vercel.app` | URL de callback e inicio del flujo de Auth.js. |
 | **`APP_DOMAIN`** | `localhost:3600` | `abd-logs.vercel.app` | Dominio base para resolución. |
 | **`NEXT_PUBLIC_APP_URL`** | `http://localhost:3600` | `https://abd-logs.vercel.app` | URL pública de la aplicación para APIs y recursos. |
+| **`AUTH_JWT_SECRET`** | `abd-suite-shared-industrial-secret-2026-prod` | `[Misma clave compartida]` | Secreto compartido de firma simétrica para criptografía de sesión federada. |
