@@ -1,0 +1,24 @@
+{
+  "title": "Exam Setup",
+  "module": "MODULE",
+  "source": "SOURCE",
+  "skip": "Skip Question",
+  "bypassTask": "Bypass Task",
+  "analyzeLogic": "Analyze Logic",
+  "terminateManifest": "Terminate Manifest",
+  "commitProceed": "Commit & Proceed",
+  "timer": {
+    "global": "Global Time",
+    "question": "Question Time"
+  },
+  "navigation": {
+    "skip": "Skip",
+    "next": "Next",
+    "finish": "Finish"
+  },
+  "results": {
+    "score": "Score",
+    "percentage": "Percentage",
+    "explanation": "Explanation"
+  }
+}

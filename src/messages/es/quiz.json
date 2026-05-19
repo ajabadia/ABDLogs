@@ -1,0 +1,24 @@
+{
+  "title": "Configuración de Examen",
+  "module": "MÓDULO",
+  "source": "FUENTE",
+  "skip": "Saltar Pregunta",
+  "bypassTask": "Bypass de Tarea",
+  "analyzeLogic": "Analizar Lógica",
+  "terminateManifest": "Terminar Manifiesto",
+  "commitProceed": "Commit y Continuar",
+  "timer": {
+    "global": "Tiempo Global",
+    "question": "Tiempo Pregunta"
+  },
+  "navigation": {
+    "skip": "Saltar",
+    "next": "Siguiente",
+    "finish": "Finalizar"
+  },
+  "results": {
+    "score": "Puntuación",
+    "percentage": "Porcentaje",
+    "explanation": "Explicación"
+  }
+}

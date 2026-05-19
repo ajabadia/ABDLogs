@@ -1,0 +1,9 @@
+{
+  "appTitle": "ABDQuiz",
+  "startExam": "Comenzar Examen",
+  "trainingMode": "Entrenamiento",
+  "mockMode": "Simulacro",
+  "footer": {
+    "rights": "Todos los derechos reservados"
+  }
+}

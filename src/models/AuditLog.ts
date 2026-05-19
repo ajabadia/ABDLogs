@@ -1,0 +1,34 @@
+import { Schema, model, models } from 'mongoose';
+
+export interface IAuditLog {
+  appId: string;                        // Aplicación origen: 'auth', 'quiz', 'gobernanza'
+  tenantId: string;                     // ID de la organización o 'SYSTEM' para operaciones globales
+  action: string;                       // Ej: 'USER_LOGIN', 'SSO_HANDSHAKE_GRANTED', 'EXAM_CREATED'
+  entityType: 'USER' | 'TENANT' | 'SSO' | 'EXAM' | 'CONFIG' | 'SYSTEM';
+  entityId: string;                     // ID de la entidad afectada
+  userId: string;                       // ID del operador (actor)
+  userEmail: string;                    // Email del operador
+  changedFields: Record<string, unknown>; // Metadatos dinámicos del evento
+  ipAddress?: string;
+  userAgent?: string;
+  createdAt: Date;
+}
+
+const AuditLogSchema = new Schema<IAuditLog>({
+  appId: { type: String, required: true, index: true },
+  tenantId: { type: String, required: true, index: true },
+  action: { type: String, required: true, index: true },
+  entityType: { type: String, required: true },
+  entityId: { type: String, required: true },
+  userId: { type: String, required: true },
+  userEmail: { type: String, required: true },
+  changedFields: { type: Schema.Types.Mixed, default: {} },
+  ipAddress: { type: String },
+  userAgent: { type: String },
+  createdAt: { type: Date, default: Date.now, index: true },
+});
+
+// Índice compuesto para telemetría rápida por organización y tiempo
+AuditLogSchema.index({ tenantId: 1, createdAt: -1 });
+
+export const AuditLog = models.AuditLog || model<IAuditLog>('AuditLog', AuditLogSchema, 'central_audit_logs');

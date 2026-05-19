@@ -1,0 +1,125 @@
+import React from 'react';
+import { ensureIndustrialAccess } from '@/lib/session';
+import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';
+import { AuditTenantSelector } from '@/components/admin/audit/AuditTenantSelector';
+import { ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
+import connectDB from '@/lib/database/mongodb';
+import { AuditLog } from '@/models/AuditLog';
+
+export const revalidate = 0; // Evitar el cacheado estático de la página administrativa
+
+interface SearchParams {
+  tenantId?: string;
+}
+
+export default async function AdminAuditPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<SearchParams>;
+}) {
+  const { locale } = await params;
+  const { tenantId } = await searchParams;
+  const t = await getTranslations('admin');
+
+  // 1. Garantizar acceso seguro y ROL mínimo de administrador
+  const user = await ensureIndustrialAccess('ADMIN');
+  const isSuperAdmin = user.role === 'SUPER_ADMIN';
+
+  // 2. Aislamiento Estricto SaaS: Solo SuperAdmin puede auditar otros tenants vía URL
+  const targetTenantId = isSuperAdmin && tenantId ? tenantId : user.tenantId;
+
+  // Conectar a la base de datos principal
+  await connectDB();
+
+  // 3. Recuperar la configuración del tenant auditado actual (fallback para microservicio desacoplado)
+  const tenantConfig = {
+    name: targetTenantId === 'SYSTEM' ? 'Sistema Global' : `Organización: ${targetTenantId}`,
+    tenantId: targetTenantId,
+  };
+
+  // 4. Si es SuperAdmin, cargar todos los tenants activos del ecosistema desde los logs reales
+  let allTenants: { tenantId: string; name: string }[] = [];
+  if (isSuperAdmin) {
+    const distinctTenants = await AuditLog.distinct('tenantId');
+    allTenants = distinctTenants.map((id: string) => ({
+      tenantId: id,
+      name: id === 'SYSTEM' ? 'Sistema Global' : `Org: ${id}`,
+    }));
+
+    if (targetTenantId && !distinctTenants.includes(targetTenantId)) {
+      allTenants.push({
+        tenantId: targetTenantId,
+        name: targetTenantId === 'SYSTEM' ? 'Sistema Global' : `Org: ${targetTenantId}`,
+      });
+    }
+  }
+
+  return (
+    <main className="min-h-screen bg-background text-foreground p-6 md:p-12 selection:bg-primary/30" role="main">
+      <div className="max-w-7xl mx-auto flex flex-col gap-10">
+        
+        {/* Encabezado Principal */}
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
+          <div className="flex flex-col gap-2">
+            <div className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-primary flex items-center gap-2 mb-2">
+              <ShieldCheck size={14} className="text-primary animate-pulse" aria-hidden="true" />
+              <span className="animate-console-pulse">{t('controlConsole')} • {tenantConfig.name}</span>
+            </div>
+            
+            <div className="flex items-center gap-4 mt-1">
+              <Link 
+                href={`/${locale}/admin`}
+                className="inline-flex items-center justify-center p-2 bg-transparent text-muted-foreground hover:text-foreground border border-border hover:border-border/80 transition-all duration-200 cursor-pointer rounded-none active:scale-[0.95] shrink-0 focus:outline-none focus:ring-1 focus:ring-primary/50"
+                aria-label="Back to Admin Dashboard"
+                title="Back to Dashboard"
+              >
+                <ArrowLeft size={14} aria-hidden="true" />
+              </Link>
+              
+              <h1 className="text-3xl font-black uppercase italic tracking-tight text-foreground leading-none flex-1 truncate">
+                {t('auditTitle')}
+              </h1>
+            </div>
+            
+            <p className="text-sm text-muted-foreground font-sans mt-2 leading-relaxed">
+              {t('auditDesc')}
+            </p>
+          </div>
+        </header>
+
+        {/* 🏢 Selector de Tenant Activo (Únicamente renderizado para SUPER_ADMIN) */}
+        {isSuperAdmin && allTenants.length > 1 && (
+          <AuditTenantSelector 
+            currentTenantId={targetTenantId}
+            allTenants={allTenants}
+            locale={locale}
+          />
+        )}
+
+        {/* 📊 Historial de Auditoría e Ingesta Inmutable */}
+        <div className="flex flex-col gap-6 pt-2">
+          <div className="flex flex-col gap-1.5">
+            <h2 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-2">
+              <span className="p-1 rounded-md bg-primary/10 text-primary">
+                <Activity className="w-4.5 h-4.5" />
+              </span>
+              {t('auditActivityHistory')}
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              {t('auditActivityDesc')}
+            </p>
+          </div>
+
+          <div className="p-6 bg-card border border-border rounded-xl shadow-sm">
+            <AuditHistoryPanel tenantId={targetTenantId} />
+          </div>
+        </div>
+
+      </div>
+    </main>
+  );
+}
