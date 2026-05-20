@@ -13,6 +13,8 @@ export interface IAuditLog {
   ipAddress?: string;
   userAgent?: string;
   createdAt: Date;
+  previousHash?: string;                // Enlace inmutable al bloque de auditoría anterior
+  hash?: string;                        // Sello criptográfico SHA-256 de este bloque
 }
 
 const AuditLogSchema = new Schema<IAuditLog>({
@@ -28,6 +30,8 @@ const AuditLogSchema = new Schema<IAuditLog>({
   ipAddress: { type: String },
   userAgent: { type: String },
   createdAt: { type: Date, default: Date.now, index: true },
+  previousHash: { type: String, index: true },
+  hash: { type: String, index: true },
 });
 
 // Índice compuesto para telemetría rápida por organización y tiempo
