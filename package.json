@@ -11,7 +11,7 @@
     "full-audit": "powershell -File ./scripts/abd-audit.ps1"
   },
   "dependencies": {
-    "@abd/satellite-sdk": "file:..\\ABDSatelliteSDK",
+    "@abd/satellite-sdk": "github:ajabadia/ABDSatelliteSDK#b8c85b6762470c2aa9c1fa263613cdc7da372ab8",
     "@abd/styles": "github:ajabadia/ABDStyles#main",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-progress": "^1.1.8",
