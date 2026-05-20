@@ -248,7 +248,15 @@
     "audit_no_details": "No additional details.",
     "audit_previous": "Previous:",
     "audit_new": "New:",
-    "audit_toggle_details": "Expand log details"
+    "audit_toggle_details": "Expand log details",
+    "filterAllLabel": "Filter all applications",
+    "filterAuthLabel": "Filter ABDAuth logs",
+    "filterQuizLabel": "Filter ABDQuiz logs",
+    "filterGobernanzaLabel": "Filter ABDGobernance logs",
+    "audit_live_pause": "Pause Stream",
+    "audit_live_resume": "Resume Stream",
+    "audit_live_on": "Live ON",
+    "audit_live_off": "Live OFF"
   },
   "quiz": {
     "module": "MODULE",
