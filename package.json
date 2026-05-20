@@ -10,6 +10,11 @@
     "lint": "eslint",
     "full-audit": "powershell -File ./scripts/abd-audit.ps1"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@abd/satellite-sdk"
+    ]
+  },
   "dependencies": {
     "@abd/satellite-sdk": "github:ajabadia/ABDSatelliteSDK#b8c85b6762470c2aa9c1fa263613cdc7da372ab8",
     "@abd/styles": "github:ajabadia/ABDStyles#main",
