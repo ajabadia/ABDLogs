@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { getLocale } from "next-intl/server";
-import { generateTenantCss } from "@abd/styles";
-import { resolveTenantBranding } from "@/lib/tenant-branding";
+import { BrandingStyles, getIndustrialSession } from "@abd/satellite-sdk";
+import { SessionProvider } from "@abd/satellite-sdk/client";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ABDQuiz | Industrial Exam Training",
-  description: "High-performance platform for exam training and management.",
+  title: "ABDLogs | Governance & Telemetry",
+  description: "High-performance platform for log governance and telemetry monitoring.",
 };
 
 export default async function RootLayout({
@@ -26,8 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const locale = await getLocale();
-  const branding = await resolveTenantBranding();
-  const customCss = branding?.theme ? generateTenantCss(branding.theme) : '';
+  const session = await getIndustrialSession();
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -47,12 +46,13 @@ export default async function RootLayout({
             `,
           }}
         />
-        {customCss && (
-          <style id="tenant-branding-gateway" dangerouslySetInnerHTML={{ __html: customCss }} />
-        )}
+        {/* Centralized dynamic branding styles injection (Zero FOUC) */}
+        <BrandingStyles />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
-        {children}
+        <SessionProvider initialSession={session}>
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

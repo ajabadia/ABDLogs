@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@abd/satellite-sdk':
+        specifier: file:..\ABDSatelliteSDK
+        version: file:../ABDSatelliteSDK(@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80(lucide-react@1.16.0(react@19.2.4))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@abd/styles':
         specifier: github:ajabadia/ABDStyles#main
         version: https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80(lucide-react@1.16.0(react@19.2.4))(react@19.2.4)
@@ -104,6 +107,14 @@ importers:
         version: 5.9.3
 
 packages:
+
+  '@abd/satellite-sdk@file:../ABDSatelliteSDK':
+    resolution: {directory: ../ABDSatelliteSDK, type: directory}
+    peerDependencies:
+      '@abd/styles': github:ajabadia/ABDStyles#main
+      next: '>=14.0.0'
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
 
   '@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80':
     resolution: {tarball: https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80}
@@ -4118,6 +4129,14 @@ packages:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
+
+  '@abd/satellite-sdk@file:../ABDSatelliteSDK(@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80(lucide-react@1.16.0(react@19.2.4))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@abd/styles': https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80(lucide-react@1.16.0(react@19.2.4))(react@19.2.4)
+      jose: 6.2.3
+      next: 16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
 
   '@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/68f7d5da930ecc06124c301b6c70dad299489d80(lucide-react@1.16.0(react@19.2.4))(react@19.2.4)':
     dependencies:

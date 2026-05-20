@@ -1,13 +1,17 @@
 # ABD Suite - CENTRAL AUDIT DELEGATOR
-# Invokes the unified pipeline from @abd/styles node_modules.
+# Checks the local suite utilidades directory first, falling back to node_modules/@abd/styles.
 
-$CentralScript = "$PSScriptRoot/../node_modules/@abd/styles/scripts/abd-audit.ps1"
+$SuiteCentralScript = "D:\desarrollos\ABDSuite\utilidades\scripts\abd-audit.ps1"
+$StylesCentralScript = "$PSScriptRoot/../node_modules/@abd/styles/scripts/abd-audit.ps1"
 
-if (Test-Path $CentralScript) {
-    & powershell -File $CentralScript
+if (Test-Path $SuiteCentralScript) {
+    & powershell -File $SuiteCentralScript
+    exit $LASTEXITCODE
+} elseif (Test-Path $StylesCentralScript) {
+    & powershell -File $StylesCentralScript
     exit $LASTEXITCODE
 } else {
-    Write-Host "`nError: Central @abd/styles audit script not found." -ForegroundColor Red
-    Write-Host "Please run 'pnpm install' or 'npm install' to restore dependencies.`n" -ForegroundColor Yellow
+    Write-Host "`nError: Central audit script not found in ABD Suite or node_modules." -ForegroundColor Red
+    Write-Host "Please restore dependencies or verify your local development structure.`n" -ForegroundColor Yellow
     exit 1
 }

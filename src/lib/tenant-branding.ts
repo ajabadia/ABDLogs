@@ -1,5 +1,5 @@
 import { headers } from 'next/headers';
-import { getTenantSubdomain } from './proxy/tenant-resolver';
+import { getTenantSubdomain } from '@abd/satellite-sdk';
 
 export interface TenantBranding {
   logoUrl?: string | null;
