@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@abd/satellite-sdk':
-        specifier: github:ajabadia/ABDSatelliteSDK#b8c85b6762470c2aa9c1fa263613cdc7da372ab8
-        version: https://codeload.github.com/ajabadia/ABDSatelliteSDK/tar.gz/b8c85b6762470c2aa9c1fa263613cdc7da372ab8(@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: file:../ABDSatelliteSDK
+        version: file:../ABDSatelliteSDK(@abd/styles@file:../ABDStyles(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@abd/styles':
-        specifier: github:ajabadia/ABDStyles#cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29
-        version: https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
+        specifier: file:../ABDStyles
+        version: file:../ABDStyles(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -108,18 +108,16 @@ importers:
 
 packages:
 
-  '@abd/satellite-sdk@https://codeload.github.com/ajabadia/ABDSatelliteSDK/tar.gz/b8c85b6762470c2aa9c1fa263613cdc7da372ab8':
-    resolution: {tarball: https://codeload.github.com/ajabadia/ABDSatelliteSDK/tar.gz/b8c85b6762470c2aa9c1fa263613cdc7da372ab8}
-    version: 1.0.0
+  '@abd/satellite-sdk@file:../ABDSatelliteSDK':
+    resolution: {directory: ../ABDSatelliteSDK, type: directory}
     peerDependencies:
-      '@abd/styles': github:ajabadia/ABDStyles#93645b8e8f79e4175ccc2e7bb725fabcb7cdb356
+      '@abd/styles': ^1.0.0
       next: '>=14.0.0'
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29':
-    resolution: {tarball: https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29}
-    version: 1.0.0
+  '@abd/styles@file:../ABDStyles':
+    resolution: {directory: ../ABDStyles, type: directory}
     peerDependencies:
       lucide-react: ^0.46.0 || ^1.0.0
       next-intl: ^4.12.0
@@ -4132,15 +4130,15 @@ packages:
 
 snapshots:
 
-  '@abd/satellite-sdk@https://codeload.github.com/ajabadia/ABDSatelliteSDK/tar.gz/b8c85b6762470c2aa9c1fa263613cdc7da372ab8(@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@abd/satellite-sdk@file:../ABDSatelliteSDK(@abd/styles@file:../ABDStyles(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@abd/styles': https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
+      '@abd/styles': file:../ABDStyles(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
       jose: 6.2.3
       next: 16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@abd/styles@https://codeload.github.com/ajabadia/ABDStyles/tar.gz/cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)':
+  '@abd/styles@file:../ABDStyles(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)':
     dependencies:
       lucide-react: 1.16.0(react@19.2.4)
       next-intl: 4.12.0(next@16.2.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3)

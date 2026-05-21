@@ -30,6 +30,7 @@ export function SystemSettings({ isAuthenticated = false }: SystemSettingsProps)
         login: t('login'),
       }}
       isAuthenticated={isAuthenticated}
+      showLogin={false}
       logoutUrl="/api/auth/logout"
       versionSignature="ABD_GOBERNANZA_V0.1"
     />
