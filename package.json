@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@abd/satellite-sdk": "github:ajabadia/ABDSatelliteSDK#b8c85b6762470c2aa9c1fa263613cdc7da372ab8",
-    "@abd/styles": "github:ajabadia/ABDStyles#179400d569c2f65efc03f79dffd31a3c484476d7",
+    "@abd/styles": "github:ajabadia/ABDStyles#cff4f1bd1449d9ba97cd5815ab0d9bbaa2a93c29",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-progress": "^1.1.8",
     "@radix-ui/react-separator": "^1.1.8",

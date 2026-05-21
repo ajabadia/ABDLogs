@@ -18,8 +18,11 @@ export async function GET(request: Request) {
     await connectDB();
 
     const { searchParams } = new URL(request.url);
-    // Filtrar por el tenant solicitado o el del propio usuario administrador por defecto
-    const tenantId = searchParams.get('tenantId') || user.tenantId;
+    const isSuperAdmin = user.role === 'SUPER_ADMIN';
+    const tenantIdParam = searchParams.get('tenantId');
+
+    // Aislamiento Estricto SaaS: Solo SuperAdmin puede auditar otros tenants vía parámetro
+    const tenantId = isSuperAdmin && tenantIdParam ? tenantIdParam : user.tenantId;
     const limit = parseInt(searchParams.get('limit') || '50', 10);
 
     // 3. Recuperar y retornar la cronología consolidada de logs

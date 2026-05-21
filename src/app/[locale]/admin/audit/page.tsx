@@ -1,7 +1,6 @@
 import React from 'react';
 import { ensureIndustrialAccess } from '@/lib/session';
 import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';
-import { AuditTenantSelector } from '@/components/admin/audit/AuditTenantSelector';
 import { ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
@@ -90,15 +89,6 @@ export default async function AdminAuditPage({
             </p>
           </div>
         </header>
-
-        {/* 🏢 Selector de Tenant Activo (Únicamente renderizado para SUPER_ADMIN) */}
-        {isSuperAdmin && allTenants.length > 1 && (
-          <AuditTenantSelector 
-            currentTenantId={targetTenantId}
-            allTenants={allTenants}
-            locale={locale}
-          />
-        )}
 
         {/* 📊 Historial de Auditoría e Ingesta Inmutable */}
         <div className="flex flex-col gap-6 pt-2">
