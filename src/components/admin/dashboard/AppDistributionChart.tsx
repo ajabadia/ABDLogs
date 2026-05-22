@@ -1,5 +1,6 @@
 'use client';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { useTranslations } from 'next-intl';
 
 interface AppDistributionChartProps {
   data: {
@@ -9,10 +10,11 @@ interface AppDistributionChartProps {
 }
 
 export function AppDistributionChart({ data }: AppDistributionChartProps) {
+  const t = useTranslations('admin');
   if (!data || data.length === 0) {
     return (
       <div className="h-full flex items-center justify-center text-muted-foreground uppercase tracking-widest text-xs font-bold animate-pulse">
-        Sin datos
+        {t('tenant_selector_empty')}
       </div>
     );
   }

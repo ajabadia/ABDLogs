@@ -16,9 +16,8 @@ export interface FederatedSession {
 
 export async function getFederatedSession(cookieString: string): Promise<FederatedSession> {
   // 🛰️ Points to the central identity provider's session verification endpoint
-  const verifyUrl = process.env.AUTH_PROVIDER_URL 
-    ? `${process.env.AUTH_PROVIDER_URL}/api/auth/session`
-    : 'http://localhost:3400/api/auth/session';
+  const verifyUrl = process.env.AUTH_PROVIDER_URL;
+  if (!verifyUrl) throw new Error('AUTH_PROVIDER_URL is not defined in environment');
 
   try {
     const response = await fetch(verifyUrl, {

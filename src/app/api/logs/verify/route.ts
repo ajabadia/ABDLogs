@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectToDatabase } from '@/lib/db';
+import connectDB from '@/lib/database/mongodb';
 import { AuditLog } from '@/models/AuditLog';
 import crypto from 'crypto';
 
 export async function GET(request: NextRequest) {
   // 🛡️ Seguridad Inter-servicio
   const authHeader = request.headers.get('Authorization');
-  const systemToken = process.env.LOGS_SECRET_TOKEN || 'shared-system-token-2026';
+  const systemToken = process.env.LOGS_SECRET_TOKEN;
 
   if (!authHeader || authHeader !== `Bearer ${systemToken}`) {
     return NextResponse.json({ error: 'UNAUTHORIZED_SERVICE_REQUEST' }, { status: 401 });
   }
 
   try {
-    await connectToDatabase();
+    await connectDB();
     
     // Obtenemos todos los logs de la cadena ordenados desde el más antiguo al más reciente
     const logs = await AuditLog.find().sort({ _id: 1 }).lean();
@@ -49,7 +49,9 @@ export async function GET(request: NextRequest) {
         userId: currentLog.userId,
         userEmail: currentLog.userEmail,
         changedFields: currentLog.changedFields || {},
-        previousState: currentLog.previousState || {}
+        previousState: currentLog.previousState || {},
+        ipAddress: currentLog.ipAddress,
+        userAgent: currentLog.userAgent
       });
 
       // Recalculamos la firma criptográfica usando el tiempo exacto en que fue guardado

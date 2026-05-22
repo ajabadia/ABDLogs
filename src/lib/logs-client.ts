@@ -13,9 +13,9 @@ export interface LogPayload {
 export class LogsClient {
   private static getApiConfig() {
     return {
-      endpoint: process.env.LOGS_SERVICE_URL || 'http://localhost:3600/api/logs',
-      token: process.env.LOGS_SECRET_TOKEN || 'shared-system-token-2026',
-      appId: process.env.NEXT_PUBLIC_APP_ID || 'unknown',
+      endpoint: process.env.LOGS_SERVICE_URL,
+      token: process.env.LOGS_SECRET_TOKEN,
+      appId: process.env.NEXT_PUBLIC_APP_ID,
     };
   }
 
@@ -24,6 +24,11 @@ export class LogsClient {
    */
   static async log(payload: LogPayload): Promise<void> {
     const { endpoint, token, appId } = this.getApiConfig();
+
+    if (!endpoint || !token) {
+      console.warn('[LogsClient] Missing configuration. Logs will not be sent.');
+      return;
+    }
 
     // Evitar bloqueos de ejecución en hilos principales del servidor
     fetch(endpoint, {

@@ -76,7 +76,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
       <div className="flex items-center justify-between border border-border p-2 rounded-xl bg-card shadow-sm">
          <div className="flex items-center gap-2 text-[11px] font-black text-muted-foreground uppercase px-2 tracking-widest">
             <CalendarDays className="w-4 h-4 text-primary" />
-            Ventana de Tiempo
+            {t('telemetry_window')}
          </div>
          <div className="flex items-center gap-1">
             {[7, 15, 30, 90].map((d) => (
@@ -102,7 +102,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
            </div>
            <div>
              <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-1">
-               Volumen ({days}D)
+               {t('telemetry_volume', { days })}
              </p>
              <p className="text-3xl font-black font-mono">{totalEvents.toLocaleString()}</p>
            </div>
@@ -114,7 +114,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
            </div>
            <div>
              <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-1">
-               Satélites Activos
+               {t('telemetry_active_satellites')}
              </p>
              <p className="text-3xl font-black font-mono">{activeApps}</p>
            </div>
@@ -126,7 +126,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
            </div>
            <div>
              <p className="text-[10px] text-destructive uppercase tracking-widest font-bold mb-1">
-               Riesgos ({days}D)
+               {t('telemetry_risks', { days })}
              </p>
              <p className="text-3xl font-black font-mono text-destructive">{totalErrors.toLocaleString()}</p>
            </div>
@@ -136,7 +136,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
       {/* ── Visual Dashboards ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col gap-2">
-          <h3 className="text-[11px] font-black uppercase tracking-widest text-muted-foreground">Flujo Operativo Cronológico</h3>
+          <h3 className="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{t('telemetry_flow')}</h3>
           <div className="p-6 border border-border bg-card rounded-xl h-[350px] relative">
             {loading && <div className="absolute inset-0 bg-background/50 backdrop-blur-sm z-10 flex items-center justify-center rounded-xl"><Loader2 className="w-8 h-8 text-primary animate-spin" /></div>}
             <ActivityChart data={chartData} />
@@ -144,7 +144,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
         </div>
         
         <div className="flex flex-col gap-2">
-          <h3 className="text-[11px] font-black uppercase tracking-widest text-muted-foreground">Distribución por Satélite</h3>
+          <h3 className="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{t('telemetry_distribution')}</h3>
           <div className="p-6 border border-border bg-card rounded-xl h-[350px] relative">
             {loading && <div className="absolute inset-0 bg-background/50 backdrop-blur-sm z-10 flex items-center justify-center rounded-xl"><Loader2 className="w-8 h-8 text-primary animate-spin" /></div>}
              <AppDistributionChart data={barChartData} />

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { LucideIcon, ArrowRight } from 'lucide-react';
 import Link from 'next/link';

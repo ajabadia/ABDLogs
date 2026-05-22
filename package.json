@@ -14,7 +14,8 @@
     "onlyBuiltDependencies": []
   },
   "dependencies": {
-    "@abd/satellite-sdk": "github:ajabadia/ABDSatelliteSDK#313719d66a65eb28172bbae08a5a46bc2b6d1afd",
+    "@abd/ecosystem-widgets": "file:../ABDEcosystemWidgets",
+    "@abd/satellite-sdk": "file:../ABDSatelliteSDK",
     "@abd/styles": "file:../ABDStyles",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-progress": "^1.1.8",

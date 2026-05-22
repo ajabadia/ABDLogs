@@ -6,7 +6,6 @@ import { ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import connectDB from '@/lib/database/mongodb';
-import { AuditLog } from '@/models/AuditLog';
 import { AdminPageHeader } from '@abd/styles';
 
 export const revalidate = 0; // Evitar el cacheado estático de la página administrativa

@@ -1,7 +1,6 @@
 import connectDB from '@/lib/database/mongodb';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
-import stringify from 'fast-json-stable-stringify';
-import crypto from 'crypto';
+import { computeBlockHash } from '@/lib/crypto-chain';
 
 export class AuditService {
   /**
@@ -29,19 +28,18 @@ export class AuditService {
           });
           
           const obj = doc.toObject();
-          // Excluimos metadata interna y de encadenamiento para el hash de los datos puros
-          const { hash: _h, previousHash: _ph, _id, __v, ...cleanPayload } = obj as any;
+          const { hash: _h, previousHash: _ph, _id, __v, ...cleanPayload } = obj;
           
           // 3. Serialización determinista y cálculo del sello SHA-256
-          const payloadString = stringify(cleanPayload);
-          const hash = crypto.createHash('sha256').update(previousHash + payloadString).digest('hex');
+          const timestamp = doc.createdAt.getTime();
+          const hash = computeBlockHash(cleanPayload, previousHash, timestamp);
           
           doc.hash = hash;
           
           // 4. Intentar guardar
           await doc.save();
           
-          console.log(`[AUDIT_SAAS_LOG] Persisted ${doc.action} event successfully with hash ${hash.substring(0, 8)}...`);
+          // console.log(`[AUDIT_SAAS_LOG] Persisted ${doc.action} event successfully with hash ${hash.substring(0, 8)}...`);
           return; // Éxito, salir del bucle
         } catch (err: any) {
           // Si es un error de índice único (código 11000 en MongoDB), significa que otro proceso insertó a la vez
@@ -76,7 +74,7 @@ export class AuditService {
       return logs.map(doc => {
         const obj = doc.toObject();
         if (obj._id) obj._id = obj._id.toString();
-        return obj as unknown as IAuditLog;
+        return obj as IAuditLog;
       });
     } catch (err) {
       console.error('[AUDIT_SAAS_READ_ERROR] Failed to query central logs database:', err);
@@ -151,12 +149,14 @@ export class AuditService {
         }
         
         const obj = log.toObject();
-        const { hash: storedHash, previousHash: storedPrev, _id, __v, ...cleanPayload } = obj as any;
+        const { hash: storedHash, previousHash: storedPrev, _id, __v, ...cleanPayload } = obj;
         
-        const payloadString = stringify(cleanPayload);
-        const calculatedHash = crypto.createHash('sha256').update(expectedPreviousHash + payloadString).digest('hex');
+        const timestamp = log.createdAt.getTime();
+        // Fallback for legacy logs: check with and without timestamp
+        const calculatedHashWithTs = computeBlockHash(cleanPayload, expectedPreviousHash, timestamp);
+        const calculatedHashWithoutTs = computeBlockHash(cleanPayload, expectedPreviousHash);
         
-        if (calculatedHash !== storedHash) {
+        if (calculatedHashWithTs !== storedHash && calculatedHashWithoutTs !== storedHash) {
           invalidLogsCount++;
           errorDetails.push(`Hash mismatch at ${log.createdAt.toISOString()} (Action: ${log.action}): Data has been tampered with.`);
           break;

@@ -48,7 +48,7 @@ export function IntegrityCheckPanel({ tenantId }: IntegrityCheckPanelProps) {
           </div>
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider text-foreground">
-              Análisis Forense de Integridad
+              {t('integrity_title')}
             </h3>
             <p className="text-xs text-muted-foreground mt-1.5 max-w-lg leading-relaxed">
               Verifica el encadenamiento criptográfico (SHA-256) de los logs de auditoría para garantizar que ninguna entrada ha sido modificada, eliminada o alterada desde su creación. Requisito SOC2.
@@ -64,12 +64,12 @@ export function IntegrityCheckPanel({ tenantId }: IntegrityCheckPanelProps) {
           {isPending ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              Calculando Hashes...
+              {t('integrity_calculating')}
             </>
           ) : (
             <>
               <Search className="w-4 h-4" />
-              Ejecutar Escaneo
+              {t('integrity_execute')}
             </>
           )}
         </button>
@@ -90,8 +90,8 @@ export function IntegrityCheckPanel({ tenantId }: IntegrityCheckPanelProps) {
             <div>
               <h4 className={`text-sm font-bold ${result.isValid ? 'text-emerald-500' : 'text-red-500'}`}>
                 {result.isValid 
-                  ? 'Cadena Criptográfica Íntegra' 
-                  : '¡Alerta de Integridad Forense!'}
+                  ? t('chain_valid') 
+                  : t('chain_alert')}
               </h4>
               <p className="text-xs text-muted-foreground mt-0.5">
                 {result.isValid 
@@ -103,7 +103,7 @@ export function IntegrityCheckPanel({ tenantId }: IntegrityCheckPanelProps) {
 
           {!result.isValid && result.errorDetails && result.errorDetails.length > 0 && (
             <div className="mt-4 pt-4 border-t border-red-500/20 space-y-2">
-              <h5 className="text-[11px] font-black uppercase tracking-wider text-red-400">Detalles de la Fractura</h5>
+              <h5 className="text-[11px] font-black uppercase tracking-wider text-red-400">{t('fracture_details')}</h5>
               <ul className="space-y-1.5">
                 {result.errorDetails.map((detail, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-xs font-mono text-red-400/80 bg-red-950/20 p-2 rounded">

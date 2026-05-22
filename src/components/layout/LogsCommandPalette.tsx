@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter, usePathname } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
-import { CommandPalette, Command } from '@abd/styles';
+import { CommandPalette, Command } from '@abd/ecosystem-widgets';
 import { ShieldCheck, Server, Globe, LogOut, Settings } from 'lucide-react';
 
 export function LogsCommandPalette() {

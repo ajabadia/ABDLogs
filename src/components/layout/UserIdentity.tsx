@@ -1,5 +1,5 @@
 import { getIndustrialSession } from '@/lib/session';
-import { UserIdentity as SharedUserIdentity } from '@abd/styles';
+import { UserIdentity as SharedUserIdentity } from '@abd/ecosystem-widgets';
 import Link from 'next/link';
 
 /**

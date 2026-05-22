@@ -18,7 +18,7 @@ export async function uploadBrandingAsset(
   assetType: 'logo' | 'favicon'
 ): Promise<{ url: string; publicId: string; secureUrl: string }> {
   return new Promise((resolve, reject) => {
-    const folder = `abd-tenant-governance/tenants/${tenantId}/branding`;
+    const folder = `abd-logs/tenants/${tenantId}/branding`;
     const publicId = `${assetType}_${Date.now()}`;
     
     // Aplicar transformaciones optimizadas según el tipo de asset (marca blanca premium)

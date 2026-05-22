@@ -3,7 +3,7 @@
 @import "tw-animate-css";
 
 /* 🛠️ Carga del Core de Estilos Unificados de la Suite */
-@import "../../node_modules/@abd/styles/dist/styles/industrial-core.css";
+@import "@abd/styles/dist/styles/industrial-core.css";
 
 @theme inline {
   --radius-xl: calc(var(--radius) + 1px);

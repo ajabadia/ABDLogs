@@ -1,5 +1,6 @@
 'use client';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useTranslations } from 'next-intl';
 
 interface ActivityChartProps {
   data: {
@@ -10,10 +11,11 @@ interface ActivityChartProps {
 }
 
 export function ActivityChart({ data }: ActivityChartProps) {
+  const t = useTranslations('admin');
   if (!data || data.length === 0) {
     return (
       <div className="h-full flex items-center justify-center text-muted-foreground uppercase tracking-widest text-xs font-bold animate-pulse">
-        No hay datos de telemetría disponibles (30 días).
+        {t('telemetry_no_data')}
       </div>
     );
   }
@@ -70,7 +72,7 @@ export function ActivityChart({ data }: ActivityChartProps) {
           strokeWidth={2}
           fillOpacity={1} 
           fill="url(#colorTotal)" 
-          name="Volumen (Global)" 
+          name={t('telemetry_volume_global')} 
         />
         <Area 
           type="monotone" 
@@ -79,7 +81,7 @@ export function ActivityChart({ data }: ActivityChartProps) {
           strokeWidth={2}
           fillOpacity={1} 
           fill="url(#colorErrors)" 
-          name="Fallos/Riesgo" 
+          name={t('telemetry_failures')} 
         />
       </AreaChart>
     </ResponsiveContainer>
