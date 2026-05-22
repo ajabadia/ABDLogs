@@ -133,6 +133,7 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
 
   // ─── Carga inicial ───────────────────────────────────────────────────────────
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void fetchLogs(true);
   }, [fetchLogs]);
 

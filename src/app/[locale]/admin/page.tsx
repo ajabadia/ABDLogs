@@ -26,8 +26,8 @@ export default async function AdminPortalPage({ params }: { params: Promise<{ lo
         <AdminPageHeader
           icon={LayoutDashboard}
           breadcrumb={<>{t('controlConsole')} • DASHBOARD</>}
-          title={<>ABD <span className="text-primary">{t('logsTitle')}</span></>}
-          description={<>Consola central de auditoría técnica y operacional del inquilino <span className="text-primary font-bold">{user.tenantId}</span>.</>}
+          title={<>{'ABD'} <span className="text-primary">{t('logsTitle')}</span></>}
+          description={<>{t('auditDesc')} <span className="text-primary font-bold">{user.tenantId}</span>.</>}
         />
 
         {/* Dashboard Grid */}

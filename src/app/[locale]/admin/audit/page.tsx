@@ -41,22 +41,7 @@ export default async function AdminAuditPage({
     tenantId: targetTenantId,
   };
 
-  // 4. Si es SuperAdmin, cargar todos los tenants activos del ecosistema desde los logs reales
-  let allTenants: { tenantId: string; name: string }[] = [];
-  if (isSuperAdmin) {
-    const distinctTenants = await AuditLog.distinct('tenantId');
-    allTenants = distinctTenants.map((id: string) => ({
-      tenantId: id,
-      name: id === 'SYSTEM' ? 'Sistema Global' : `Org: ${id}`,
-    }));
-
-    if (targetTenantId && !distinctTenants.includes(targetTenantId)) {
-      allTenants.push({
-        tenantId: targetTenantId,
-        name: targetTenantId === 'SYSTEM' ? 'Sistema Global' : `Org: ${targetTenantId}`,
-      });
-    }
-  }
+  // El selector unificado global en el layout ya se encarga del cambio de contexto.
 
   return (
     <main className="min-h-screen bg-background text-foreground p-6 md:p-12 selection:bg-primary/30" role="main">
