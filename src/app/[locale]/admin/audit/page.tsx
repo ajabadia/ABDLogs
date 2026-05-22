@@ -80,7 +80,7 @@ export default async function AdminAuditPage({
           </div>
 
           <div className="p-6 bg-card border border-border rounded-xl shadow-sm">
-            <AuditHistoryPanel tenantId={targetTenantId} />
+            <AuditHistoryPanel key={targetTenantId} tenantId={targetTenantId} />
           </div>
         </div>
 
