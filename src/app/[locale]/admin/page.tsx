@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { ensureIndustrialAccess } from '@/lib/session';
-import { LayoutDashboard, ShieldCheck } from 'lucide-react';
+import { LayoutDashboard, ShieldCheck, Activity } from 'lucide-react';
 import { DashboardActionCard } from '@/components/admin/dashboard/DashboardActionCard';
 import { AdminPageHeader } from '@abd/styles';
 import { SystemTelemetryPanel } from '@/components/admin/dashboard/SystemTelemetryPanel';
@@ -35,8 +35,20 @@ export default async function AdminPortalPage({ params }: { params: Promise<{ lo
           
           {/* Main Controls Column (2/3 width) */}
           <div className="lg:col-span-2 flex flex-col gap-8">
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
+              {/* Card: Telemetry Dashboard */}
+              <DashboardActionCard 
+                icon={Activity}
+                category="SOC2 COMPLIANCE"
+                title="Telemetry Console"
+                description="Monitorización visual de volumen operativo, seguridad y actividad SaaS en tiempo real."
+                footerLabel={t('prodReady')}
+                footerValue={ap('activo') || 'ONLINE'}
+                buttonText="Ver Métricas"
+                href={`/${locale}/admin/dashboard`}
+              />
+
               {/* Card: Chain Auditing Logs */}
               <DashboardActionCard 
                 icon={ShieldCheck}

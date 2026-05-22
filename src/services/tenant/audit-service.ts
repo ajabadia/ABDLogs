@@ -43,4 +43,49 @@ export class AuditService {
       return [];
     }
   }
+
+  /**
+   * Obtiene estadísticas agregadas de telemetría para los dashboards (últimos N días)
+   */
+  static async getTelemetryStatsByTenant(tenantId: string, days = 30): Promise<any[]> {
+    try {
+      await connectDB();
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - days);
+
+      const filter: any = { createdAt: { $gte: startDate } };
+      if (tenantId !== 'SYSTEM' && tenantId) {
+        filter.tenantId = tenantId;
+      }
+
+      const stats = await AuditLog.aggregate([
+        { $match: filter },
+        {
+          $group: {
+            _id: {
+              date: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+              appId: '$appId',
+              action: '$action'
+            },
+            count: { $sum: 1 }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            date: '$_id.date',
+            appId: '$_id.appId',
+            action: '$_id.action',
+            count: 1
+          }
+        },
+        { $sort: { date: 1 } }
+      ]);
+
+      return stats;
+    } catch (err) {
+      console.error('[AUDIT_SAAS_TELEMETRY_ERROR] Failed to aggregate stats:', err);
+      return [];
+    }
+  }
 }

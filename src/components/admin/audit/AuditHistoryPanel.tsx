@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 import { toast } from 'sonner';
 import { 
   Activity, 
@@ -18,7 +19,8 @@ import {
   Pause,
   Play,
   Wifi,
-  WifiOff
+  WifiOff,
+  BarChart3
 } from 'lucide-react';
 import { AuditLog } from './types';
 import { ActionBadge } from './ActionBadge';
@@ -63,6 +65,7 @@ const NEW_ROW_FLASH_DURATION_MS = 2500;
 
 export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
   const t = useTranslations('admin');
+  const locale = useLocale();
   
   const [logs, setLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
@@ -225,22 +228,34 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
           )}
         </div>
 
-        {/* Toggle LIVE/PAUSE */}
-        <button
-          aria-label={isLive
-            ? t('audit_live_pause', { defaultMessage: 'Pausar Stream' })
-            : t('audit_live_resume', { defaultMessage: 'Reanudar Stream' })
-          }
-          onClick={toggleLive}
-          className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
-            isLive
-              ? 'bg-background border-border text-muted-foreground hover:border-amber-500/50 hover:text-amber-400'
-              : 'bg-emerald-500/10 border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/20'
-          }`}
-        >
-          {isLive ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-          {isLive ? t('audit_live_pause', { defaultMessage: 'Pausar Stream' }) : t('audit_live_resume', { defaultMessage: 'Reanudar Stream' })}
-        </button>
+        <div className="flex items-center gap-2">
+          {/* Link al Dashboard */}
+          <Link
+            href={`/${locale}/admin/dashboard?tenantId=${tenantId}`}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all cursor-pointer shadow-sm"
+            title="Ver Telemetría Visual"
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Métricas</span>
+          </Link>
+
+          {/* Toggle LIVE/PAUSE */}
+          <button
+            aria-label={isLive
+              ? t('audit_live_pause', { defaultMessage: 'Pausar Stream' })
+              : t('audit_live_resume', { defaultMessage: 'Reanudar Stream' })
+            }
+            onClick={toggleLive}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
+              isLive
+                ? 'bg-background border-border text-muted-foreground hover:border-amber-500/50 hover:text-amber-400'
+                : 'bg-emerald-500/10 border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/20'
+            }`}
+          >
+            {isLive ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+            {isLive ? t('audit_live_pause', { defaultMessage: 'Pausar Stream' }) : t('audit_live_resume', { defaultMessage: 'Reanudar Stream' })}
+          </button>
+        </div>
       </div>
 
       {/* ── Chips de Filtro por Aplicación ─────────────────────────────── */}
