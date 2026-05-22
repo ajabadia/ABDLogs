@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { BrandingStyles, getIndustrialSession } from "@abd/satellite-sdk";
 import { SessionProvider } from "@abd/satellite-sdk/client";
+import { ThemeScript } from "@abd/styles";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,21 +32,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var theme = localStorage.getItem('theme') || 'dark';
-                if (theme === 'system') {
-                  var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  document.documentElement.classList.add(isDark ? 'dark' : 'light');
-                } else {
-                  document.documentElement.classList.add(theme);
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
+        <ThemeScript />
         {/* Centralized dynamic branding styles injection (Zero FOUC) */}
         <BrandingStyles />
       </head>

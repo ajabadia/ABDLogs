@@ -28,6 +28,33 @@ interface AuditHistoryPanelProps {
   tenantId: string;
 }
 
+// ─── FilterChip — declared outside component to avoid 'component created during render' ───
+interface FilterChipProps {
+  id: string;
+  label: string;
+  ariaLabel: string;
+  icon: React.ElementType;
+  activeFilter: string;
+  onSelect: (id: string) => void;
+}
+
+function FilterChip({ id, label, ariaLabel, icon: Icon, activeFilter, onSelect }: FilterChipProps) {
+  return (
+    <button
+      aria-label={ariaLabel}
+      onClick={() => onSelect(id)}
+      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+        activeFilter === id
+          ? 'bg-primary text-primary-foreground shadow-sm'
+          : 'bg-background border border-border text-muted-foreground hover:text-foreground hover:bg-secondary/20'
+      }`}
+    >
+      <Icon className="w-3 h-3 opacity-80" />
+      {label}
+    </button>
+  );
+}
+
 // Frecuencia de sondeo en milisegundos (5 segundos)
 const POLL_INTERVAL_MS = 5000;
 
@@ -106,7 +133,7 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
 
   // ─── Carga inicial ───────────────────────────────────────────────────────────
   useEffect(() => {
-    fetchLogs(true);
+    void fetchLogs(true);
   }, [fetchLogs]);
 
   // ─── Sondeo periódico (activado solo cuando LIVE) ─────────────────────────────
@@ -160,31 +187,6 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
     }
   };
 
-  // ─── Renders ─────────────────────────────────────────────────────────────────
-  const FilterChip = ({
-    id,
-    label,
-    ariaLabel,
-    icon: Icon,
-  }: {
-    id: string;
-    label: string;
-    ariaLabel: string;
-    icon: React.ElementType;
-  }) => (
-    <button
-      aria-label={ariaLabel}
-      onClick={() => setFilter(id)}
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-        filter === id
-          ? 'bg-primary text-primary-foreground shadow-sm'
-          : 'bg-background border border-border text-muted-foreground hover:text-foreground hover:bg-secondary/20'
-      }`}
-    >
-      <Icon className="w-3 h-3 opacity-80" />
-      {label}
-    </button>
-  );
 
   return (
     <div className="space-y-4">
@@ -224,6 +226,10 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
 
         {/* Toggle LIVE/PAUSE */}
         <button
+          aria-label={isLive
+            ? t('audit_live_pause', { defaultMessage: 'Pausar Stream' })
+            : t('audit_live_resume', { defaultMessage: 'Reanudar Stream' })
+          }
           onClick={toggleLive}
           className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
             isLive
@@ -243,24 +249,32 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
           label={t('audit_filter_all', { defaultMessage: 'Todos los Logs' })}
           ariaLabel={t('filterAllLabel', { defaultMessage: 'Filtrar todos los logs' })}
           icon={Activity}
+          activeFilter={filter}
+          onSelect={setFilter}
         />
         <FilterChip
           id="AUTH"
           label="ABDAuth"
           ariaLabel={t('filterAuthLabel', { defaultMessage: 'Filtrar por logs de autenticación' })}
           icon={ShieldAlert}
+          activeFilter={filter}
+          onSelect={setFilter}
         />
         <FilterChip
           id="QUIZ"
           label="ABDQuiz"
           ariaLabel={t('filterQuizLabel', { defaultMessage: 'Filtrar por logs de evaluación' })}
           icon={FileText}
+          activeFilter={filter}
+          onSelect={setFilter}
         />
         <FilterChip
           id="GOBERNANZA"
           label="Gobernanza"
           ariaLabel={t('filterGobernanzaLabel', { defaultMessage: 'Filtrar por logs de gobernanza' })}
           icon={Settings}
+          activeFilter={filter}
+          onSelect={setFilter}
         />
       </div>
 

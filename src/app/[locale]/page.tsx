@@ -1,7 +1,8 @@
 import { getTranslations } from 'next-intl/server';
-import { Separator } from '@/components/ui/separator';
-import { ArrowRight, Cpu, Sliders, Database, ShieldCheck, Palette, Layers } from 'lucide-react';
+import { ArrowRight, Cpu, Sliders, Database, ShieldCheck } from 'lucide-react';
+import { HeroHeader } from '@abd/styles';
 import Link from 'next/link';
+import { Footer } from '@abd/styles';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -16,23 +17,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <div className="z-10 w-full max-w-5xl flex flex-col gap-16 animate-in fade-in duration-500">
         
         {/* Core Brand Header */}
-        <header className="flex flex-col gap-6 items-center text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 border border-border text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono rounded">
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            {h('status')}
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-foreground italic uppercase antialiased">
-            ABD <span className="text-primary">{h('tenants')}</span>
-          </h1>
-          
-          <p className="text-lg text-muted-foreground max-w-[650px] font-light leading-relaxed">
-            {h('tagline')}
-          </p>
-        </header>
+        <HeroHeader
+          statusText={h('status')}
+          title={
+            <>ABD <span className="text-primary">{h('tenants')}</span></>
+          }
+          description={h('tagline')}
+        />
 
         {/* Central Tactical Action Area (CTA) */}
         <div className="flex flex-col items-center justify-center gap-4">
@@ -100,13 +91,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         </div>
 
-        <footer className="flex flex-col items-center gap-6 text-muted-foreground/50 font-mono text-[9px] uppercase tracking-[0.3em] pt-8" role="contentinfo">
-          <Separator className="w-24 bg-border" aria-hidden="true" />
-          <div className="flex gap-12">
-            <span>{locale === 'es' ? 'Microservicio' : 'Microservice'}: {h('version')}</span>
-            <span>Estilo: {h('style')}</span>
-          </div>
-        </footer>
+        <Footer 
+          separatorWidth="short"
+          telemetryItems={[
+            { label: locale === 'es' ? 'Microservicio' : 'Microservice', value: h('version') },
+            { label: locale === 'es' ? 'Estilo' : 'Style', value: h('style') }
+          ]}
+        />
 
       </div>
     </main>

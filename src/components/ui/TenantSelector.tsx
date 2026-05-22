@@ -1,9 +1,15 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { TenantSelector as SharedTenantSelector, type TenantOption } from "@abd/styles";
+
+interface TenantApiResponse {
+  tenantId: string;
+  name?: string;
+  active?: boolean;
+}
 
 interface SessionUser {
   id?: string;
@@ -21,36 +27,41 @@ export function TenantSelector({ sessionUser }: TenantSelectorProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const [tenants, setTenants] = useState<TenantOption[]>([]);
+  const [superAdminTenants, setSuperAdminTenants] = useState<TenantOption[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const userRole = sessionUser?.role || "USER";
   const defaultTenantId = sessionUser?.tenantId || "";
   const activeTenantId = searchParams.get("tenantId") || defaultTenantId;
 
-  // Fetch tenants if user is SUPER_ADMIN
-  useEffect(() => {
-    if (userRole !== "SUPER_ADMIN") {
-      // Standard admins / users are bound to their single tenant
-      if (defaultTenantId) {
-        setTenants([{ tenantId: defaultTenantId, name: defaultTenantId === 'SYSTEM' ? 'Sistema Global' : `Org: ${defaultTenantId}` }]);
-      }
-      return;
+  // Compute tenants list: for non-SUPER_ADMIN users derive it directly without setState
+  const tenants = useMemo<TenantOption[]>(() => {
+    if (userRole !== 'SUPER_ADMIN') {
+      if (!defaultTenantId) return [];
+      return [{
+        tenantId: defaultTenantId,
+        name: defaultTenantId === 'SYSTEM' ? 'Sistema Global' : `Org: ${defaultTenantId}`
+      }];
     }
+    return superAdminTenants;
+  }, [userRole, defaultTenantId, superAdminTenants]);
+
+  // Fetch all tenants only for SUPER_ADMIN
+  useEffect(() => {
+    if (userRole !== "SUPER_ADMIN") return;
 
     const fetchAllTenants = async () => {
       setIsLoading(true);
       try {
         const res = await fetch("/api/admin/tenants");
         if (res.ok) {
-          const data = await res.json();
-          // Map API response to TenantOption
-          const options: TenantOption[] = data.map((t: any) => ({
+          const data: TenantApiResponse[] = await res.json();
+          const options: TenantOption[] = data.map((t) => ({
             tenantId: t.tenantId,
             name: t.name || t.tenantId,
             active: t.active,
           }));
-          setTenants(options);
+          setSuperAdminTenants(options);
         }
       } catch (error) {
         console.error("[TENANT_SELECTOR_FETCH_ERROR]", error);
@@ -60,20 +71,16 @@ export function TenantSelector({ sessionUser }: TenantSelectorProps) {
     };
 
     fetchAllTenants();
-  }, [userRole, defaultTenantId]);
+  }, [userRole]);
 
   const handleTenantChange = (newTenantId: string) => {
-    // Update tenantId query parameter while preserving existing ones
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("tenantId", newTenantId);
-    
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    
     router.push(`${pathname}${query}`);
   };
 
-  // If user is not logged in, do not render the selector
   if (!sessionUser) return null;
 
   return (

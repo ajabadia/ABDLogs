@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 🌐 Registro dinámico de Blockchains activas (una por Tenant)
-    let expectedPreviousHashes: Record<string, string> = {};
+    const expectedPreviousHashes: Record<string, string> = {};
     let brokenBlockId = null;
 
     for (let i = 0; i < logs.length; i++) {
