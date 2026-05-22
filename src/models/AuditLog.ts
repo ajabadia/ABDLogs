@@ -1,4 +1,5 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, models, model } from 'mongoose';
+import { getTenantModel } from '../lib/database/tenant-model';
 
 export interface IAuditLog {
   appId: string;                        // Aplicación origen: 'auth', 'quiz', 'gobernanza'
