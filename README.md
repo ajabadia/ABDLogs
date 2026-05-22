@@ -10,6 +10,7 @@ El microservicio está certificado bajo los más altos estándares de **Clean Ar
 *   **Next.js 16.2.6 & React 19**: Aprovecha al máximo los React Server Components (RSC).
 *   **Mongoose 9.6.2 & Zod**: Capa de persistencia con tipados estrictos y base de datos centralizada de logs en MongoDB Atlas.
 *   **Next-Intl**: Soporte multilingüe integral (Inglés / Español) mediante enrutamiento localizado con prefijos de idioma (`/[locale]`).
+*   **Encadenamiento Criptográfico SOC2**: Aseguramiento forense de logs mediante firmas SHA-256 acumulativas (`previousHash` + `payload`) por Tenant, con validación de integridad inmutable.
 
 ---
 

@@ -38,4 +38,11 @@ const AuditLogSchema = new Schema<IAuditLog>({
 // Índice compuesto para telemetría rápida por organización y tiempo
 AuditLogSchema.index({ tenantId: 1, createdAt: -1 });
 
+// Índice único para evitar colisiones/bifurcaciones en la cadena criptográfica
+// Permite que logs antiguos (sin previousHash) sigan existiendo sin chocar, pero fuerza unicidad si existe
+AuditLogSchema.index(
+  { tenantId: 1, previousHash: 1 }, 
+  { unique: true, partialFilterExpression: { previousHash: { $exists: true, $type: "string" } } }
+);
+
 export const AuditLog = models.AuditLog || model<IAuditLog>('AuditLog', AuditLogSchema, 'central_audit_logs');

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ensureIndustrialAccess } from '@/lib/session';
 import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';
+import { IntegrityCheckPanel } from '@/components/admin/audit/IntegrityCheckPanel';
 import { ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
@@ -64,6 +65,9 @@ export default async function AdminAuditPage({
           }
           description={t('auditDesc')}
         />
+
+        {/* Panel de Análisis de Integridad */}
+        <IntegrityCheckPanel key={targetTenantId} tenantId={targetTenantId} />
 
         {/* 📊 Historial de Auditoría e Ingesta Inmutable */}
         <div className="flex flex-col gap-6 pt-2">
