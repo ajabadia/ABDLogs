@@ -22,7 +22,35 @@
     "styleLabel": "Estilo",
     "tenants": "LOGS"
   },
+  "widgets": {
+    "tenant_selector_select": "Seleccionar organización",
+    "tenant_selector_title": "ORGANIZACIÓN",
+    "tenant_selector_search": "Buscar...",
+    "tenant_selector_empty": "Sin resultados",
+    "tenant_selector_active": "Organización Activa",
+    "system_settings_title": "CONFIGURACIÓN DEL SISTEMA",
+    "system_settings_close": "Cerrar",
+    "system_settings_language": "IDIOMA",
+    "system_settings_theme": "TEMA",
+    "system_settings_theme_light": "CLARO",
+    "system_settings_theme_dark": "OSCURO",
+    "system_settings_theme_system": "SISTEMA",
+    "system_settings_logout": "Cerrar Sesión"
+  },
+  "adminPortal": {
+    "activo": "Activo"
+  },
   "admin": {
+    "auditActivityHistory": "Historial de Actividad",
+    "auditActivityDesc": "Registros de auditoría y eventos de trazabilidad recientes",
+    "controlConsole": "Consola de Control",
+    "auditDesc": "Seguridad y Trazabilidad.",
+    "certification": "CUMPLIMIENTO SOC2",
+    "auditTitle": "Logs de Auditoría",
+    "footer": "Sistema verificado",
+    "activeAuthority": "Autoridad Activa",
+    "sessionRole": "Rol de Sesión",
+    "localRegion": "Región Local",
     "filters": "Filtros Operativos",
     "securityTitle": "Seguridad de Gobernanza",
     "prodReady": "PROD_READY [OK]",

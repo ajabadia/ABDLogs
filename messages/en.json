@@ -22,7 +22,35 @@
     "styleLabel": "Style",
     "tenants": "LOGS"
   },
+  "widgets": {
+    "tenant_selector_select": "Select organization",
+    "tenant_selector_title": "ORGANIZATION",
+    "tenant_selector_search": "Search...",
+    "tenant_selector_empty": "No results",
+    "tenant_selector_active": "Active Organization",
+    "system_settings_title": "SYSTEM SETTINGS",
+    "system_settings_close": "Close",
+    "system_settings_language": "LANGUAGE",
+    "system_settings_theme": "THEME",
+    "system_settings_theme_light": "LIGHT",
+    "system_settings_theme_dark": "DARK",
+    "system_settings_theme_system": "SYSTEM",
+    "system_settings_logout": "Sign Out"
+  },
+  "adminPortal": {
+    "activo": "Active"
+  },
   "admin": {
+    "auditActivityHistory": "Activity History",
+    "auditActivityDesc": "Recent audit logs and traceability events",
+    "controlConsole": "Control Console",
+    "auditDesc": "Security and Traceability.",
+    "certification": "SOC2 COMPLIANCE",
+    "auditTitle": "Chain Auditing Logs",
+    "footer": "System verified",
+    "activeAuthority": "Active Authority",
+    "sessionRole": "Session Role",
+    "localRegion": "Local Region",
     "filters": "Operational Filters",
     "securityTitle": "Governance Security",
     "prodReady": "PROD_READY [OK]",

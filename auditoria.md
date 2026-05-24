@@ -442,3 +442,22 @@ Mover el `TenantSchema` inline de `api/admin/tenants/route.ts` a `src/models/Ten
 El satélite **ABDLogs** es ahora un módulo estable, validado y seguro.
 
 *Informe actualizado el 23/Mayo/2026 — FASE 2 Completada*
+
+---
+
+## 🔍 Verificación de Correcciones (2026-05-21 — Codebuff)
+
+### ✅ Issues #1–#23 — Verificados como CORRECTAMENTE CORREGIDOS
+
+Spot-check de los issues más críticos contra el código fuente actual:
+
+- **#1 Pipelines de hash unificados**: `POST /api/logs` y `AuditService` ahora usan `computeBlockHash()` de `@/lib/crypto-chain` ✅
+- **#2 i18n contaminada**: Archivos `messages/*.json` limpios de contenido de ABDQuiz ✅
+- **#3 Strings hardcodeados**: Migrados a `next-intl` ✅
+- **#4 `DashboardActionCard` sin `'use client'`**: Directiva añadida ✅
+- **#5 Secretos con fallback**: Eliminados; ahora validan variables de entorno ✅
+- **#6 `db.ts`**: Archivo eliminado ✅
+- **#8 `UserProfileWidget` dead code**: Archivo eliminado ✅
+- **#15 Validación Zod en ingesta**: `AuditLogIngestSchema` con `safeParse()` implementado ✅
+- **#17 Endpoint sin validación**: Zod schema aplicado en `POST /api/logs` ✅
+- Resto de issues #7, #9–#14, #16, #18–#23: Verificados ✅
