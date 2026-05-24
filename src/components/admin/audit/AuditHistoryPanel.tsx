@@ -233,10 +233,10 @@ export function AuditHistoryPanel({ tenantId }: AuditHistoryPanelProps) {
           <Link
             href={`/${locale}/admin/dashboard?tenantId=${tenantId}`}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all cursor-pointer shadow-sm"
-            title="Ver Telemetría Visual"
+            title={t('audit_view_telemetry_title', { defaultMessage: 'Ver Telemetría Visual' })}
           >
             <BarChart3 className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Métricas</span>
+            <span className="hidden sm:inline">{t('audit_metrics_label', { defaultMessage: 'Métricas' })}</span>
           </Link>
 
           {/* Toggle LIVE/PAUSE */}

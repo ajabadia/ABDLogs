@@ -81,6 +81,7 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
          <div className="flex items-center gap-1">
             {[7, 15, 30, 90].map((d) => (
                <button
+                 aria-label={`${d}D`}
                  key={d}
                  onClick={() => setDays(d)}
                  disabled={loading}

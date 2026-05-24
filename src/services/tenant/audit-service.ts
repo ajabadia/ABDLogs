@@ -41,9 +41,10 @@ export class AuditService {
           
           // console.log(`[AUDIT_SAAS_LOG] Persisted ${doc.action} event successfully with hash ${hash.substring(0, 8)}...`);
           return; // Éxito, salir del bucle
-        } catch (err: any) {
+        } catch (err: unknown) {
           // Si es un error de índice único (código 11000 en MongoDB), significa que otro proceso insertó a la vez
-          if (err.code === 11000) {
+          const mongoError = err as { code?: number };
+          if (mongoError.code === 11000) {
             attempt++;
             console.warn(`[AUDIT_SAAS_WARN] Hash collision detected for tenant ${tenantId}. Retrying ${attempt}/${retries}...`);
             await new Promise(r => setTimeout(r, Math.random() * 50 * attempt));
@@ -85,13 +86,13 @@ export class AuditService {
   /**
    * Obtiene estadísticas agregadas de telemetría para los dashboards (últimos N días)
    */
-  static async getTelemetryStatsByTenant(tenantId: string, days = 30): Promise<any[]> {
+  static async getTelemetryStatsByTenant(tenantId: string, days = 30): Promise<{ date: string; appId: string; action: string; count: number }[]> {
     try {
       await connectDB();
       const startDate = new Date();
       startDate.setDate(startDate.getDate() - days);
 
-      const filter: any = { createdAt: { $gte: startDate } };
+      const filter: Record<string, unknown> = { createdAt: { $gte: startDate } };
       if (tenantId !== 'SYSTEM' && tenantId) {
         filter.tenantId = tenantId;
       }
@@ -170,9 +171,10 @@ export class AuditService {
         invalidLogsCount,
         errorDetails
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('[AUDIT_SAAS_VERIFY_ERROR] Verification failed:', err);
-      return { isValid: false, invalidLogsCount: 1, errorDetails: [err.message] };
+      const msg = err instanceof Error ? err.message : 'Unknown error';
+      return { isValid: false, invalidLogsCount: 1, errorDetails: [msg] };
     }
   }
 }

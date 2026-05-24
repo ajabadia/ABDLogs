@@ -40,8 +40,7 @@ export async function GET() {
     const TenantModel = conn.models.Tenant || conn.model('Tenant', TenantSchema);
     
     const rawTenants = await TenantModel.find().lean();
-    
-    const tenants = rawTenants.map((t: any) => ({
+    const tenants = (rawTenants as unknown as { tenantId: string; name?: string; active?: boolean }[]).map((t) => ({
       tenantId: t.tenantId,
       name: t.name || t.tenantId,
       active: t.active !== false,

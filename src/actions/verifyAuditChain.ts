@@ -23,11 +23,11 @@ export async function verifyAuditChainAction(tenantId?: string) {
       success: true,
       data: result
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[ACTION_VERIFY_CHAIN_ERROR]', error);
     return {
       success: false,
-      error: error.message || 'Unknown error occurred during verification'
+      error: error instanceof Error ? error.message : 'Unknown error occurred during verification'
     };
   }
 }
