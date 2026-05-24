@@ -79,7 +79,6 @@ export function LogsCommandPalette() {
     <CommandPalette
       commands={commands}
       placeholder={locale === 'es' ? 'Escribe un comando o busca trazas...' : 'Type a command or search traces...'}
-      triggerElementId="command-palette-trigger"
     />
   );
 }

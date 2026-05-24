@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start -p 3600",
     "lint": "eslint",
-    "full-audit": "powershell -File ./scripts/abd-audit.ps1"
+    "full-audit": "powershell -File ./scripts/abd-audit.ps1",
+    "test": "vitest run"
   },
   "pnpm": {
     "onlyBuiltDependencies": []
@@ -51,6 +52,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.7"
   }
 }
