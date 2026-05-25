@@ -17,7 +17,20 @@ export function SystemSettings({ isAuthenticated = false }: SystemSettingsProps)
   return (
     <SharedSystemSettings
       locale={locale}
-      onLocaleChange={(newLoc) => router.replace(pathname, { locale: newLoc })}
+      onLocaleChange={(newLoc) => {
+        let domainSuffix = "";
+        const hostname = window.location.hostname;
+        if (hostname !== "localhost" && hostname !== "127.0.0.1") {
+          const parts = hostname.split('.');
+          if (parts.length >= 2) {
+            domainSuffix = `; domain=.${parts.slice(-2).join('.')}`;
+          }
+        }
+        document.cookie = `NEXT_LOCALE=${newLoc}; path=/; max-age=31536000; SameSite=Lax${domainSuffix}`;
+        
+        const search = typeof window !== 'undefined' ? window.location.search : '';
+        router.replace(`${pathname}${search}`, { locale: newLoc });
+      }}
       isAuthenticated={isAuthenticated}
       showLogin={false}
       logoutUrl="/api/auth/logout"

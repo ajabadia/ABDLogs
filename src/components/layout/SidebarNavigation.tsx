@@ -3,6 +3,7 @@
 import React from 'react';
 import { Home, Terminal, ShieldCheck } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 import { Link, usePathname } from '@/i18n/routing';
 import { TacticalSidebar as SharedTacticalSidebar } from '@abd/styles';
 
@@ -29,6 +30,8 @@ export function SidebarNavigation({ session, logoUrl }: SidebarNavigationProps) 
   const t = useTranslations('common');
   const locale = useLocale();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const queryStr = searchParams.toString();
 
   const isLoggedIn = session.authenticated && !!session.user;
   const user = session.user;
@@ -71,11 +74,14 @@ export function SidebarNavigation({ session, logoUrl }: SidebarNavigationProps) 
 
   const finalLogoUrl = logoUrl || (isLoggedIn && user?.branding ? user.branding.logoUrl : null);
 
-  const LocalizedLink = ({ href, onClick, className, children }: { href: string; onClick?: () => void; className?: string; children: React.ReactNode }) => (
-    <Link href={href} onClick={onClick} className={className}>
-      {children}
-    </Link>
-  );
+  const LocalizedLink = ({ href, onClick, className, children }: { href: string; onClick?: () => void; className?: string; children: React.ReactNode }) => {
+    const finalHref = queryStr ? `${href}?${queryStr}` : href;
+    return (
+      <Link href={finalHref} onClick={onClick} className={className}>
+        {children}
+      </Link>
+    );
+  };
 
   return (
     <SharedTacticalSidebar
