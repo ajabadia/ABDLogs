@@ -17,8 +17,11 @@ async function run() {
     clientSecret: 'abdquiz-industrial-super-secret-key-2026',
     redirectUris: [
       'http://localhost:3300/api/auth/federated/callback',
+      'http://localhost:3300',
       'http://localhost:3600/api/auth/federated/callback',
-      'https://quiz.abd.vercel.app/api/auth/federated/callback'
+      'https://quiz.abd.vercel.app/api/auth/federated/callback',
+      'https://abd-quiz.vercel.app/api/auth/federated/callback',
+      'https://abd-quiz.vercel.app'
     ],
     active: true,
     updatedAt: new Date(),

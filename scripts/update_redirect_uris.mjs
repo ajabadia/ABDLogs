@@ -12,7 +12,7 @@ async function run() {
   const connection = await mongoose.connect(uri);
   
   const db = connection.connection.client.db('ABDElevators-Auth');
-  const collection = db.collection('Applications');
+  const collection = db.collection('applications');
   
   const client = await collection.findOne({ clientId: 'abdquiz-industrial-client-id' });
   if (client) {

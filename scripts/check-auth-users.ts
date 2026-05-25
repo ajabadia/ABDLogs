@@ -54,7 +54,7 @@ async function check() {
       });
     }
 
-    const apps = await db.collection('Applications').find({}).toArray() as unknown as AuthApp[];
+    const apps = await db.collection('applications').find({}).toArray() as unknown as AuthApp[];
     console.log(`\n--- APPLICATIONS IN ${dbName} ---`);
     apps.forEach((a: AuthApp) => {
       console.log(`- Name: ${a.name} | ClientID: ${a.clientId} | Active: ${a.active}`);

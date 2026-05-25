@@ -8,7 +8,7 @@ async function run() {
   const db = connection.connection.client.db('ABDElevators-Auth');
   
   console.log("\n--- APPLICATIONS ---");
-  const apps = await db.collection('Applications').find({}).toArray();
+  const apps = await db.collection('applications').find({}).toArray();
   apps.forEach(app => {
     console.log(JSON.stringify({
       _id: app._id,
