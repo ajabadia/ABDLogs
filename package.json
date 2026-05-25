@@ -9,7 +9,8 @@
     "start": "next start -p 3600",
     "lint": "eslint",
     "full-audit": "powershell -File ./scripts/abd-audit.ps1",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "pnpm": {
     "onlyBuiltDependencies": []
@@ -52,7 +53,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^4.1.7"
+    "typescript": "^5.6.3",
+    "vitest": "^4.1.7",
+    "@vitest/coverage-v8": "^4.1.7"
   }
 }

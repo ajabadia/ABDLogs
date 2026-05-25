@@ -36,8 +36,13 @@ export function resolveTenantUri(baseUri: string, dbName: string): string {
 }
 
 // Global cache for tenant connections to survive Hot Module Replacement (HMR)
+interface CachedConnection {
+  connection: Connection;
+  lastUsed: number;
+}
+
 interface TenantConnectionCache {
-  [key: string]: Connection;
+  [key: string]: CachedConnection;
 }
 
 const globalWithTenantConnections = global as typeof globalThis & {
@@ -59,9 +64,32 @@ export function getTenantConnection(dbPrefix: string, isolationStrategy: string)
     : `COLL_PREFIX:${dbPrefix}`;
     
   if (connectionPool[cacheKey]) {
-    return connectionPool[cacheKey];
+    connectionPool[cacheKey].lastUsed = Date.now();
+    return connectionPool[cacheKey].connection;
   }
   
+  // Eviction policy (LRU) - Limit pool to 15 connections to prevent descriptor leaks
+  const keys = Object.keys(connectionPool);
+  if (keys.length >= 15) {
+    let oldestKey = '';
+    let oldestTime = Infinity;
+    for (const key of keys) {
+      if (connectionPool[key].lastUsed < oldestTime) {
+        oldestTime = connectionPool[key].lastUsed;
+        oldestKey = key;
+      }
+    }
+    
+    if (oldestKey) {
+      const evicted = connectionPool[oldestKey];
+      delete connectionPool[oldestKey];
+      // console.log(`[MultiTenant] Evicting LRU connection from cache: ${oldestKey}`);
+      evicted.connection.close().catch(err => {
+        console.error(`[MultiTenant] Error closing evicted connection ${oldestKey}:`, err);
+      });
+    }
+  }
+
   const baseUri = process.env.MONGODB_URI || "";
   if (!baseUri) {
     throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
@@ -77,7 +105,7 @@ export function getTenantConnection(dbPrefix: string, isolationStrategy: string)
   
   const opts = {
     bufferCommands: false,
-    maxPoolSize: 10,
+    maxPoolSize: 3, // Optimized from 10 to 3 to minimize socket footprint in serverless environments
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 45000,
   };
@@ -91,7 +119,10 @@ export function getTenantConnection(dbPrefix: string, isolationStrategy: string)
     console.error(`[MultiTenant] Connection error for ${cacheKey}:`, err);
   });
   
-  connectionPool[cacheKey] = conn;
+  connectionPool[cacheKey] = {
+    connection: conn,
+    lastUsed: Date.now(),
+  };
   return conn;
 }
 
