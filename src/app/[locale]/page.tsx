@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { ArrowRight, Cpu, Sliders, Database, ShieldCheck } from 'lucide-react';
 import { HeroHeader } from '@abd/styles';
 import Link from 'next/link';
-import { Footer } from '@abd/styles';
+import { GlobalFooter } from '@abd/ecosystem-widgets';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -91,7 +91,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         </div>
 
-        <Footer 
+        <GlobalFooter 
           separatorWidth="short"
           telemetryItems={[
             { label: locale === 'es' ? 'Microservicio' : 'Microservice', value: h('version') },

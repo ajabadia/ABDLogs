@@ -74,11 +74,14 @@ export function TenantSelector({ sessionUser }: TenantSelectorProps) {
   }, [userRole]);
 
   const handleTenantChange = (newTenantId: string) => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    // 1. Set the cookie immediately on client side
+    document.cookie = `active_tenant_id=${newTenantId}; path=/; max-age=2592000; SameSite=Lax`;
+
+    // 2. Perform native window navigation to trigger layout rerender and clean context switch
+    const current = new URLSearchParams(window.location.search);
     current.set("tenantId", newTenantId);
-    const search = current.toString();
-    const query = search ? `?${search}` : "";
-    router.push(`${pathname}${query}`);
+    const query = current.toString() ? `?${current.toString()}` : "";
+    window.location.href = `${window.location.pathname}${query}`;
   };
 
   if (!sessionUser) return null;

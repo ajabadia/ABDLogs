@@ -3,8 +3,8 @@ import { generateTenantCss, type ThemeConfig } from './css-generator';
 
 describe('generateTenantCss', () => {
   it('should return empty string when theme is empty or missing primary color', () => {
-    expect(generateTenantCss({} as any)).toBe('');
-    expect(generateTenantCss({ secondary: '#000000' } as any)).toBe('');
+    expect(generateTenantCss({} as unknown as ThemeConfig)).toBe('');
+    expect(generateTenantCss({ secondary: '#000000' } as unknown as ThemeConfig)).toBe('');
   });
 
   it('should generate valid CSS variables for primary and default secondary/accent values', () => {

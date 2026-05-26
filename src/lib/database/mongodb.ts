@@ -36,7 +36,9 @@ async function connectDB(): Promise<typeof mongoose> {
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
-      console.log('✅ MongoDB connected successfully to Cluster');
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('[DEV] MongoDB connected to Cluster');
+      }
       return mongooseInstance;
     });
   }

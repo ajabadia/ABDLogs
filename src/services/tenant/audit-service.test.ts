@@ -2,6 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AuditService } from './audit-service';
 import { computeBlockHash } from '@/lib/crypto-chain';
 
+// Helper type for mocked Mongoose query chain
+type MockQuery = { sort: ReturnType<typeof vi.fn> };
+
 // Mock DB connection module
 vi.mock('@/lib/database/mongodb', () => {
   return {
@@ -24,19 +27,19 @@ vi.mock('@/models/AuditLog', () => {
     tenantId: string;
     save = mockSave;
 
-    constructor(data: any) {
-      this.createdAt = data.createdAt || new Date();
-      this.hash = data.hash;
-      this.previousHash = data.previousHash;
-      this.action = data.action || 'TEST_ACTION';
-      this.tenantId = data.tenantId || 'SYSTEM';
+    constructor(data: Record<string, unknown>) {
+      this.createdAt = (data.createdAt as Date) || new Date();
+      this.hash = data.hash as string | undefined;
+      this.previousHash = data.previousHash as string | undefined;
+      this.action = (data.action as string) || 'TEST_ACTION';
+      this.tenantId = (data.tenantId as string) || 'SYSTEM';
       Object.assign(this, data);
     }
 
     toObject() {
       const obj = { ...this };
-      delete (obj as any).save;
-      delete (obj as any).toObject;
+      delete (obj as Record<string, unknown>).save;
+      delete (obj as Record<string, unknown>).toObject;
       return obj;
     }
   }
@@ -56,7 +59,20 @@ vi.mock('@/models/AuditLog', () => {
 
 // Import the mocked module and extract the runtime mock references
 import * as mockMod from '@/models/AuditLog';
-const { AuditLog, mockFind, mockFindOne, mockSave } = mockMod as any;
+const { AuditLog, mockFind, mockFindOne, mockSave } = mockMod as unknown as {
+  AuditLog: new (data: Record<string, unknown>) => {
+    createdAt: Date;
+    hash?: string;
+    previousHash?: string;
+    action: string;
+    tenantId: string;
+    save: ReturnType<typeof vi.fn>;
+    toObject(): Record<string, unknown>;
+  };
+  mockFind: ReturnType<typeof vi.fn>;
+  mockFindOne: ReturnType<typeof vi.fn>;
+  mockSave: ReturnType<typeof vi.fn>;
+};
 
 describe('AuditService', () => {
   beforeEach(() => {
@@ -66,7 +82,7 @@ describe('AuditService', () => {
   describe('verifyTenantChain', () => {
     it('should return isValid: true when there are no logs for a tenant', async () => {
       const mockSort = vi.fn().mockResolvedValue([]);
-      mockFind.mockReturnValue({ sort: mockSort } as any);
+      mockFind.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
 
       const result = await AuditService.verifyTenantChain('tenant-empty');
 
@@ -108,7 +124,7 @@ describe('AuditService', () => {
       doc2.hash = computeBlockHash(cleanPayload2, doc2.previousHash!, createdAt2.getTime());
 
       const mockSort = vi.fn().mockResolvedValue([doc1, doc2]);
-      mockFind.mockReturnValue({ sort: mockSort } as any);
+      mockFind.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
 
       const result = await AuditService.verifyTenantChain(tenantId);
 
@@ -145,7 +161,7 @@ describe('AuditService', () => {
       doc2.hash = computeBlockHash(cleanPayload2, doc2.previousHash!, createdAt2.getTime());
 
       const mockSort = vi.fn().mockResolvedValue([doc1, doc2]);
-      mockFind.mockReturnValue({ sort: mockSort } as any);
+      mockFind.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
 
       const result = await AuditService.verifyTenantChain(tenantId);
 
@@ -172,7 +188,7 @@ describe('AuditService', () => {
       doc.action = 'TAMPERED_ACTION';
 
       const mockSort = vi.fn().mockResolvedValue([doc]);
-      mockFind.mockReturnValue({ sort: mockSort } as any);
+      mockFind.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
 
       const result = await AuditService.verifyTenantChain(tenantId);
 
@@ -188,7 +204,7 @@ describe('AuditService', () => {
       const eventParams = { tenantId, action: 'INITIAL_EVENT', appId: 'app' };
 
       const mockSort = vi.fn().mockResolvedValue(null);
-      mockFindOne.mockReturnValue({ sort: mockSort } as any);
+      mockFindOne.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
       mockSave.mockResolvedValue({});
 
       await AuditService.logEvent(eventParams);
@@ -208,7 +224,7 @@ describe('AuditService', () => {
       });
 
       const mockSort = vi.fn().mockResolvedValue(lastLogDoc);
-      mockFindOne.mockReturnValue({ sort: mockSort } as any);
+      mockFindOne.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
       mockSave.mockResolvedValue({});
 
       await AuditService.logEvent(eventParams);
@@ -221,10 +237,10 @@ describe('AuditService', () => {
       const eventParams = { tenantId, action: 'COLLISION_EVENT', appId: 'app' };
 
       const mockSort = vi.fn().mockResolvedValue(null);
-      mockFindOne.mockReturnValue({ sort: mockSort } as any);
+      mockFindOne.mockReturnValue({ sort: mockSort } as unknown as MockQuery);
 
       const mongoError = new Error('Unique constraint collision');
-      (mongoError as any).code = 11000;
+      Object.assign(mongoError, { code: 11000 });
       mockSave
         .mockRejectedValueOnce(mongoError)
         .mockResolvedValueOnce({});

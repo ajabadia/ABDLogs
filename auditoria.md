@@ -3,7 +3,7 @@
 **Fecha:** 25 de Mayo de 2026
 **Versión:** v1.0.0-PROD
 **Rol:** Satélite #4 — Central Logging
-**Auditoría v02:** Codebuff AI — Verificación post-correcciones
+**Auditoría v04:** Codebuff AI — Dependencias no usadas eliminadas
 
 ---
 
@@ -11,8 +11,8 @@
 
 | Métrica | Valor v02 | Cambio vs v01 |
 |---|---|---|
-| Archivos fuente totales | ~70 | -2 (dead code eliminado) |
-| Componentes React | 16 | -1 (UserProfileWidget eliminado) |
+| Archivos fuente totales | ~69 | -1 (auth-bridge.ts eliminado) |
+| Componentes React | 16 | = |
 | API Routes | 6 | = |
 | Servicios | 2 | = |
 | Tests unitarios (Vitest) | 22 | 22 ✓ |
@@ -20,7 +20,9 @@
 | i18n contaminada Quiz | 0% | ✅ Limpio |
 | Strings hardcodeados | 0 | ✅ Migrados a i18n |
 | Secretos con fallback | 0 | ✅ Validación estricta |
-| Dead code | 0 | ✅ Eliminado |
+| Dead code | 0 | ✅ Eliminado (auth-bridge.ts) |
+| Dependencias no usadas | 0 | ✅ 6 eliminadas (v04) |
+| console.log en producción | 0 | ✅ Silenciados (mongodb-logs, mongodb) |
 
 ---
 
@@ -43,7 +45,7 @@ Verificado en:
 - `src/lib/security.ts`: `ENCRYPTION_SECRET` sin fallback; `getSecret()` lanza `Error` si no está definido
 - `src/lib/logs-client.ts`: `getApiConfig()` valúa si `endpoint` y `token` existen, warning si no
 - `src/proxy.ts`: Usa `process.env.AUTH_CLIENT_ID as string`
-- `src/lib/auth-bridge.ts`: Usa variables de entorno sin fallback
+- ~~`src/lib/auth-bridge.ts`~~ — Archivo eliminado en v03 (era dead code)
 
 ### ✅ Issue #6 — db.ts wrapper inútil: CORREGIDO
 El archivo `src/lib/db.ts` ya no existe.
@@ -78,25 +80,49 @@ Eliminado.
 
 ---
 
-## 🟡 Observaciones Nuevas
+## 🟢 Correcciones Aplicadas en v03 (25/Mayo/2026)
 
-### 1. 🟡 `connectLogsDB()` en mongodb-logs.ts tiene `console.log` de conexión exitosa
+### ✅ Observación #1 — console.log en mongodb-logs.ts: CORREGIDO
+`connectLogsDB()` ahora muestra el log solo en entorno development:
 ```typescript
-console.log('✅ Secondary Mongoose connected successfully to ABDElevators-Logs');
+if (process.env.NODE_ENV !== 'production') {
+  console.log('[DEV] Secondary Mongoose connected to ABDElevators-Logs');
+}
 ```
-En producción, este log no expone datos sensibles, pero genera ruido en los logs de Vercel.
 
-### 2. 🟡 `connectDB()` en mongodb.ts también tiene `console.log`
+### ✅ Observación #2 — console.log en mongodb.ts: CORREGIDO
+`connectDB()` ahora muestra el log solo en entorno development:
 ```typescript
-console.log('✅ MongoDB connected successfully to Cluster');
+if (process.env.NODE_ENV !== 'production') {
+  console.log('[DEV] MongoDB connected to Cluster');
+}
 ```
-Mismo caso — informativo pero ruidoso en producción.
 
-### 3. 🟢 `LogsClient.log()` no tiene retry implementado
+### ✅ Observación #4 — auth-bridge.ts dead code: CORREGIDO
+El archivo `src/lib/auth-bridge.ts` ha sido eliminado. Su funcionalidad estaba completamente reemplazada por el SDK centralizado (`@abd/satellite-sdk`).
+
+---
+
+## 🟢 Correcciones Aplicadas en v04 (26/Mayo/2026)
+
+### ✅ DEP-1 — 6 dependencias no usadas/redundantes eliminadas
+
+| Dependencia | Motivo |
+|---|---|
+| `papaparse` | 0 imports en producción |
+| `@types/papaparse` | 0 imports (redundante con papaparse eliminado) |
+| `shadcn` | 0 imports (CLI tool no usado) |
+| `jose` | 0 imports (JWT vía `@abd/satellite-sdk` transitivo) |
+| `@radix-ui/react-dialog` | Redundante — Dialog se importa desde `radix-ui` (meta-package) |
+| `@radix-ui/react-separator` | Redundante — Separator se importa desde `radix-ui` (meta-package) |
+| `@radix-ui/react-progress` | 🟢 Se conserva — import directo en `progress.tsx` |
+
+---
+
+## 🟡 Observaciones Restantes
+
+### 1. 🟢 `LogsClient.log()` no tiene retry implementado
 Sigue siendo fire-and-forget como se documentó en v01. Aceptado como diseño.
-
-### 4. 🟡 `src/lib/auth-bridge.ts` es dead code
-El archivo existe y define `getFederatedSession()` e `FederatedSession`, pero **no es importado por ningún otro módulo** del proyecto. Su funcionalidad fue reemplazada por el SDK centralizado (`@abd/satellite-sdk`). Recomendable eliminar el archivo.
 
 ---
 
@@ -116,6 +142,14 @@ El archivo existe y define `getFederatedSession()` e `FederatedSession`, pero **
 
 ## 🏁 Conclusión
 
-**ABDLogs** está en estado óptimo. Todos los issues de la v01 han sido corregidos y verificados. La suite de 22 tests unitarios certifica la integridad criptográfica y la seguridad del módulo.
+**ABDLogs** está en estado óptimo. Todos los issues de la v01 y v02 han sido corregidos y verificados. La suite de 22 tests unitarios certifica la integridad criptográfica y la seguridad del módulo.
+
+**Correcciones de v03:**
+- 🗑️ `auth-bridge.ts` eliminado (dead code reemplazado por `@abd/satellite-sdk`)
+- 🔇 `console.log` de conexión en `mongodb-logs.ts` silenciado en producción
+- 🔇 `console.log` de conexión en `mongodb.ts` silenciado en producción
+
+**Correcciones de v04:**
+- 🗑️ 6 dependencias no usadas/redundantes eliminadas (`papaparse`, `@types/papaparse`, `shadcn`, `jose`, `@radix-ui/react-dialog`, `@radix-ui/react-separator`)
 
 **Calificación general:** ✅ PROD-READY — Sistema de auditoría forense estable y verificado.

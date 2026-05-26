@@ -18,21 +18,22 @@ export function IntegrityCheckPanel({ tenantId }: IntegrityCheckPanelProps) {
 
   const handleVerify = () => {
     startTransition(async () => {
-      try {
-        const response = await verifyAuditChainAction(tenantId);
+      const promise = verifyAuditChainAction(tenantId).then(response => {
         if (response.success && response.data) {
           setResult(response.data);
-          if (response.data.isValid) {
-            toast.success('Cadena de bloques válida y sin alteraciones.');
-          } else {
-            toast.error(`Se encontraron ${response.data.invalidLogsCount} bloques alterados.`);
-          }
-        } else {
-          toast.error(response.error || 'Error al verificar la cadena');
+          return response.data;
         }
-      } catch (error) {
-        toast.error('Error inesperado al verificar la cadena');
-      }
+        throw new Error(response.error || 'Error al verificar la cadena');
+      });
+
+      toast.promise(promise, {
+        loading: '🔍 Verificando cadena de bloques...',
+        success: (data) =>
+          data.isValid
+            ? '✅ Cadena de bloques válida y sin alteraciones.'
+            : `⚠️ Se encontraron ${data.invalidLogsCount} bloques alterados.`,
+        error: (err: Error) => err.message || 'Error inesperado al verificar la cadena',
+      });
     });
   };
 

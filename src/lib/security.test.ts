@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 
 describe('SecurityService', () => {
   const originalSecret = process.env.ENCRYPTION_SECRET;
-  let SecurityService: any;
+  let SecurityService: typeof import('./security').SecurityService;
 
   beforeAll(async () => {
     // Set environment variable BEFORE importing the service to bypass module-level evaluation
@@ -55,6 +55,6 @@ describe('SecurityService', () => {
     const mod = await import('./security');
     const LocalSecurityService = mod.SecurityService;
 
-    expect(() => (LocalSecurityService as any).getSecret()).toThrow('ENCRYPTION_SECRET no está definida en las variables de entorno.');
+    expect(() => (LocalSecurityService as unknown as { getSecret: () => Buffer }).getSecret()).toThrow('ENCRYPTION_SECRET no está definida en las variables de entorno.');
   });
 });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const fetch = require('node:crypto') ? global.fetch : null; // fetch is global in node 18+
 
 async function trace(url, depth = 0) {

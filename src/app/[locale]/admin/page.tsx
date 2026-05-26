@@ -4,7 +4,7 @@ import { LayoutDashboard, ShieldCheck, Activity } from 'lucide-react';
 import { DashboardActionCard } from '@/components/admin/dashboard/DashboardActionCard';
 import { AdminPageHeader } from '@abd/styles';
 import { SystemTelemetryPanel } from '@/components/admin/dashboard/SystemTelemetryPanel';
-import { Footer } from '@abd/styles';
+import { GlobalFooter } from '@abd/ecosystem-widgets';
 
 /**
  * 🛰️ Central Admin Logs Portal Page (Federated Server Component)
@@ -73,7 +73,7 @@ export default async function AdminPortalPage({ params }: { params: Promise<{ lo
 
         </div>
 
-        <Footer label={t('footer')} opacity={0.8} />
+        <GlobalFooter label={t('footer')} opacity={0.8} />
 
       </div>
     </main>
