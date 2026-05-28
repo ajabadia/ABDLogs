@@ -16,9 +16,9 @@
     "onlyBuiltDependencies": []
   },
   "dependencies": {
-    "@ajabadia/ecosystem-widgets": "file:../ABDEcosystemWidgets",
-    "@ajabadia/satellite-sdk": "file:../ABDSatelliteSDK",
-    "@ajabadia/styles": "file:../ABDStyles",
+    "@ajabadia/ecosystem-widgets": "latest",
+    "@ajabadia/satellite-sdk": "latest",
+    "@ajabadia/styles": "latest",
     "@radix-ui/react-progress": "^1.1.8",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.5.1",
