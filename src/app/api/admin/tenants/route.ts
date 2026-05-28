@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess } from '@/lib/session';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import mongoose from 'mongoose';
 
 export const revalidate = 0; // Evitar el cacheado estático de la API

@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/routing";
-import { TenantSelector as SharedTenantSelector, type TenantOption } from "@abd/ecosystem-widgets";
+import { TenantSelector as SharedTenantSelector, type TenantOption } from "@ajabadia/ecosystem-widgets";
 
 interface TenantApiResponse {
   tenantId: string;

@@ -1,6 +1,6 @@
-import connectDB from '@/lib/database/mongodb';
+import { connectDB } from '@ajabadia/satellite-sdk';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
-import { computeBlockHash } from '@/lib/crypto-chain';
+import { computeBlockHash } from '@ajabadia/satellite-sdk';
 
 export class AuditService {
   /**

@@ -29,7 +29,7 @@ Al abrir el panel de navegación lateral táctil en entornos de producción, el 
 * **Oclusión Física**: Al tener el panel y el backdrop un z-index superior (`z-50` y `z-[45]`) al del botón disparador (`z-40`), este quedaba ocultado/bloqueado por debajo de las nuevas capas, impidiendo cualquier captura de eventos de puntero (clic/touch) sobre el icono de cierre.
 
 ### 3. La Solución Industrial
-* **Z-Index Dinámico**: Modificar la clase del botón en `TacticalSidebar.tsx` de `@abd/styles` mediante el utilitario `cn()` para inyectar una clase dinámica de prioridad en caliente:
+* **Z-Index Dinámico**: Modificar la clase del botón en `TacticalSidebar.tsx` de `@ajabadia/styles` mediante el utilitario `cn()` para inyectar una clase dinámica de prioridad en caliente:
   ```typescript
   className={cn(
     "fixed top-6 left-6 p-3 rounded-none ...",
@@ -37,4 +37,4 @@ Al abrir el panel de navegación lateral táctil en entornos de producción, el 
   )}
   ```
   De esta forma, cuando el menú está cerrado, el botón no invade otras interfaces modales superiores (`z-40`), pero al abrirse salta a la cima de la pila visual (`z-[55]`) superando al panel (`z-50`) y al velo oscuro, garantizando plena interactividad.
-* **Empaquetado y Distribución Centralizada**: Ejecutar siempre el build de distribución (`tsc`) en `@abd/styles` antes de subir cambios a la rama principal de GitHub (`main`) para que los satélites en Vercel incorporen de forma inmediata los CSS y componentes transpilados.
+* **Empaquetado y Distribución Centralizada**: Ejecutar siempre el build de distribución (`tsc`) en `@ajabadia/styles` antes de subir cambios a la rama principal de GitHub (`main`) para que los satélites en Vercel incorporen de forma inmediata los CSS y componentes transpilados.

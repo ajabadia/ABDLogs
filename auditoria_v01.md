@@ -141,7 +141,7 @@ Solo re-exporta `connectDB` de `./database/mongodb`. Mismo anti-patrón identifi
 ### 7. ✅ **CORREGIDO: Duplicate sidebar implementations**
 **Ubicación:** `SidebarNavigation.tsx` vs `SidebarLinks.tsx` + `SidebarUserCard.tsx`
 
-`SidebarNavigation.tsx` usa el `TacticalSidebar` de `@abd/styles` (es el que se renderiza en `[locale]/layout.tsx`). `SidebarLinks.tsx` y `SidebarUserCard.tsx` implementan una sidebar alternativa manual que parece ser dead code. Eliminados.
+`SidebarNavigation.tsx` usa el `TacticalSidebar` de `@ajabadia/styles` (es el que se renderiza en `[locale]/layout.tsx`). `SidebarLinks.tsx` y `SidebarUserCard.tsx` implementan una sidebar alternativa manual que parece ser dead code. Eliminados.
 
 ### 8. ✅ **CORREGIDO: `UserProfileWidget.tsx` es dead code confirmado**
 **Ubicación:** `src/components/common/UserProfileWidget.tsx`
@@ -232,7 +232,7 @@ Si el error es de red/timeout (no 11000), no hace retry y lanza directo al catch
 El schema se recrea en cada request. Se ha extraído a nivel de módulo superior.
 
 ### 23. ✅ **CORREGIDO: `globals.css` importa desde `node_modules` con ruta relativa**
-Frágil si cambia la estructura de node_modules. Resuelto, ahora usa `@import "@abd/styles/dist/styles/industrial-core.css"`.
+Frágil si cambia la estructura de node_modules. Resuelto, ahora usa `@import "@ajabadia/styles/dist/styles/industrial-core.css"`.
 
 ---
 
@@ -270,7 +270,7 @@ Mover el `TenantSchema` inline de `api/admin/tenants/route.ts` a `src/models/Ten
 
 ### 8. **Usar `import` en lugar de rutas relativas en CSS**
 ```css
-@import "@abd/styles/dist/styles/industrial-core.css";
+@import "@ajabadia/styles/dist/styles/industrial-core.css";
 ```
 
 ---
@@ -340,7 +340,7 @@ La suite consta de **22 tests** y completa la verificación de todas las funcion
 ### Core Infrastructure
 | Archivo | Rol |
 |---|---|
-| `src/proxy.ts` | Middleware guard — delega a `@abd/satellite-sdk` |
+| `src/proxy.ts` | Middleware guard — delega a `@ajabadia/satellite-sdk` |
 | `src/lib/session.ts` | Wrapper de `getIndustrialSession`/`ensureIndustrialAccess` |
 | `src/lib/session-types.ts` | Re-exporta tipos del SDK |
 | `src/lib/auth-bridge.ts` | Bridge HTTP al IdP para verificar sesiones |
@@ -421,9 +421,9 @@ La suite consta de **22 tests** y completa la verificación de todas las funcion
 | `components/admin/dashboard/SystemTelemetryPanel.tsx` | Client | Panel lateral de telemetría de sesión |
 | `components/admin/dashboard/TelemetryDashboard.tsx` | Client | Dashboard completo con KPIs + gráficos |
 | `components/common/UserProfileWidget.tsx` | ⚠️ Dead code | Retorna `null` |
-| `components/layout/LogsCommandPalette.tsx` | Client | Paleta de comandos (importa de `@abd/ecosystem-widgets`) |
-| `components/layout/SidebarNavigation.tsx` | Client | Sidebar principal (usa `@abd/styles`) |
-| `components/layout/UserIdentity.tsx` | Server | Identidad de usuario (usa `@abd/ecosystem-widgets`) |
+| `components/layout/LogsCommandPalette.tsx` | Client | Paleta de comandos (importa de `@ajabadia/ecosystem-widgets`) |
+| `components/layout/SidebarNavigation.tsx` | Client | Sidebar principal (usa `@ajabadia/styles`) |
+| `components/layout/UserIdentity.tsx` | Server | Identidad de usuario (usa `@ajabadia/ecosystem-widgets`) |
 | `components/layout/sidebar/SidebarLinks.tsx` | ⚠️ Posible dead code | Sidebar alternativa manual |
 | `components/layout/sidebar/SidebarUserCard.tsx` | ⚠️ Posible dead code | Tarjeta de usuario manual |
 | `components/ui/SystemSettings.tsx` | Client | Configuración de tema/idioma |

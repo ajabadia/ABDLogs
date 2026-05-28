@@ -16,9 +16,9 @@
     "onlyBuiltDependencies": []
   },
   "dependencies": {
-    "@abd/ecosystem-widgets": "file:../ABDEcosystemWidgets",
-    "@abd/satellite-sdk": "file:../ABDSatelliteSDK",
-    "@abd/styles": "file:../ABDStyles",
+    "@ajabadia/ecosystem-widgets": "file:../ABDEcosystemWidgets",
+    "@ajabadia/satellite-sdk": "file:../ABDSatelliteSDK",
+    "@ajabadia/styles": "file:../ABDStyles",
     "@radix-ui/react-progress": "^1.1.8",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.5.1",
@@ -43,7 +43,6 @@
     "@eslint/eslintrc": "^3.0.0",
     "@playwright/test": "1.56.0",
     "@tailwindcss/postcss": "^4",
-    "@types/fast-json-stable-stringify": "^2.1.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

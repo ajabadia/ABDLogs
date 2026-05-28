@@ -1,4 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+// Mock @ajabadia/satellite-sdk to avoid loading next/server in test environment
+vi.mock('@ajabadia/satellite-sdk', () => ({
+  computeBlockHash: vi.fn((payload, previousHash, timestamp) => {
+    const crypto = require('crypto');
+    const stringify = require('fast-json-stable-stringify');
+    const payloadString = stringify(payload);
+    const entropy = timestamp
+      ? `${previousHash}${payloadString}${timestamp}`
+      : `${previousHash}${payloadString}`;
+    return crypto.createHash('sha256').update(entropy).digest('hex');
+  }),
+}));
+
 import { computeBlockHash } from './crypto-chain';
 
 describe('computeBlockHash', () => {

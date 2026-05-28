@@ -1,9 +1,9 @@
 import React from 'react';
-import { ensureIndustrialAccess } from '@/lib/session';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { Activity, ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { AdminPageHeader } from '@abd/styles';
+import { AdminPageHeader } from '@ajabadia/styles';
 import { TelemetryDashboard } from '@/components/admin/dashboard/TelemetryDashboard';
 
 export const revalidate = 0; 

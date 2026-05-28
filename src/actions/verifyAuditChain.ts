@@ -1,6 +1,6 @@
 'use server';
 
-import { ensureIndustrialAccess } from '@/lib/session';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { AuditService } from '@/services/tenant/audit-service';
 
 export async function verifyAuditChainAction(tenantId?: string) {

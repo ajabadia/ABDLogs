@@ -1,6 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+vi.hoisted(() => {
+  process.env.MONGODB_URI = 'mongodb://test:27017/test';
+  process.env.LOGS_SECRET_TOKEN = 'test-token';
+  process.env.LOGS_SERVICE_URL = 'http://localhost:3600/api/logs';
+});
+
 import { AuditService } from './audit-service';
-import { computeBlockHash } from '@/lib/crypto-chain';
+import { computeBlockHash } from '@ajabadia/satellite-sdk';
 
 // Helper type for mocked Mongoose query chain
 type MockQuery = { sort: ReturnType<typeof vi.fn> };

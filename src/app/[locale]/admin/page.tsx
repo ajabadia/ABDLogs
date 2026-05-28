@@ -1,10 +1,10 @@
 import { getTranslations } from 'next-intl/server';
-import { ensureIndustrialAccess } from '@/lib/session';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { LayoutDashboard, ShieldCheck, Activity } from 'lucide-react';
 import { DashboardActionCard } from '@/components/admin/dashboard/DashboardActionCard';
-import { AdminPageHeader } from '@abd/styles';
+import { AdminPageHeader } from '@ajabadia/styles';
 import { SystemTelemetryPanel } from '@/components/admin/dashboard/SystemTelemetryPanel';
-import { GlobalFooter } from '@abd/ecosystem-widgets';
+import { GlobalFooter } from '@ajabadia/ecosystem-widgets';
 
 /**
  * 🛰️ Central Admin Logs Portal Page (Federated Server Component)

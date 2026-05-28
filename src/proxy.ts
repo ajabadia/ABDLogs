@@ -1,4 +1,4 @@
-import { withIndustrialAuth } from '@abd/satellite-sdk';
+import { withIndustrialAuth } from '@ajabadia/satellite-sdk';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
@@ -6,7 +6,7 @@ const intlMiddleware = createMiddleware(routing);
 
 /**
  * 🛰️ ABDLogs Proxy Guard
- * Next.js 16 centralized ecosystem proxy guard utilizing @abd/satellite-sdk.
+ * Next.js 16 centralized ecosystem proxy guard utilizing @ajabadia/satellite-sdk.
  */
 export const proxy = withIndustrialAuth({
   appId: process.env.NEXT_PUBLIC_APP_ID as string,

@@ -4,7 +4,7 @@ import React from 'react';
 import { Home, Terminal, ShieldCheck } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
-import { SmartNavbar, buildSidebarLinks } from '@abd/ecosystem-widgets';
+import { SmartNavbar, buildSidebarLinks } from '@ajabadia/ecosystem-widgets';
 
 interface UserSession {
   authenticated: boolean;
@@ -32,11 +32,10 @@ export function SidebarNavigation({ session, logoUrl, tenantSelectorSlot, settin
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  const [queryStr, setQueryStr] = React.useState('');
-
-  React.useEffect(() => {
-    setQueryStr(window.location.search.substring(1));
-  }, []);
+  const [queryStr] = React.useState(() => {
+    if (typeof window === 'undefined') return '';
+    return window.location.search.substring(1);
+  });
 
   const isLoggedIn = session.authenticated && !!session.user;
   const user = session.user;

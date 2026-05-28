@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/database/mongodb';
+import { connectDB } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';
-import { computeBlockHash } from '@/lib/crypto-chain';
+import { computeBlockHash } from '@ajabadia/satellite-sdk';
 
 import { z } from 'zod';
 

@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 import { ArrowRight, Cpu, Sliders, Database, ShieldCheck } from 'lucide-react';
-import { HeroHeader } from '@abd/styles';
+import { HeroHeader } from '@ajabadia/styles';
 import Link from 'next/link';
-import { GlobalFooter } from '@abd/ecosystem-widgets';
+import { GlobalFooter } from '@ajabadia/ecosystem-widgets';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -99,7 +99,7 @@ if (process.env.NODE_ENV !== 'production') {
 ```
 
 ### ✅ Observación #4 — auth-bridge.ts dead code: CORREGIDO
-El archivo `src/lib/auth-bridge.ts` ha sido eliminado. Su funcionalidad estaba completamente reemplazada por el SDK centralizado (`@abd/satellite-sdk`).
+El archivo `src/lib/auth-bridge.ts` ha sido eliminado. Su funcionalidad estaba completamente reemplazada por el SDK centralizado (`@ajabadia/satellite-sdk`).
 
 ---
 
@@ -112,7 +112,7 @@ El archivo `src/lib/auth-bridge.ts` ha sido eliminado. Su funcionalidad estaba c
 | `papaparse` | 0 imports en producción |
 | `@types/papaparse` | 0 imports (redundante con papaparse eliminado) |
 | `shadcn` | 0 imports (CLI tool no usado) |
-| `jose` | 0 imports (JWT vía `@abd/satellite-sdk` transitivo) |
+| `jose` | 0 imports (JWT vía `@ajabadia/satellite-sdk` transitivo) |
 | `@radix-ui/react-dialog` | Redundante — Dialog se importa desde `radix-ui` (meta-package) |
 | `@radix-ui/react-separator` | Redundante — Separator se importa desde `radix-ui` (meta-package) |
 | `@radix-ui/react-progress` | 🟢 Se conserva — import directo en `progress.tsx` |
@@ -145,7 +145,7 @@ Sigue siendo fire-and-forget como se documentó en v01. Aceptado como diseño.
 **ABDLogs** está en estado óptimo. Todos los issues de la v01 y v02 han sido corregidos y verificados. La suite de 22 tests unitarios certifica la integridad criptográfica y la seguridad del módulo.
 
 **Correcciones de v03:**
-- 🗑️ `auth-bridge.ts` eliminado (dead code reemplazado por `@abd/satellite-sdk`)
+- 🗑️ `auth-bridge.ts` eliminado (dead code reemplazado por `@ajabadia/satellite-sdk`)
 - 🔇 `console.log` de conexión en `mongodb-logs.ts` silenciado en producción
 - 🔇 `console.log` de conexión en `mongodb.ts` silenciado en producción
 

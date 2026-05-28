@@ -1,5 +1,5 @@
 import { Schema, models, model } from 'mongoose';
-import { getTenantModel } from '../lib/database/tenant-model';
+import { getTenantModel } from '@ajabadia/satellite-sdk';
 
 export interface IAuditLog {
   appId: string;                        // Aplicación origen: 'auth', 'quiz', 'gobernanza'

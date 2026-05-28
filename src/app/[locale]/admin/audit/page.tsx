@@ -1,12 +1,12 @@
 import React from 'react';
-import { ensureIndustrialAccess } from '@/lib/session';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';
 import { IntegrityCheckPanel } from '@/components/admin/audit/IntegrityCheckPanel';
 import { ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import connectDB from '@/lib/database/mongodb';
-import { AdminPageHeader } from '@abd/styles';
+import { connectDB } from '@ajabadia/satellite-sdk';
+import { AdminPageHeader } from '@ajabadia/styles';
 
 export const revalidate = 0; // Evitar el cacheado estático de la página administrativa
 

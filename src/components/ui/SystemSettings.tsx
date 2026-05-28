@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
-import { SystemSettings as SharedSystemSettings } from '@abd/ecosystem-widgets';
+import { SystemSettings as SharedSystemSettings } from '@ajabadia/ecosystem-widgets';
 
 interface SystemSettingsProps {
   isAuthenticated?: boolean;

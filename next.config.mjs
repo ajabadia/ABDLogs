@@ -4,7 +4,7 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@abd/ecosystem-widgets', '@abd/styles', '@abd/satellite-sdk', 'next-intl'],
+  transpilePackages: ['@ajabadia/ecosystem-widgets', '@ajabadia/styles', '@ajabadia/satellite-sdk', 'next-intl'],
 };
 
 export default withNextIntl(nextConfig);

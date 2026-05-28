@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess } from '@/lib/session';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { AuditService } from '@/services/tenant/audit-service';
-import connectDB from '@/lib/database/mongodb';
+import { connectDB } from '@ajabadia/satellite-sdk';
 
 export const revalidate = 0; // Evitar el cacheado estático de la API
 
