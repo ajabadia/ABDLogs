@@ -2,7 +2,9 @@ import React from 'react';
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';
 import { IntegrityCheckPanel } from '@/components/admin/audit/IntegrityCheckPanel';
-import { ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
+import { AlertThresholdManager } from '@/components/admin/audit/AlertThresholdManager';
+import { AlertHistoryPanel } from '@/components/admin/audit/AlertHistoryPanel';
+import { ShieldCheck, Activity, ArrowLeft, AlertTriangle, History } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { connectDB } from '@ajabadia/satellite-sdk';
@@ -68,7 +70,13 @@ export default async function AdminAuditPage({
         {/* Panel de Análisis de Integridad */}
         <IntegrityCheckPanel key={targetTenantId} tenantId={targetTenantId} />
 
-        {/* 📊 Historial de Auditoría e Ingesta Inmutable */}
+        {/* 🔴 Alert Configuration and History */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <AlertThresholdManager tenantId={targetTenantId} />
+          <AlertHistoryPanel tenantId={targetTenantId} />
+        </div>
+
+        {/* 📊 Hot Log Streaming — Historial de Auditoría en Vivo */}
         <div className="flex flex-col gap-6 pt-2">
           <div className="flex flex-col gap-1.5">
             <h2 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-2">

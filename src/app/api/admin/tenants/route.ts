@@ -1,33 +1,21 @@
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess, getGlobalModel, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import mongoose from 'mongoose';
 
 export const revalidate = 0; // Evitar el cacheado estático de la API
 
-const globalWithMongoose = global as typeof globalThis & {
-  authConnPromise?: Promise<mongoose.Connection>;
-};
-
 const TenantSchema = new mongoose.Schema({ tenantId: String, name: String, active: Boolean }, { collection: 'tenants' });
+const TenantModel = getGlobalModel('Tenant', TenantSchema, 'AUTH');
 
-async function getAuthConnection() {
-  if (globalWithMongoose.authConnPromise) {
-    return globalWithMongoose.authConnPromise;
-  }
-  
-  const authUri = process.env.MONGODB_AUTH_URI;
-  if (!authUri) throw new Error("MONGODB_AUTH_URI no definido");
-  
-  const fullUri = authUri.endsWith('/') 
-    ? `${authUri}ABDElevators-Auth?retryWrites=true&w=majority`
-    : `${authUri}/ABDElevators-Auth?retryWrites=true&w=majority`;
-    
-  globalWithMongoose.authConnPromise = mongoose.createConnection(fullUri, { maxPoolSize: 5 }).asPromise();
-  return globalWithMongoose.authConnPromise;
-}
-
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // 🚦 Rate limit: 20 tenant list requests per 60s
+    const ip = rateLimitMongodb.getClientIpFromRequest(request);
+    const allowed = await rateLimitMongodb.check(ip, 'api', 20, 60);
+    if (!allowed) {
+      return NextResponse.json({ error: 'TOO_MANY_REQUESTS' }, { status: 429 });
+    }
+
     // 🛡️ Verificar acceso con rol mínimo ADMIN
     const user = await ensureIndustrialAccess('ADMIN');
     
@@ -36,9 +24,6 @@ export async function GET() {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const conn = await getAuthConnection();
-    const TenantModel = conn.models.Tenant || conn.model('Tenant', TenantSchema);
-    
     const rawTenants = await TenantModel.find().lean();
     const tenants = (rawTenants as unknown as { tenantId: string; name?: string; active?: boolean }[]).map((t) => ({
       tenantId: t.tenantId,

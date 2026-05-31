@@ -4,7 +4,7 @@ import * as React from "react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 import { DialogPortal, DialogOverlay } from "./dialog-primitives"
 import { DialogContent } from "./dialog-content"
-import { DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "./dialog-elements"
+import { DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "@ajabadia/ecosystem-widgets"
 
 function Dialog({
   ...props

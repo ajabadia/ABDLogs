@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';
 import crypto from 'crypto';
 
 export async function GET(request: NextRequest) {
+  // 🚦 Rate limit: 5 verifications per 60s (expensive chain scan)
+  const ip = rateLimitMongodb.getClientIpFromRequest(request);
+  const allowed = await rateLimitMongodb.check(ip, 'api', 5, 60);
+  if (!allowed) {
+    return NextResponse.json({ error: 'TOO_MANY_REQUESTS' }, { status: 429 });
+  }
+
   // 🛡️ Seguridad Inter-servicio
   const authHeader = request.headers.get('Authorization');
   const systemToken = process.env.LOGS_SECRET_TOKEN;

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AuditService } from '@/services/tenant/audit-service';
 import { connectDB } from '@ajabadia/satellite-sdk';
 
@@ -11,6 +11,13 @@ export const revalidate = 0; // Evitar el cacheado estático de la API
  */
 export async function GET(request: Request) {
   try {
+    // 🚦 Rate limit: 30 admin audit requests per 60s
+    const ip = rateLimitMongodb.getClientIpFromRequest(request);
+    const allowed = await rateLimitMongodb.check(ip, 'api', 30, 60);
+    if (!allowed) {
+      return NextResponse.json({ error: 'TOO_MANY_REQUESTS' }, { status: 429 });
+    }
+
     // 1. Garantizar acceso seguro con rol mínimo de administrador
     const user = await ensureIndustrialAccess('ADMIN');
     

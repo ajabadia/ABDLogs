@@ -82,6 +82,8 @@
     "audit_live_resume": "Resume Stream",
     "audit_live_on": "Live ON",
     "audit_live_off": "Live OFF",
+    "audit_view_telemetry_title": "View Telemetry",
+    "audit_metrics_label": "Metrics",
     "integrity_title": "Forensic Integrity Analysis",
     "integrity_execute": "Run Scan",
     "integrity_calculating": "Calculating Hashes...",

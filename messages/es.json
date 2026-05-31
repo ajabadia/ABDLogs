@@ -82,6 +82,8 @@
     "audit_live_resume": "Reanudar Stream",
     "audit_live_on": "En Vivo",
     "audit_live_off": "Pausado",
+    "audit_view_telemetry_title": "Ver Telemetría Visual",
+    "audit_metrics_label": "Métricas",
     "integrity_title": "Análisis Forense de Integridad",
     "integrity_execute": "Ejecutar Escaneo",
     "integrity_calculating": "Calculando Hashes...",

@@ -32,10 +32,13 @@ export function SidebarNavigation({ session, logoUrl, tenantSelectorSlot, settin
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  const [queryStr] = React.useState(() => {
-    if (typeof window === 'undefined') return '';
-    return window.location.search.substring(1);
-  });
+  const [queryStr, setQueryStr] = React.useState('');
+
+  React.useEffect(() => {
+    React.startTransition(() => {
+      setQueryStr(window.location.search.substring(1));
+    });
+  }, []);
 
   const isLoggedIn = session.authenticated && !!session.user;
   const user = session.user;
@@ -96,6 +99,7 @@ export function SidebarNavigation({ session, logoUrl, tenantSelectorSlot, settin
       tenantSelectorSlot={tenantSelectorSlot}
       settingsSlot={settingsSlot}
       onLocaleChange={handleLocaleChange}
+      appBadge="LOGS"
       onSearchTrigger={() => {
         window.dispatchEvent(new CustomEvent('abd-command-palette-open'));
       }}

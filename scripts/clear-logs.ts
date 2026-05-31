@@ -14,7 +14,7 @@ if (fs.existsSync(envPath)) {
 
 async function clearLogs() {
   try {
-    const { default: connectDB } = await import('../src/lib/database/mongodb');
+    const { connectDB } = await import('@ajabadia/satellite-sdk');
     const { AuditLog } = await import('../src/models/AuditLog');
 
     console.log('Connecting to DB...');

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';
 import { computeBlockHash } from '@ajabadia/satellite-sdk';
 
@@ -20,6 +20,13 @@ const AuditLogIngestSchema = z.object({
 }).passthrough(); // Allow extra fields to be passed to payload if needed
 
 export async function POST(request: NextRequest) {
+  // 🚦 Rate limit: 100 ingestions per 60s per source IP
+  const ip = rateLimitMongodb.getClientIpFromRequest(request);
+  const allowed = await rateLimitMongodb.check(ip, 'ingestion', 100, 60);
+  if (!allowed) {
+    return NextResponse.json({ error: 'TOO_MANY_REQUESTS' }, { status: 429 });
+  }
+
   // 🛡️ Seguridad Inter-servicio
   const authHeader = request.headers.get('Authorization');
   const systemToken = process.env.LOGS_SECRET_TOKEN;

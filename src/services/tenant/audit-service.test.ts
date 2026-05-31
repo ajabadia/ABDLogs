@@ -6,18 +6,26 @@ vi.hoisted(() => {
   process.env.LOGS_SERVICE_URL = 'http://localhost:3600/api/logs';
 });
 
+vi.mock('@ajabadia/satellite-sdk', async () => {
+  const crypto = await import('crypto');
+  const stringify = (await import('fast-json-stable-stringify')).default;
+  return {
+    connectDB: vi.fn(async () => {}),
+    computeBlockHash: vi.fn((payload, previousHash, timestamp) => {
+      const payloadString = stringify(payload);
+      const entropy = timestamp
+        ? `${previousHash}${payloadString}${timestamp}`
+        : `${previousHash}${payloadString}`;
+      return crypto.createHash('sha256').update(entropy).digest('hex');
+    }),
+  };
+});
+
 import { AuditService } from './audit-service';
 import { computeBlockHash } from '@ajabadia/satellite-sdk';
 
 // Helper type for mocked Mongoose query chain
 type MockQuery = { sort: ReturnType<typeof vi.fn> };
-
-// Mock DB connection module
-vi.mock('@/lib/database/mongodb', () => {
-  return {
-    default: vi.fn().mockResolvedValue(null),
-  };
-});
 
 // Mock Mongoose AuditLog model by declaring helper classes and mocks inside the factory.
 // This prevents hoisting reference errors by initializing mocks at factory instantiation time.
