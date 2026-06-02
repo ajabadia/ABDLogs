@@ -23,12 +23,13 @@ export default function LogoutSuccessPage() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background text-foreground font-sans">
+      <main className="min-h-screen flex items-center justify-center bg-background text-foreground font-sans">
         <div className="animate-pulse flex flex-col items-center gap-4">
           <div className="w-12 h-12 rounded-full bg-muted" />
           <div className="h-4 w-32 bg-muted rounded" />
         </div>
-      </div>
+        <h1 className="sr-only">ABDLogs</h1>
+      </main>
     );
   }
 
@@ -38,7 +39,7 @@ export default function LogoutSuccessPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground font-sans relative overflow-hidden p-6">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground font-sans relative overflow-hidden p-6">
       {/* 🌌 Background Elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
       <div className="absolute -top-[40%] -left-[20%] w-[80%] h-[80%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
@@ -103,6 +104,6 @@ export default function LogoutSuccessPage() {
       <footer className="absolute bottom-6 opacity-25 text-[8px] font-mono tracking-widest uppercase text-muted-foreground">
         {common('appTitle')} | SEC_REVOKED_LOGOUT_OK
       </footer>
-    </div>
+    </main>
   );
 }
