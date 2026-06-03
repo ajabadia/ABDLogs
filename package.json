@@ -15,7 +15,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [],
     "overrides": {
-      "ecosystem-widgets": "link:C:/Users/ajaba/AppData/Local/pnpm/global/5/node_modules/@ajabadia/ecosystem-widgets"
+      "@ajabadia/ecosystem-widgets": "link:../ABDEcosystemWidgets"
     }
   },
   "dependencies": {
