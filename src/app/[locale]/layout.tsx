@@ -36,7 +36,7 @@ export default async function LocaleLayout({
         <SidebarNavigation
           session={session}
           logoUrl={branding?.logoUrl}
-          tenantSelectorSlot={<TenantSelector sessionUser={session?.user} />}
+          tenantSelectorSlot={session.authenticated ? <TenantSelector sessionUser={session?.user} /> : undefined}
           settingsSlot={<SystemSettings isAuthenticated={session.authenticated} />}
         />
         <LogsCommandPalette />

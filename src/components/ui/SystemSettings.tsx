@@ -31,12 +31,14 @@ export function SystemSettings({ isAuthenticated = false }: SystemSettingsProps)
     router.replace(`${pathname}${search}`, { locale: newLoc });
   };
 
+  const authUrl = process.env.NEXT_PUBLIC_AUTH_PROVIDER_URL || 'http://localhost:3400';
+
   const handleLogin = () => {
-    window.location.href = 'http://localhost:3400/login';
+    window.location.href = `${authUrl}/login`;
   };
 
   const handleLogout = () => {
-    window.location.href = 'http://localhost:3400';
+    window.location.href = authUrl;
   };
 
   return (

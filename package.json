@@ -10,12 +10,14 @@
     "lint": "eslint",
     "full-audit": "powershell -File ./scripts/abd-audit.ps1",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "powershell -ExecutionPolicy Bypass -File scripts/run-e2e.ps1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [],
     "overrides": {
-      "@ajabadia/ecosystem-widgets": "link:../ABDEcosystemWidgets"
+      "@ajabadia/ecosystem-widgets": "link:../ABDEcosystemWidgets",
+      "@ajabadia/satellite-sdk": "link:../ABDSatelliteSDK"
     }
   },
   "dependencies": {

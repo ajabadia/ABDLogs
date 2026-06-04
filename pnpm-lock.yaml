@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@ajabadia/ecosystem-widgets': link:../ABDEcosystemWidgets
+  '@ajabadia/satellite-sdk': link:../ABDSatelliteSDK
 
 importers:
 
@@ -15,8 +16,8 @@ importers:
         specifier: link:../ABDEcosystemWidgets
         version: link:../ABDEcosystemWidgets
       '@ajabadia/satellite-sdk':
-        specifier: ^1.0.11
-        version: 1.0.17(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: link:../ABDSatelliteSDK
+        version: link:../ABDSatelliteSDK
       '@ajabadia/styles':
         specifier: ^1.0.15
         version: 1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
@@ -119,14 +120,6 @@ importers:
         version: 4.1.7(@types/node@20.19.41)(@vitest/coverage-v8@4.1.7)(msw@2.14.6(@types/node@20.19.41)(typescript@5.9.3))(vite@8.0.14(@types/node@20.19.41)(jiti@2.7.0))
 
 packages:
-
-  '@ajabadia/satellite-sdk@1.0.17':
-    resolution: {integrity: sha512-AFplFahlD4fVCg+r7P2FYtcHZfCvrnPrTITv7aqYDDZSDpk2ygKQbBWwEBYxt50r/FnpqVpl/1v3OagomjoI3A==, tarball: https://npm.pkg.github.com/download/@ajabadia/satellite-sdk/1.0.17/96926623c0ec017ab3b8386f74fc5938a28a26ce}
-    peerDependencies:
-      '@ajabadia/styles': ^1.0.0
-      next: '>=14.0.0'
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
 
   '@ajabadia/styles@1.0.15':
     resolution: {integrity: sha512-7JcyJx5cz5/vF5J290TYCxx/mBRfOKOjzgwrFxuRdPUjlP23C039rtvjfQ9RHA8Ou+zE3WhD47ClTZofpyCy1w==, tarball: https://npm.pkg.github.com/download/@ajabadia/styles/1.0.15/9768f5e1979d6d1c468932a42d7fd8680411e65d}
@@ -2814,9 +2807,6 @@ packages:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
 
-  jose@6.2.3:
-    resolution: {integrity: sha512-YYVDInQKFJfR/xa3ojUTl8c2KoTwiL1R5Wg9YCydwH0x0B9grbzlg5HC7mMjCtUJjbQ/YnGEZIhI5tCgfTb4Hw==}
-
   js-tokens@10.0.0:
     resolution: {integrity: sha512-lM/UBzQmfJRo9ABXbPWemivdCW8V2G8FHaHdypQaIy523snUjog0W71ayWXTjiR+ixeMyVHN2XcpnTd/liPg/Q==}
 
@@ -3872,26 +3862,6 @@ packages:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
-
-  '@ajabadia/satellite-sdk@1.0.17(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
-    dependencies:
-      '@ajabadia/styles': 1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
-      cloudinary: 2.10.0
-      fast-json-stable-stringify: 2.1.0
-      jose: 6.2.3
-      mongoose: 9.6.2
-      next: 16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      zod: 4.4.3
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-providers'
-      - '@mongodb-js/zstd'
-      - gcp-metadata
-      - kerberos
-      - mongodb-client-encryption
-      - snappy
-      - socks
 
   '@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)':
     dependencies:
@@ -6675,8 +6645,6 @@ snapshots:
       set-function-name: 2.0.2
 
   jiti@2.7.0: {}
-
-  jose@6.2.3: {}
 
   js-tokens@10.0.0: {}
 
