@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 vi.hoisted(() => {
   process.env.MONGODB_URI = 'mongodb://test:27017/test';
   process.env.LOGS_SECRET_TOKEN = 'test-token';
-  process.env.LOGS_SERVICE_URL = 'http://localhost:3600/api/logs';
+  process.env.LOGS_SERVICE_URL = 'http://localhost:5003/api/logs';
 });
 
 vi.mock('@ajabadia/satellite-sdk', async () => {

@@ -28,7 +28,7 @@ export default function LogoutSuccessPage() {
           <div className="w-12 h-12 rounded-full bg-muted" />
           <div className="h-4 w-32 bg-muted rounded" />
         </div>
-        <h1 className="sr-only">ABDLogs</h1>
+        <h1 className="sr-only">{common('appTitle')}</h1>
       </main>
     );
   }

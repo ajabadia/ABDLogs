@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { assertAccess } from '@/lib/abac';
 import { AuditService } from '@/services/tenant/audit-service';
 import { connectDB } from '@ajabadia/satellite-sdk';
 
@@ -18,8 +19,14 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'TOO_MANY_REQUESTS' }, { status: 429 });
     }
 
-    // 1. Garantizar acceso seguro con rol mínimo de administrador
-    const user = await ensureIndustrialAccess('ADMIN');
+    // 1. Garantizar acceso seguro con ABAC
+    const user = await ensureIndustrialAccess();
+    await assertAccess({
+      userId: user.id,
+      tenantId: user.tenantId,
+      resource: 'logs:audit',
+      action: 'view'
+    });
     
     // 2. Resolver conexión principal para validar sesión (si es necesario) y luego conectar logs
     await connectDB();

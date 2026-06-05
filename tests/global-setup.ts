@@ -5,7 +5,7 @@
  * Verifica:
  *   1. .env.local existe y tiene variables requeridas
  *   2. MONGODB_URI configurada en .env.local
- *   3. ABDAuth está corriendo (localhost:3400) — warn si no
+ *   3. ABDAuth está corriendo (localhost:5001) — warn si no
  *   4. node_modules está presente
  *
  * Si algún check crítico falla, lanza error y los tests no se ejecutan.
@@ -146,7 +146,7 @@ async function globalSetup() {
   if (!process.env.ABDLOGS_SKIP_PORT_CLEANUP) {
     console.log('');
     console.log('⚠️  Ejecución directa detectada (sin scripts/run-e2e.sh)');
-    console.log('   Asegúrate de que el server ya esté corriendo en localhost:3600');
+    console.log('   Asegúrate de que el server ya esté corriendo en localhost:5003');
     console.log('   O usa: bash scripts/run-e2e.sh');
     console.log('');
   }
@@ -154,7 +154,7 @@ async function globalSetup() {
   console.log('');
   console.log('═══════════════════════════════════════════════');
   console.log('🎭  Playwright — Pre-flight Checks');
-  console.log('    ABDLogs (localhost:3600)');
+  console.log('    ABDLogs (localhost:5003)');
   console.log('═══════════════════════════════════════════════');
   console.log('');
 

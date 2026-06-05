@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
-import { AuditLog } from '@/models/AuditLog';
+import { AuditLog, IAuditLog } from '@/models/AuditLog';
 import { AlertService } from '@/services/tenant/alert-service';
 
 export const revalidate = 0;
@@ -61,7 +61,7 @@ export async function GET(request: Request) {
             if (newLogs.length > 0) {
               for (const log of newLogs) {
                 // Evaluate alert thresholds for this log
-                const alerts = await AlertService.evaluateLog(log as any);
+                const alerts = await AlertService.evaluateLog(log as unknown as IAuditLog);
 
                 // Send log event
                 const logId = (log as unknown as { _id: { toString(): string } })._id?.toString();

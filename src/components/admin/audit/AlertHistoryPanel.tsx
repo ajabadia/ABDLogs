@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useEffect, useTransition, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import {
@@ -48,7 +48,7 @@ export function AlertHistoryPanel({ tenantId }: AlertHistoryPanelProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [filter, setFilter] = useState<'ALL' | 'ACTIVE' | 'ACKNOWLEDGED' | 'RESOLVED'>('ALL');
 
-  const fetchAlerts = async () => {
+  const fetchAlerts = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`/api/admin/alerts/events?tenantId=${tenantId}&scope=history`);
@@ -61,9 +61,11 @@ export function AlertHistoryPanel({ tenantId }: AlertHistoryPanelProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [tenantId]);
 
-  useEffect(() => { fetchAlerts(); }, [tenantId]);
+  useEffect(() => {
+    startTransition(() => { void fetchAlerts(); });
+  }, [fetchAlerts, startTransition]);
 
   const handleAcknowledge = async (alertId: string) => {
     startTransition(async () => {
@@ -116,6 +118,7 @@ export function AlertHistoryPanel({ tenantId }: AlertHistoryPanelProps) {
           </div>
         </div>
         <button
+          aria-label={t('alert_history_title')}
           onClick={fetchAlerts}
           disabled={isPending}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border border-border hover:bg-foreground/5 transition-all cursor-pointer disabled:opacity-50"
@@ -129,6 +132,7 @@ export function AlertHistoryPanel({ tenantId }: AlertHistoryPanelProps) {
         {(['ALL', 'ACTIVE', 'ACKNOWLEDGED', 'RESOLVED'] as const).map(s => (
           <button
             key={s}
+            aria-label={s === 'ALL' ? t('all') : s}
             onClick={() => setFilter(s)}
             className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer ${
               filter === s

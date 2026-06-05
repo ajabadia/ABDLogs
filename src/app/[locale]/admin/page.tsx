@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
-import { LayoutDashboard, ShieldCheck, Activity, ArrowLeft } from 'lucide-react';
+import { LayoutDashboard, ShieldCheck, Activity, ArrowLeft, ShieldAlert, BrainCircuit } from 'lucide-react';
 import { DashboardActionCard } from '@/components/admin/dashboard/DashboardActionCard';
 import { AdminPageHeader } from '@ajabadia/styles';
 import { SystemTelemetryPanel } from '@/components/admin/dashboard/SystemTelemetryPanel';
@@ -69,6 +69,30 @@ export default async function AdminPortalPage({ params }: { params: Promise<{ lo
                 footerValue={ap('activo') || 'ONLINE'}
                 buttonText={t('auditTitle')}
                 href={`/${locale}/admin/audit`}
+              />
+
+              {/* Card: GDPR Compliance */}
+              <DashboardActionCard 
+                icon={ShieldAlert}
+                category="REGULATORIO GDPR"
+                title="Cumplimiento GDPR"
+                description="Portabilidad de datos (ZIP cifrado) y Derecho al Olvido mediante anonimización de logs."
+                footerLabel={t('prodReady')}
+                footerValue={ap('activo') || 'ONLINE'}
+                buttonText="Ver Panel"
+                href={`/${locale}/admin/compliance`}
+              />
+
+              {/* Card: Threat Detection */}
+              <DashboardActionCard
+                icon={BrainCircuit}
+                category="SOC2 · HEURÍSTICA IA"
+                title="Detección de Amenazas"
+                description="Motor predictivo de anomalías: fuerza bruta, borrados masivos, accesos nocturnos e IPs desconocidas."
+                footerLabel={t('prodReady')}
+                footerValue={ap('activo') || 'ONLINE'}
+                buttonText="Ver Amenazas"
+                href={`/${locale}/admin/threats`}
               />
 
             </div>

@@ -14,7 +14,7 @@ export const proxy = withIndustrialAuth({
   clientSecret: process.env.AUTH_CLIENT_SECRET || '',
   jwtSecret: process.env.AUTH_JWT_SECRET!,
   publicPaths: ['/', '/logout-success'],
-  intlMiddleware: intlMiddleware as any,
+  intlMiddleware: intlMiddleware as unknown as Parameters<typeof withIndustrialAuth>[0]['intlMiddleware'],
 });
 
 export const config = {

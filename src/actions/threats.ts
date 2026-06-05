@@ -1,0 +1,111 @@
+'use server';
+
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
+import { AnomalyEngine } from '@/services/tenant/anomaly-engine';
+import type { IAnomalyRecord } from '@/models/AnomalyRecord';
+
+// ─── scanThreatsAction ─────────────────────────────────────────────────────────
+
+export interface ScanThreatsResult {
+  ok: boolean;
+  created: number;
+  anomalies: IAnomalyRecord[];
+  error?: string;
+}
+
+/**
+ * Triggers a full anomaly scan for the calling user's tenant.
+ * Super admins may pass an explicit tenantId to scan on behalf of another tenant.
+ */
+export async function scanThreatsAction(overrideTenantId?: string): Promise<ScanThreatsResult> {
+  try {
+    const user = await ensureIndustrialAccess('ADMIN');
+    const tenantId = (user.role === 'SUPER_ADMIN' && overrideTenantId)
+      ? overrideTenantId
+      : (user.tenantId ?? 'SYSTEM');
+
+    const anomalies = await AnomalyEngine.runFullScan(tenantId);
+    return { ok: true, created: anomalies.length, anomalies };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return { ok: false, created: 0, anomalies: [], error: message };
+  }
+}
+
+// ─── getThreatsAction ─────────────────────────────────────────────────────────
+
+export interface GetThreatsResult {
+  ok: boolean;
+  anomalies: IAnomalyRecord[];
+  error?: string;
+}
+
+export async function getThreatsAction(
+  overrideTenantId?: string,
+  status: 'OPEN' | 'DISMISSED' | 'RESOLVED' | 'ALL' = 'OPEN'
+): Promise<GetThreatsResult> {
+  try {
+    const user = await ensureIndustrialAccess('ADMIN');
+    const tenantId = (user.role === 'SUPER_ADMIN' && overrideTenantId)
+      ? overrideTenantId
+      : (user.tenantId ?? 'SYSTEM');
+
+    const anomalies = await AnomalyEngine.getAnomalies(tenantId, status);
+    return { ok: true, anomalies };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return { ok: false, anomalies: [], error: message };
+  }
+}
+
+// ─── dismissThreatAction ───────────────────────────────────────────────────────
+
+export interface DismissThreatResult {
+  ok: boolean;
+  error?: string;
+}
+
+export async function dismissThreatAction(
+  anomalyId: string,
+  overrideTenantId?: string
+): Promise<DismissThreatResult> {
+  try {
+    const user = await ensureIndustrialAccess('ADMIN');
+    const tenantId = (user.role === 'SUPER_ADMIN' && overrideTenantId)
+      ? overrideTenantId
+      : (user.tenantId ?? 'SYSTEM');
+
+    const dismissed = await AnomalyEngine.dismissAnomaly(anomalyId, tenantId);
+    if (!dismissed) return { ok: false, error: 'Anomaly not found or already dismissed.' };
+    return { ok: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return { ok: false, error: message };
+  }
+}
+
+// ─── getSoc2ReportAction ───────────────────────────────────────────────────────
+
+export interface Soc2ReportResult {
+  ok: boolean;
+  report?: Record<string, unknown>;
+  error?: string;
+}
+
+export async function getSoc2ReportAction(
+  overrideTenantId?: string,
+  days = 30
+): Promise<Soc2ReportResult> {
+  try {
+    const user = await ensureIndustrialAccess('ADMIN');
+    const tenantId = (user.role === 'SUPER_ADMIN' && overrideTenantId)
+      ? overrideTenantId
+      : (user.tenantId ?? 'SYSTEM');
+
+    const report = await AnomalyEngine.buildSoc2Report(tenantId, days);
+    return { ok: true, report };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return { ok: false, error: message };
+  }
+}

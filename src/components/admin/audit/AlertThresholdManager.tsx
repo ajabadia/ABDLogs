@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useEffect, useTransition, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import {
@@ -114,7 +114,7 @@ export function AlertThresholdManager({ tenantId }: AlertThresholdManagerProps) 
     cooldownMinutes: 15,
   });
 
-  const fetchThresholds = async () => {
+  const fetchThresholds = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`/api/admin/alerts/thresholds?tenantId=${tenantId}`);
@@ -127,9 +127,11 @@ export function AlertThresholdManager({ tenantId }: AlertThresholdManagerProps) 
     } finally {
       setLoading(false);
     }
-  };
+  }, [tenantId]);
 
-  useEffect(() => { fetchThresholds(); }, [tenantId]);
+  useEffect(() => {
+    startTransition(() => { void fetchThresholds(); });
+  }, [fetchThresholds, startTransition]);
 
   const applyPreset = (presetName: string) => {
     const preset = PRESETS.find(p => p.name === presetName);
@@ -231,6 +233,7 @@ export function AlertThresholdManager({ tenantId }: AlertThresholdManagerProps) 
           </div>
         </div>
         <button
+          aria-label={showForm ? t('cancel') : t('add_threshold')}
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer"
         >
@@ -246,6 +249,7 @@ export function AlertThresholdManager({ tenantId }: AlertThresholdManagerProps) 
             {PRESETS.map(p => (
               <button
                 key={p.name}
+                aria-label={p.name}
                 onClick={() => applyPreset(p.name)}
                 className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer ${
                   selectedPreset === p.name
@@ -374,6 +378,7 @@ export function AlertThresholdManager({ tenantId }: AlertThresholdManagerProps) 
           </div>
 
           <button
+            aria-label={t('save_threshold')}
             onClick={handleSave}
             disabled={isPending}
             className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all disabled:opacity-50 cursor-pointer"

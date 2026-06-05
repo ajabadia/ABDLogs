@@ -24,7 +24,7 @@ export default defineConfig({
   // Para ejecutar: bash scripts/run-e2e.sh
 
   use: {
-    baseURL: 'http://localhost:3600',
+    baseURL: 'http://localhost:5003',
     trace: 'on-first-retry',
     screenshot: 'on',
     video: 'on-first-retry',

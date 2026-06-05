@@ -11,10 +11,11 @@ const handler = createAuthRouteHandler({
   jwtSecret: process.env.AUTH_JWT_SECRET!,
 });
 
-export async function GET(request: any, context: any) {
-  return handler(request);
+
+export async function GET(request: Request) {
+  return handler(request as Parameters<typeof handler>[0]);
 }
 
-export async function POST(request: any, context: any) {
-  return handler(request);
+export async function POST(request: Request) {
+  return handler(request as Parameters<typeof handler>[0]);
 }

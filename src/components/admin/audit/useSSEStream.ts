@@ -39,6 +39,9 @@ export function useSSEStream({
   const retryCountRef = useRef(0);
   const maxRetryDelay = 30000; // 30s max backoff
 
+  // Use a ref for the connect function to avoid forward-reference lint errors
+  const connectRef = useRef<(() => void) | null>(null);
+
   const cleanup = useCallback(() => {
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
@@ -68,7 +71,7 @@ export function useSSEStream({
 
     es.addEventListener('log', (event: MessageEvent) => {
       try {
-        const data = JSON.parse(event.data);
+        const data = JSON.parse(event.data) as unknown;
         const sseEvent: SSEStreamEvent = { type: 'log', data };
         setLastEvent(sseEvent);
         onLog?.(data);
@@ -77,7 +80,7 @@ export function useSSEStream({
 
     es.addEventListener('alert', (event: MessageEvent) => {
       try {
-        const data = JSON.parse(event.data);
+        const data = JSON.parse(event.data) as unknown;
         const sseEvent: SSEStreamEvent = { type: 'alert', data };
         setLastEvent(sseEvent);
         onAlert?.(data);
@@ -86,8 +89,8 @@ export function useSSEStream({
 
     es.addEventListener('error', (event: MessageEvent) => {
       try {
-        const data = JSON.parse(event.data);
-        const errorMsg = data?.error || 'Unknown stream error';
+        const data = JSON.parse(event.data) as Record<string, unknown>;
+        const errorMsg = (data?.error as string) || 'Unknown stream error';
         onError?.(errorMsg);
       } catch { /* skip */ }
     });
@@ -97,16 +100,21 @@ export function useSSEStream({
       es.close();
       eventSourceRef.current = null;
 
-      // Exponential backoff reconnection
+      // Exponential backoff — use ref to avoid forward-reference lint error
       const delay = Math.min(1000 * Math.pow(2, retryCountRef.current), maxRetryDelay);
       retryCountRef.current++;
       onError?.(`Stream disconnected. Reconnecting in ${Math.round(delay / 1000)}s...`);
 
       reconnectTimeoutRef.current = setTimeout(() => {
-        connect();
+        connectRef.current?.();
       }, delay);
     };
   }, [tenantId, enabled, onLog, onAlert, onError, cleanup]);
+
+  // Keep ref in sync with latest connect function
+  useEffect(() => {
+    connectRef.current = connect;
+  }, [connect]);
 
   useEffect(() => {
     connect();
