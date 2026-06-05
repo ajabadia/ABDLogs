@@ -14,11 +14,7 @@
     "test:e2e": "powershell -ExecutionPolicy Bypass -File scripts/run-e2e.ps1"
   },
   "pnpm": {
-    "onlyBuiltDependencies": [],
-    "overrides": {
-      "@ajabadia/ecosystem-widgets": "link:../ABDEcosystemWidgets",
-      "@ajabadia/satellite-sdk": "link:../ABDSatelliteSDK"
-    }
+    "onlyBuiltDependencies": []
   },
   "dependencies": {
     "@ajabadia/ecosystem-widgets": "^1.0.10",

@@ -4,20 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@ajabadia/ecosystem-widgets': link:../ABDEcosystemWidgets
-  '@ajabadia/satellite-sdk': link:../ABDSatelliteSDK
-
 importers:
 
   .:
     dependencies:
       '@ajabadia/ecosystem-widgets':
-        specifier: link:../ABDEcosystemWidgets
-        version: link:../ABDEcosystemWidgets
+        specifier: ^1.0.10
+        version: 1.0.36(@ajabadia/satellite-sdk@1.0.38(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(radix-ui@1.4.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@ajabadia/satellite-sdk':
-        specifier: link:../ABDSatelliteSDK
-        version: link:../ABDSatelliteSDK
+        specifier: ^1.0.11
+        version: 1.0.38(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@ajabadia/styles':
         specifier: ^1.0.15
         version: 1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
@@ -127,8 +123,32 @@ importers:
 
 packages:
 
+  '@ajabadia/ecosystem-widgets@1.0.36':
+    resolution: {integrity: sha512-ol7BnSdwW8yyyKb3Z8DO0IyIlUmnES2oa8+K22H7wawb6Jzoggv3EDI2jU07/pJEvdsPpNNM01jMkpO5CbvUYw==, tarball: https://npm.pkg.github.com/download/@ajabadia/ecosystem-widgets/1.0.36/6636fa3e23bf6218e06b47b53ce445ff6d23c97e}
+    peerDependencies:
+      '@ajabadia/satellite-sdk': ^1.0.0
+      lucide-react: ^0.46.0 || ^1.0.0
+      next-intl: ^4.12.0
+      radix-ui: ^1.0.0
+      react: ^19.0.0
+
+  '@ajabadia/satellite-sdk@1.0.38':
+    resolution: {integrity: sha512-lMya0qMi3HR1J7V737p2Gg+mb486Ty0aBjG+qOhMlr92t1U0isgGh48g9+5lot8XYzfULeS6rfTcAwmNmtskCw==, tarball: https://npm.pkg.github.com/download/@ajabadia/satellite-sdk/1.0.38/6d49689056e09f8e7ded183121e301c5dd4ad9b4}
+    peerDependencies:
+      '@ajabadia/styles': ^1.0.0
+      next: '>=14.0.0'
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
   '@ajabadia/styles@1.0.15':
     resolution: {integrity: sha512-7JcyJx5cz5/vF5J290TYCxx/mBRfOKOjzgwrFxuRdPUjlP23C039rtvjfQ9RHA8Ou+zE3WhD47ClTZofpyCy1w==, tarball: https://npm.pkg.github.com/download/@ajabadia/styles/1.0.15/9768f5e1979d6d1c468932a42d7fd8680411e65d}
+    peerDependencies:
+      lucide-react: ^0.46.0 || ^1.0.0
+      next-intl: ^4.12.0
+      react: ^19.0.0
+
+  '@ajabadia/styles@1.0.44':
+    resolution: {integrity: sha512-P6SdDYJW9AxAa51wOY5Mxpycuy0yvTKMnl67ER4/nmDCPaoLZ85kw3eaiqy7JOEob5XF7PBKo5UK6Qllqt5flg==, tarball: https://npm.pkg.github.com/download/@ajabadia/styles/1.0.44/7eedea4cde424893d76e2924d2f79cb6483aab19}
     peerDependencies:
       lucide-react: ^0.46.0 || ^1.0.0
       next-intl: ^4.12.0
@@ -2820,6 +2840,9 @@ packages:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
 
+  jose@6.2.3:
+    resolution: {integrity: sha512-YYVDInQKFJfR/xa3ojUTl8c2KoTwiL1R5Wg9YCydwH0x0B9grbzlg5HC7mMjCtUJjbQ/YnGEZIhI5tCgfTb4Hw==}
+
   js-tokens@10.0.0:
     resolution: {integrity: sha512-lM/UBzQmfJRo9ABXbPWemivdCW8V2G8FHaHdypQaIy523snUjog0W71ayWXTjiR+ixeMyVHN2XcpnTd/liPg/Q==}
 
@@ -3876,7 +3899,47 @@ packages:
 
 snapshots:
 
+  '@ajabadia/ecosystem-widgets@1.0.36(@ajabadia/satellite-sdk@1.0.38(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(radix-ui@1.4.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@ajabadia/satellite-sdk': 1.0.38(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@ajabadia/styles': 1.0.44(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
+      clsx: 2.1.1
+      lucide-react: 1.16.0(react@19.2.4)
+      next-intl: 4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      radix-ui: 1.4.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
+      tailwind-merge: 3.6.0
+
+  '@ajabadia/satellite-sdk@1.0.38(@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4))(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@ajabadia/styles': 1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)
+      cloudinary: 2.10.0
+      fast-json-stable-stringify: 2.1.0
+      jose: 6.2.3
+      mongoose: 9.6.2
+      next: 16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      zod: 4.4.3
+    transitivePeerDependencies:
+      - '@aws-sdk/credential-providers'
+      - '@mongodb-js/zstd'
+      - gcp-metadata
+      - kerberos
+      - mongodb-client-encryption
+      - snappy
+      - socks
+
   '@ajabadia/styles@1.0.15(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)':
+    dependencies:
+      clsx: 2.1.1
+      lucide-react: 1.16.0(react@19.2.4)
+      next-intl: 4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      react: 19.2.4
+      tailwind-merge: 3.6.0
+      zod: 4.4.3
+
+  '@ajabadia/styles@1.0.44(lucide-react@1.16.0(react@19.2.4))(next-intl@4.12.0(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.56.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react@19.2.4)':
     dependencies:
       clsx: 2.1.1
       lucide-react: 1.16.0(react@19.2.4)
@@ -6664,6 +6727,8 @@ snapshots:
       set-function-name: 2.0.2
 
   jiti@2.7.0: {}
+
+  jose@6.2.3: {}
 
   js-tokens@10.0.0: {}
 
