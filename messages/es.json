@@ -197,6 +197,8 @@
     "message": "Tu sesión ha sido revocada de forma segura tanto en el satélite como en la pasarela central.",
     "button": "Volver a Iniciar Sesión",
     "home_button": "Volver a la Bienvenida",
-    "shield_badge": "Sesión Revocada"
+    "shield_badge": "Sesión Revocada",
+    "tenantNotFoundTitle": "Organización no encontrada",
+    "tenantNotFoundDesc": "La organización especificada no existe o no está registrada en el ecosistema."
   }
 }

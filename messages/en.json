@@ -197,6 +197,8 @@
     "message": "Your session has been securely revoked at both the satellite and the central Identity Provider.",
     "button": "Sign In Again",
     "home_button": "Return to Welcome Screen",
-    "shield_badge": "Session Revoked"
+    "shield_badge": "Session Revoked",
+    "tenantNotFoundTitle": "Organization Not Found",
+    "tenantNotFoundDesc": "The specified organization does not exist or is not registered in the ecosystem."
   }
 }
