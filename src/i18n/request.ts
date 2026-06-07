@@ -8,7 +8,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
  
-  const { locales: allMessages } = await import('@abd/i18n');
+  const { locales: allMessages } = await import('@ajabadia/i18n');
   const messages = allMessages[locale as 'es' | 'en'];
 
   return {
