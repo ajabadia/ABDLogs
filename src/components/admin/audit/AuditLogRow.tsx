@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza una fila para un registro de auditoría en la interfaz administrativa, mostrando detalles como tipo de entidad, acción y fechas.
+ * @purpose_en Renders a row for an audit log entry in the admin interface, displaying details such as entity type, action, and timestamps.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:4,sig:14dt3mu
+ * @lastUpdated 2026-06-22T06:31:47.456Z
+ */
+
 import { Calendar, User, Eye, ChevronUp, Layers, ShieldAlert, Terminal, FileText, Settings, Activity } from 'lucide-react';
 import type { AuditLog } from './types';
 import { ActionBadge } from './ActionBadge';

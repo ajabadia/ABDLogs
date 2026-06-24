@@ -1,3 +1,13 @@
+/**
+ * @purpose Valida la cadena de auditoría para un inquilino específico o el inquilino actual, asegurando lógica de acceso industrial y verificación de manejo.
+ * @purpose_en Validates the audit chain for a given tenant or the current user's tenant, ensuring industrial access and handling verification logic.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:2,sig:153ajzn
+ * @lastUpdated 2026-06-22T06:29:03.796Z
+ */
+
 'use server';
 
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';

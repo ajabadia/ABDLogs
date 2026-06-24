@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza un panel que muestra registros de auditoría con filtrado y actualizaciones en tiempo real.
+ * @purpose_en Renders a panel displaying audit logs with filtering and live updates.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:10,sig:qtfzof
+ * @lastUpdated 2026-06-22T06:31:41.765Z
+ */
+
 import { useState, useEffect, useRef, useCallback, startTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';

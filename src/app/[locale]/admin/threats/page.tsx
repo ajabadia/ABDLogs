@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el panel de amenazas para un usuario administrativo, manejando control de acceso, resolución de inquilinos y carga inicial de datos anormales.
+ * @purpose_en Renders the Threats Dashboard for an admin user, handling access control, tenant resolution, and initial anomaly data loading.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:2,imports:8,sig:klsfdo
+ * @lastUpdated 2026-06-22T06:30:46.400Z
+ */
+
 import React from 'react';
 import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
 import { ThreatsDashboard } from '@/components/admin/threats/ThreatsDashboard';

@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona cumplimiento de GDPR para exportar y anonimizar datos de inquilinos.
+ * @purpose_en Manages GDPR compliance data export and anonymization for tenants.
+ * @refactorable true (contains multiple distinct functionalities)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:5,sig:130rbq3
+ * @lastUpdated 2026-06-23T23:06:45.067Z
+ */
+
 import crypto from 'crypto';
 import AdmZip from 'adm-zip';
 import { AuditLog } from '../../models/AuditLog';

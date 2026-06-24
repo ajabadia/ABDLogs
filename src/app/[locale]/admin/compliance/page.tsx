@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona la página de cumplimiento administrativo para GDPR y regulaciones, maneja autenticación del usuario, selección de inquilinos y muestra una interfaz de cliente de cumplimiento.
+ * @purpose_en Renders the admin compliance page for GDPR and regulation, handling user authentication, tenant selection, and displaying a compliance client interface.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:2,imports:7,sig:pdbuy7
+ * @lastUpdated 2026-06-22T06:30:30.058Z
+ */
+
 import React from 'react';
 import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
 import { ComplianceClient } from '@/components/admin/compliance/ComplianceClient';

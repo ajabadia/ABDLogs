@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona evaluación y operaciones de ciclo de vida para registros de inquilinos.
+ * @purpose_en Manages alert evaluation and lifecycle operations for tenant logs.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:5,sig:115awj
+ * @lastUpdated 2026-06-23T23:06:35.513Z
+ */
+
 import { connectDB } from '@ajabadia/satellite-sdk';
 import { AlertThreshold, IAlertThreshold } from '@/models/AlertThreshold';
 import { AlertEvent, IAlertEvent } from '@/models/AlertEvent';

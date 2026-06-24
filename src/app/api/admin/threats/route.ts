@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona y renderiza registros de anomalías para los inquilinos.
+ * @purpose_en Handles API requests for managing and retrieving anomaly records for tenants.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:3,imports:3,sig:1h36xz9
+ * @lastUpdated 2026-06-23T23:05:49.649Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';

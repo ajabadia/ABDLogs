@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Rendra un componente de badge según el tipo de acción desde un registro de auditoría, mostrando iconos y texto localizados adecuados.
+ * @purpose_en Renders a badge component based on the type of action from an audit log, displaying appropriate icons and localized text.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:3,sig:1g90qfw
+ * @lastUpdated 2026-06-22T06:31:14.319Z
+ */
+
 import { useTranslations } from 'next-intl';
 import { 
   Activity, 

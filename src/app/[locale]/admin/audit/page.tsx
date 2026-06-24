@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona la página de auditoría administrativa con componentes para gestionar los umbrales de alertas, visualizar la historia de alertas y transmitir actividad auditiva en vivo.
+ * @purpose_en Renders the administrative audit page with components for managing alert thresholds, viewing alert history, and streaming live audit activity.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:2,imports:11,sig:boy7a8
+ * @lastUpdated 2026-06-22T06:30:22.924Z
+ */
+
 import React from 'react';
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';

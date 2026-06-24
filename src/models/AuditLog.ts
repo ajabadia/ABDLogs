@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el esquema y modelo para registros de auditoría en una base de datos MongoDB, incluyendo campos para detalles de aplicación, acciones de usuario, información de entidad y metadatos.
+ * @purpose_en Defines the schema and model for audit logs in a MongoDB database, including fields for application details, user actions, entity information, and metadata.
+ * @refactorable false
+ * @classification Type Definition
+ * @complexity Low
+ * @fingerprint exports:2,imports:2,sig:nbux2n
+ * @lastUpdated 2026-06-22T06:33:51.836Z
+ */
+
 import { Schema, models, model } from 'mongoose';
 import { getTenantModel } from '@ajabadia/satellite-sdk';
 
@@ -5,7 +15,7 @@ export interface IAuditLog {
   appId: string;                        // Aplicación origen: 'auth', 'quiz', 'gobernanza'
   tenantId: string;                     // ID de la organización o 'SYSTEM' para operaciones globales
   action: string;                       // Ej: 'USER_LOGIN', 'SSO_HANDSHAKE_GRANTED', 'EXAM_CREATED'
-  entityType: 'USER' | 'TENANT' | 'SSO' | 'EXAM' | 'CONFIG' | 'SYSTEM' | 'SPACE' | 'BRANDING';
+  entityType: 'USER' | 'TENANT' | 'SSO' | 'EXAM' | 'CONFIG' | 'SYSTEM' | 'SPACE' | 'BRANDING' | 'COURSE' | 'ASSIGNMENT';
   entityId: string;                     // ID de la entidad afectada
   userId: string;                       // ID del operador (actor)
   userEmail: string;                    // Email del operador

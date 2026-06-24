@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Gestiona un panel de control para el manejo de amenazas con funciones para escanear, deshacerse y visualizar informes de SOC2.
+ * @purpose_en Renders a dashboard for managing threats with functionalities to scan, dismiss, and view SOC2 reports.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:6,sig:1k2odge
+ * @lastUpdated 2026-06-23T23:06:27.059Z
+ */
+
 import { useState, useTransition, useCallback, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import {

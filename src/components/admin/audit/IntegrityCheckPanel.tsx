@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza un panel para verificar la integridad de una cadena de auditoria utilizando tecnología blockchain.
+ * @purpose_en Renders a panel for verifying the integrity of an audit chain using blockchain technology.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:5,sig:1tv2c3e
+ * @lastUpdated 2026-06-22T06:31:58.413Z
+ */
+
 import { useState, useTransition } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { toast } from 'sonner';

@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza una barra de control para configuraciones de telemetry en la sección de auditoria administrativa, incluyendo estado en vivo, última hora de actualización y botón de métricas.
+ * @purpose_en Renders a control bar for telemetry settings in the admin audit section, including live status, last fetched time, and metrics button.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:3,sig:1r7njb5
+ * @lastUpdated 2026-06-23T16:27:00.045Z
+ */
+
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { Wifi, WifiOff, Pause, Play, BarChart3 } from 'lucide-react';

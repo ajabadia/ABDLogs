@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona la solicitud PATCH para eliminar un registro específico de anomalía.
+ * @purpose_en Handles the PATCH request to dismiss a specific anomaly record.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:1nj6301
+ * @lastUpdated 2026-06-23T23:05:53.028Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';

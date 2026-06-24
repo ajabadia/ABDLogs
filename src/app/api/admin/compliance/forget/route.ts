@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el solicitud POST para anonimizar PII en registros de auditoria para operadores objetivo, asegurando límites de velocidad y autorización.
+ * @purpose_en Handles the POST request to anonymize PII in audit logs for target operators, ensuring rate limiting and authorization.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:1r59m7h
+ * @lastUpdated 2026-06-23T23:05:31.899Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { GDPRService } from '@/services/tenant/gdpr-service';

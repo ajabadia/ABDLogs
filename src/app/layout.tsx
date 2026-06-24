@@ -1,3 +1,13 @@
+/**
+ * @purpose Renderiza el layout raíz para la aplicación ABDLogs, incluyendo gestión de ubicación y sesión.
+ * @purpose_en Renders the root layout for the ABDLogs application, including locale and session management.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:2,imports:7,sig:l5mqsl
+ * @lastUpdated 2026-06-22T06:30:12.640Z
+ */
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { getLocale } from "next-intl/server";

@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza un panel que muestra eventos de alerta históricos para un inquilino dado, incluyendo filtrado y expansión de detalles.
+ * @purpose_en Renders a panel displaying historical alert events for a given tenant, including filtering and expanding details.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:4,sig:1qr2efr
+ * @lastUpdated 2026-06-22T06:31:24.392Z
+ */
+
 import { useState, useEffect, useTransition, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';

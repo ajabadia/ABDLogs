@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Gestiona y renderiza la interfaz de usuario para configurar los umbrales de alertas, incluyendo crear, editar, activar/desactivar y eliminar umbrales.
+ * @purpose_en Manages and renders the UI for configuring alert thresholds, including creating, editing, enabling/disabling, and deleting thresholds.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:4,sig:1aggj86
+ * @lastUpdated 2026-06-22T06:31:31.494Z
+ */
+
 import { useState, useEffect, useTransition, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';

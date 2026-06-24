@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el solicitud GET para obtener una lista de inquilinos, aplicando límite de velocidad y control de acceso basado en roles.
+ * @purpose_en Handles the GET request to retrieve a list of tenants, applying rate limiting and role-based access control.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:1ya7e2x
+ * @lastUpdated 2026-06-22T06:29:44.149Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, getGlobalModel, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import mongoose from 'mongoose';

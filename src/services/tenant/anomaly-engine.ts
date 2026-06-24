@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el detectar y procesar anomalías en registros de inquilinos, incluyendo calcular estadísticas, verificar cooldowns y generar informes de anomalía.
+ * @purpose_en Manages the detection and processing of anomalies in tenant logs, including computing statistics, checking cooldowns, and generating anomaly reports.
+ * @refactorable true (contains multiple functions with distinct responsibilities)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:wtwnji
+ * @lastUpdated 2026-06-23T23:06:41.182Z
+ */
+
 import { connectDB } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';
 import { AnomalyRecord, IAnomalyRecord, AnomalyType, AnomalySeverity } from '@/models/AnomalyRecord';

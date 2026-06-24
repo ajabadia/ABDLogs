@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza una página de éxito de salida utilizando el componente `LogoutSuccessView` desde la biblioteca de widgets del ecosistema, delegando traducciones y manejo de rutas.
+ * @purpose_en Renders a logout success page using the `LogoutSuccessView` component from the ecosystem widgets library, delegating translations and handling routing.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:3,sig:1h2n64j
+ * @lastUpdated 2026-06-23T23:06:14.926Z
+ */
+
 import { useTranslations } from 'next-intl';
 import { LogoutSuccessView } from '@ajabadia/ecosystem-widgets';
 import Link from 'next/link';

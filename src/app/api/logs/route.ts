@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el consumo y procesamiento de registros de auditoría.
+ * @purpose_en Handles the ingestion and processing of audit logs.
+ * @refactorable true (contains business logic and data manipulation)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:5,sig:ncdaus
+ * @lastUpdated 2026-06-22T06:30:02.794Z
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';

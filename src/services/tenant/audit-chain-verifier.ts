@@ -1,3 +1,13 @@
+/**
+ * @purpose Valida la integridad y secuencia de los registros de auditoria para un inquilino específico revisando los valores de hash y los anteriores hashes.
+ * @purpose_en Validates the integrity and sequence of audit logs for a specific tenant by checking the hash values and previous hashes.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:2,sig:glvl1g
+ * @lastUpdated 2026-06-22T06:34:13.327Z
+ */
+
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
 import { computeBlockHash } from '@ajabadia/satellite-sdk';
 

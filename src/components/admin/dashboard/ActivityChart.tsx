@@ -1,4 +1,15 @@
 'use client';
+
+/**
+ * @purpose Renderiza un gráfico de área que muestra datos de actividad con métricas totales y errores a lo largo del tiempo.
+ * @purpose_en Renders an area chart displaying activity data with total and error metrics over time.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:2,sig:1hrss57
+ * @lastUpdated 2026-06-22T06:32:11.600Z
+ */
+
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTranslations } from 'next-intl';
 

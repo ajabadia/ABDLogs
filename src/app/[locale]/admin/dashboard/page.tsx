@@ -1,3 +1,13 @@
+/**
+ * @purpose Rendes la página de dashboard administrativo con datos de telemetry y garantiza el acceso industrial.
+ * @purpose_en Renders the admin dashboard page with telemetry data and ensures industrial access.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:2,imports:7,sig:195jriw
+ * @lastUpdated 2026-06-22T06:30:34.363Z
+ */
+
 import React from 'react';
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
 import { Activity, ArrowLeft } from 'lucide-react';

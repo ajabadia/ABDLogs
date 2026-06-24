@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona la configuración de solicitudes de internacionalización para la aplicación ABDLogs.
+ * @purpose_en Manages internationalization request configuration for the ABDLogs application.
+ * @refactorable false
+ * @classification Custom Hook
+ * @complexity Low
+ * @fingerprint exports:0,imports:2,sig:15kwxt7
+ * @lastUpdated 2026-06-22T06:33:11.176Z
+ */
+
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 

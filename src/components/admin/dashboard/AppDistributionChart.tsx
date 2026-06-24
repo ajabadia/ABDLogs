@@ -1,4 +1,15 @@
 'use client';
+
+/**
+ * @purpose Renderiza un gráfico de barras vertical para mostrar la distribución de aplicaciones.
+ * @purpose_en Renders a vertical bar chart to display the distribution of applications.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:2,sig:eha38v
+ * @lastUpdated 2026-06-22T06:32:16.035Z
+ */
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useTranslations } from 'next-intl';
 

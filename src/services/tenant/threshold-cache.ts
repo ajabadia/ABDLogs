@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona un caché de memoria para los umbrales de alertas, proporcionando una forma de obtener y invalidar datos almacenados en caché según el ID del inquilino.
+ * @purpose_en Manages an in-memory cache for alert thresholds, providing a way to fetch and invalidate cached data based on tenant ID.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Low
+ * @fingerprint exports:1,imports:2,sig:1qjss1s
+ * @lastUpdated 2026-06-23T23:06:51.267Z
+ */
+
 import { connectDB } from '@ajabadia/satellite-sdk';
 import { AlertThreshold, IAlertThreshold } from '@/models/AlertThreshold';
 

@@ -1,3 +1,13 @@
+/**
+ * @purpose Valida la integridad y consistencia de una cadena de registro auditivo de blockchain.
+ * @purpose_en Validates the integrity and consistency of a blockchain audit log chain.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:4,sig:5ecmkl
+ * @lastUpdated 2026-06-22T06:30:07.536Z
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';

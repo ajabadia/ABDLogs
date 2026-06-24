@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza un panel de control que muestra datos de telemetry para una aplicación, incluyendo gráficas de actividad y gráficas de distribución de aplicaciones.
+ * @purpose_en Renders a dashboard displaying telemetry data for an application, including activity charts and app distribution charts.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:6,sig:1ef932h
+ * @lastUpdated 2026-06-22T06:32:34.537Z
+ */
+
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { ActivityChart } from './ActivityChart';

@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el solicitud GET para obtener los registros de auditoría combinados de SaaS para un inquilino, asegurando el control de acceso y la limitación de tasa.
+ * @purpose_en Manages the GET request for retrieving combined SaaS audit logs for a tenant, ensuring access control and rate limiting.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:5,sig:14wtwfp
+ * @lastUpdated 2026-06-23T23:05:21.717Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { assertAccess } from '@/lib/abac';

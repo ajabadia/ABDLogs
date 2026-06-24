@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Gestiona un flujo de Server-Sent Events (SSE) para datos de registro y alertas en tiempo real, maneja conexiones, desconexiones y intentos de reconexión con exponencial backoff.
+ * @purpose_en Manages a Server-Sent Events (SSE) stream for real-time log and alert data, handling connections, disconnections, and reconnection attempts with exponential backoff.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification Custom Hook
+ * @complexity Medium
+ * @fingerprint exports:2,imports:1,sig:u9y2w2
+ * @lastUpdated 2026-06-23T23:06:21.479Z
+ */
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 export interface SSEStreamEvent {

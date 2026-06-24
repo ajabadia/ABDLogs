@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona solicitudes GET para estadísticas de telemetría agrupadas durante los últimos N días, aplicando límites de velocidad y verificaciones de autenticación.
+ * @purpose_en Handles the GET request for aggregated telemetry stats over the last N days, applying rate limiting and authentication checks.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:4,sig:tv4gug
+ * @lastUpdated 2026-06-23T23:05:46.071Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { AuditService } from '@/services/tenant/audit-service';

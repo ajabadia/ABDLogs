@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona rutas de autenticación dinámicamente para sesiones de SSO, salida y llamadas federadas.
+ * @purpose_en Manages authentication routes dynamically for SSO sessions, logout, and federated callbacks.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Low
+ * @fingerprint exports:2,imports:1,sig:1h1j3g5
+ * @lastUpdated 2026-06-23T23:05:57.550Z
+ */
+
 import { createAuthRouteHandler } from '@ajabadia/satellite-sdk';
 
 /**

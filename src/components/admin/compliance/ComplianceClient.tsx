@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza una interfaz de gestión de cumplimiento para exportar datos y anonimizar información de usuario.
+ * @purpose_en Renders a compliance management interface for exporting data and anonymizing user information.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:4,sig:18tw4s0
+ * @lastUpdated 2026-06-22T06:32:06.503Z
+ */
+
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';

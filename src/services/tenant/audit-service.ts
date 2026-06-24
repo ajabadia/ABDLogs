@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona registros de auditoría para inquilinos registrando eventos, recuperando registros combinados y verificando cadenas de inquilinos.
+ * @purpose_en Manages audit logs for tenants by logging events, retrieving combined logs, and verifying tenant chains.
+ * @refactorable true (contains multiple distinct functionalities that could be separated)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:1,imports:4,sig:i8sael
+ * @lastUpdated 2026-06-22T06:34:18.701Z
+ */
+
 import { connectDB } from '@ajabadia/satellite-sdk';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
 import { computeBlockHash } from '@ajabadia/satellite-sdk';

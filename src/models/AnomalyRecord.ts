@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona el modelo de datos y la estructura de la base de datos para registros anormales utilizando Mongoose, incluyendo campos como tenantId, tipo, gravedad, estado y fechas.
+ * @purpose_en Defines the data model and schema for anomaly records using Mongoose, including fields like tenantId, type, severity, status, and timestamps.
+ * @refactorable false
+ * @classification Type Definition
+ * @complexity Low
+ * @fingerprint exports:5,imports:1,sig:pdqwmx
+ * @lastUpdated 2026-06-22T06:33:44.860Z
+ */
+
 import { Schema, models, model } from 'mongoose';
 
 export type AnomalyType = 'BRUTE_FORCE' | 'MASS_DELETION' | 'OFF_HOURS' | 'NEW_IP';

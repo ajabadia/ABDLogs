@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona eventos Server-Sent para streaming de registro auditivo en tiempo real y evaluación de alertas.
+ * @purpose_en Manages Server-Sent Events for real-time audit log streaming and alert evaluation.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:3,imports:4,sig:1n20kca
+ * @lastUpdated 2026-06-23T23:05:40.353Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';

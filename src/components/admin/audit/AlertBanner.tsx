@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza una notificacion emergente con detalles de severidad, estado y otros datos.
+ * @purpose_en Renders a banner to display alert events with severity, status, and other details.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:1xur2u3
+ * @lastUpdated 2026-06-22T06:31:18.676Z
+ */
+
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import {

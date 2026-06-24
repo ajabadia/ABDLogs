@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona un esquema y modelo de Mongoose para eventos de alerta, incluyendo propiedades como tenantId, thresholdId, severidad, estado, mensaje y fechas.
+ * @purpose_en Defines a Mongoose schema and model for alert events, including properties like tenantId, thresholdId, severity, status, message, and timestamps.
+ * @refactorable false
+ * @classification Type Definition
+ * @complexity Low
+ * @fingerprint exports:3,imports:2,sig:1vygxc8
+ * @lastUpdated 2026-06-22T06:33:33.047Z
+ */
+
 import { Schema, models, model } from 'mongoose';
 import type { AlertSeverity } from './AlertThreshold';
 

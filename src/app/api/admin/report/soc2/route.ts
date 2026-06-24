@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona y renderiza un informe ejecutivo de SOC2 estructurado para un inquilino.
+ * @purpose_en Handles the generation and retrieval of a structured SOC2 executive report for a tenant.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:1ph3tiu
+ * @lastUpdated 2026-06-23T23:05:36.086Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';

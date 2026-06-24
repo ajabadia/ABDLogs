@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona un esquema de Mongoose y modelo para los umbrales de alertas en la aplicación ABDSLogs.
+ * @purpose_en Defines a Mongoose schema and model for alert thresholds in the ABDSLogs application.
+ * @refactorable false
+ * @classification Type Definition
+ * @complexity Low
+ * @fingerprint exports:4,imports:1,sig:hh7kth
+ * @lastUpdated 2026-06-22T06:33:37.947Z
+ */
+
 import { Schema, models, model } from 'mongoose';
 
 export type AlertSeverity = 'INFO' | 'WARNING' | 'CRITICAL';

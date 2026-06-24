@@ -1,5 +1,7 @@
 # 🛰️ ABD Logs Microservice - Central de Auditoría
 
+[![ERA 11 Certified](https://img.shields.io/badge/ERA%2011-CERTIFIED-brightgreen?style=for-the-badge&logo=shield)](../.github/workflows/audit.yml)
+
 Consola centralizada e ingesta de logs de auditoría técnica y operacional para el ecosistema **ABD**.
 
 ---
@@ -17,7 +19,7 @@ El microservicio está certificado bajo los más altos estándares de **Clean Ar
 ## 🛠️ Guía de Inicio Rápido
 
 ### Requisitos Previos
-Configurar las variables de entorno en el archivo [**.env.local**](file:///d:/desarrollos/ABDLogs/.env.local):
+Configurar las variables de entorno en el archivo `.env.local`:
 ```env
 MONGODB_URI=mongodb+srv://...
 DATABASE_URL=mongodb+srv://...
@@ -26,7 +28,7 @@ LOGS_SECRET_TOKEN=...
 ```
 
 ### Comandos de Desarrollo
-Para arrancar el servidor local en el puerto oficial **`3600`**:
+Para arrancar el servidor local en el puerto oficial **`5003`**:
 ```powershell
 # Levantar el entorno local
 .\start.bat
@@ -51,8 +53,8 @@ pnpm build
 
 | Variable de Entorno | Valor en Local (`.env.local`) | Valor en Producción (Vercel) | Razón / Propósito |
 | :--- | :--- | :--- | :--- |
-| **`NEXTAUTH_URL`** | `http://localhost:3600` | `https://abd-logs.vercel.app` | URL base para la autenticación. |
-| **`AUTH_URL`** | `http://localhost:3600` | `https://abd-logs.vercel.app` | URL de callback e inicio del flujo de Auth.js. |
-| **`APP_DOMAIN`** | `localhost:3600` | `abd-logs.vercel.app` | Dominio base para resolución. |
-| **`NEXT_PUBLIC_APP_URL`** | `http://localhost:3600` | `https://abd-logs.vercel.app` | URL pública de la aplicación para APIs y recursos. |
+| **`NEXTAUTH_URL`** | `http://localhost:5003` | `https://abd-logs.vercel.app` | URL base para la autenticación. |
+| **`AUTH_URL`** | `http://localhost:5003` | `https://abd-logs.vercel.app` | URL de callback e inicio del flujo de Auth.js. |
+| **`APP_DOMAIN`** | `localhost:5003` | `abd-logs.vercel.app` | Dominio base para resolución. |
+| **`NEXT_PUBLIC_APP_URL`** | `http://localhost:5003` | `https://abd-logs.vercel.app` | URL pública de la aplicación para APIs y recursos. |
 | **`AUTH_JWT_SECRET`** | `abd-suite-shared-industrial-secret-2026-prod` | `[Misma clave compartida]` | Secreto compartido de firma simétrica para criptografía de sesión federada. |

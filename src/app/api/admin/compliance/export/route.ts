@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona la solicitud POST para exportar datos del inquilino a un archivo ZIP firmado o criptografizado.
+ * @purpose_en Handles the POST request to export tenant data into a signed/optionally-encrypted ZIP file.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:1h1ou2y
+ * @lastUpdated 2026-06-23T23:05:26.557Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess, connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
 import { GDPRService } from '@/services/tenant/gdpr-service';
