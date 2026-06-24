@@ -4,8 +4,8 @@
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:2,sig:glvl1g
- * @lastUpdated 2026-06-22T06:34:13.327Z
+ * @fingerprint exports:1,imports:2,sig:14qi6ws
+ * @lastUpdated 2026-06-24T10:31:36.506Z
  */
 
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
@@ -13,7 +13,7 @@ import { computeBlockHash } from '@ajabadia/satellite-sdk';
 
 export async function verifyTenantChain(tenantId: string): Promise<{ isValid: boolean; invalidLogsCount: number; errorDetails: string[] }> {
   try {
-    const logs = await AuditLog.find({ tenantId }).sort({ createdAt: 1 });
+    const logs = await AuditLog.find({ tenantId }).sort({ _id: 1 });
     let expectedPreviousHash = `GENESIS_BLOCK_${tenantId}`;
     let invalidLogsCount = 0;
     const errorDetails: string[] = [];
@@ -26,7 +26,7 @@ export async function verifyTenantChain(tenantId: string): Promise<{ isValid: bo
       }
 
       const obj = log.toObject();
-      const { hash: storedHash, previousHash: storedPrev, _id, __v, ...cleanPayload } = obj;
+      const { hash: storedHash, previousHash: storedPrev, _id, __v, createdAt, ...cleanPayload } = obj;
       const timestamp = log.createdAt.getTime();
       const calculatedHashWithTs = computeBlockHash(cleanPayload, expectedPreviousHash, timestamp);
       const calculatedHashWithoutTs = computeBlockHash(cleanPayload, expectedPreviousHash);

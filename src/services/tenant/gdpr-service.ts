@@ -80,7 +80,7 @@ let decrypted = decipher.update(rawEncrypted.encryptedData, 'hex', 'utf8');
 decrypted += decipher.final('utf8');
 
 fs.writeFileSync('tenant_data.json', decrypted, 'utf8');
-console.log('Decryption successful! Output saved to tenant_data.json');
+console.log('Decryption operation completed successfully');
 \`\`\`
 `;
       zip.addFile('README.txt', Buffer.from(readme));

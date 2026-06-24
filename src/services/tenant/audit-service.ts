@@ -4,8 +4,8 @@
  * @refactorable true (contains multiple distinct functionalities that could be separated)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:4,sig:i8sael
- * @lastUpdated 2026-06-22T06:34:18.701Z
+ * @fingerprint exports:1,imports:4,sig:66x746
+ * @lastUpdated 2026-06-24T10:31:42.463Z
  */
 
 import { connectDB } from '@ajabadia/satellite-sdk';
@@ -26,7 +26,7 @@ export class AuditService {
 
           const doc = new AuditLog({ appId: process.env.NEXT_PUBLIC_APP_ID || 'gobernanza', createdAt: new Date(), ...params, previousHash });
           const obj = doc.toObject();
-          const { hash: _h, previousHash: _ph, _id, __v, ...cleanPayload } = obj;
+          const { hash: _h, previousHash: _ph, _id, __v, createdAt, ...cleanPayload } = obj;
           const hash = computeBlockHash(cleanPayload, previousHash, doc.createdAt.getTime());
           doc.hash = hash;
           await doc.save();

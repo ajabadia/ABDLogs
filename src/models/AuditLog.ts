@@ -1,11 +1,11 @@
 /**
- * @purpose Gestiona el esquema y modelo para registros de auditoría en una base de datos MongoDB, incluyendo campos para detalles de aplicación, acciones de usuario, información de entidad y metadatos.
+ * @purpose Gestiona el esquema y modelo para registros de auditoria en una base de datos MongoDB, incluyendo campos para detalles de aplicación, acciones de usuario, información de entidad y metadatos.
  * @purpose_en Defines the schema and model for audit logs in a MongoDB database, including fields for application details, user actions, entity information, and metadata.
  * @refactorable false
  * @classification Type Definition
  * @complexity Low
- * @fingerprint exports:2,imports:2,sig:nbux2n
- * @lastUpdated 2026-06-22T06:33:51.836Z
+ * @fingerprint exports:2,imports:2,sig:1kz9dsl
+ * @lastUpdated 2026-06-24T10:31:29.109Z
  */
 
 import { Schema, models, model } from 'mongoose';

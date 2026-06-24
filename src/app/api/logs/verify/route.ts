@@ -1,17 +1,16 @@
 /**
- * @purpose Valida la integridad y consistencia de una cadena de registro auditivo de blockchain.
+ * @purpose Valida la integridad y consistencia de una cadena de registro de auditoria blockchain.
  * @purpose_en Validates the integrity and consistency of a blockchain audit log chain.
  * @refactorable true (contains too many state variables and UI parts)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:4,sig:5ecmkl
- * @lastUpdated 2026-06-22T06:30:07.536Z
+ * @fingerprint exports:1,imports:3,sig:1hd8hl8
+ * @lastUpdated 2026-06-24T10:31:21.501Z
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { connectDB, rateLimitMongodb, computeBlockHash } from '@ajabadia/satellite-sdk';
 import { AuditLog } from '@/models/AuditLog';
-import crypto from 'crypto';
 
 export async function GET(request: NextRequest) {
   // 🚦 Rate limit: 5 verifications per 60s (expensive chain scan)
@@ -48,7 +47,7 @@ export async function GET(request: NextRequest) {
       const tId = currentLog.tenantId;
       
       // Si es el primer bloque de este Tenant, inicializamos su Génesis
-      const expectedPreviousHash = expectedPreviousHashes[tId] || `GENESIS_BLOCK_TENANT_${tId}`;
+      const expectedPreviousHash = expectedPreviousHashes[tId] || `GENESIS_BLOCK_${tId}`;
 
       // Verificamos si el enlace de este bloque apunta correctamente al bloque anterior de SU cadena
       if (currentLog.previousHash !== expectedPreviousHash) {
@@ -57,7 +56,7 @@ export async function GET(request: NextRequest) {
       }
 
       // Recreamos el payload exacto
-      const payloadString = JSON.stringify({
+      const payload = {
         appId: currentLog.appId,
         tenantId: currentLog.tenantId,
         action: currentLog.action,
@@ -69,13 +68,11 @@ export async function GET(request: NextRequest) {
         previousState: currentLog.previousState || {},
         ipAddress: currentLog.ipAddress,
         userAgent: currentLog.userAgent
-      });
+      };
 
       // Recalculamos la firma criptográfica usando el tiempo exacto en que fue guardado
       const timestamp = new Date(currentLog.createdAt).getTime();
-      const calculatedHash = crypto.createHash('sha256')
-                                   .update(currentLog.previousHash + payloadString + timestamp)
-                                   .digest('hex');
+      const calculatedHash = computeBlockHash(payload, expectedPreviousHash, timestamp);
 
       // Si la firma recalculada no coincide con la almacenada, los datos han sido manipulados
       if (calculatedHash !== currentLog.hash) {

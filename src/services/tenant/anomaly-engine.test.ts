@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { AnomalyEngine } from './anomaly-engine';
 import { AuditLog } from '../../models/AuditLog';
 import { AnomalyRecord } from '../../models/AnomalyRecord';
@@ -32,11 +32,15 @@ vi.mock('../../models/AnomalyRecord', () => ({
 
 const TENANT = 'tenant-test';
 
-const makeLeanChain = (results: unknown[]) => ({
-  sort: vi.fn().mockReturnThis(),
-  limit: vi.fn().mockReturnThis(),
-  select: vi.fn().mockResolvedValue(results),
-});
+const makeLeanChain = (results: unknown[]) => {
+  const chain = {
+    sort: vi.fn().mockImplementation(() => chain),
+    limit: vi.fn().mockImplementation(() => chain),
+    select: vi.fn().mockImplementation(() => chain),
+    lean: vi.fn().mockResolvedValue(results),
+  };
+  return chain;
+};
 
 // ─── Suite ────────────────────────────────────────────────────────────────────
 
@@ -45,6 +49,12 @@ describe('AnomalyEngine', () => {
     vi.clearAllMocks();
     // Default: no cooldown-blocking anomaly exists
     vi.mocked(AnomalyRecord.findOne).mockResolvedValue(null);
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-06-24T02:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   // ── runFullScan ────────────────────────────────────────────────────────────
@@ -60,17 +70,22 @@ describe('AnomalyEngine', () => {
     });
 
     it('creates AnomalyRecord when brute force is detected', async () => {
-      // Simulate 3 actors — actor A has a massive spike above mean+3σ
+      // Simulate actor A has a massive spike above mean+3σ
       vi.mocked(AuditLog.aggregate)
         .mockResolvedValueOnce([
-          // detectBruteForce groups: mean ~2, std ~1.5 → threshold ~6.5 → min 6.5
           { _id: { userId: 'hacker', ipAddress: '1.2.3.4' }, count: 20, logIds: ['l1', 'l2'] },
-          { _id: { userId: 'user-a', ipAddress: '5.6.7.8' }, count: 2, logIds: ['l3'] },
+          { _id: { userId: 'user-a', ipAddress: '5.6.7.8' }, count: 1, logIds: ['l3'] },
           { _id: { userId: 'user-b', ipAddress: '9.0.1.2' }, count: 1, logIds: ['l4'] },
+          { _id: { userId: 'user-c', ipAddress: '9.0.1.3' }, count: 1, logIds: ['l5'] },
+          { _id: { userId: 'user-d', ipAddress: '9.0.1.4' }, count: 1, logIds: ['l6'] },
+          { _id: { userId: 'user-e', ipAddress: '9.0.1.5' }, count: 1, logIds: ['l7'] },
+          { _id: { userId: 'user-f', ipAddress: '9.0.1.6' }, count: 1, logIds: ['l8'] },
+          { _id: { userId: 'user-g', ipAddress: '9.0.1.7' }, count: 1, logIds: ['l9'] },
+          { _id: { userId: 'user-h', ipAddress: '9.0.1.8' }, count: 1, logIds: ['l10'] },
+          { _id: { userId: 'user-i', ipAddress: '9.0.1.9' }, count: 1, logIds: ['l11'] },
         ])
         // detectMassiveDeletion returns nothing
         .mockResolvedValueOnce([])
-        // buildSoc2Report not called here
       ;
 
       // detectOffHours & detectNewIp — no logins in current window
@@ -78,6 +93,7 @@ describe('AnomalyEngine', () => {
       vi.mocked(AuditLog.countDocuments).mockResolvedValue(0);
 
       const insertedDoc = {
+        _id: { toString: () => 'anomaly-1' },
         toObject: () => ({ _id: { toString: () => 'anomaly-1' }, type: 'BRUTE_FORCE' }),
       };
       vi.mocked(AnomalyRecord.insertMany).mockResolvedValue([insertedDoc] as unknown as Awaited<ReturnType<typeof AnomalyRecord.insertMany>>);
@@ -173,6 +189,7 @@ describe('AnomalyEngine', () => {
       vi.mocked(AuditLog.countDocuments).mockResolvedValue(0);
 
       const insertedDoc = {
+        _id: { toString: () => 'anomaly-99' },
         toObject: () => ({ _id: { toString: () => 'anomaly-99' }, type: 'NEW_IP' }),
       };
       vi.mocked(AnomalyRecord.insertMany).mockResolvedValue([insertedDoc] as unknown as Awaited<ReturnType<typeof AnomalyRecord.insertMany>>);

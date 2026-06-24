@@ -123,7 +123,7 @@ describe('AuditService', () => {
         previousHash: `GENESIS_BLOCK_${tenantId}`,
       });
       const obj1 = doc1.toObject();
-      const { hash: _h1, previousHash: _ph1, _id: _id1, __v: _v1, ...cleanPayload1 } = obj1;
+      const { hash: _h1, previousHash: _ph1, _id: _id1, __v: _v1, createdAt: _c1, ...cleanPayload1 } = obj1;
       doc1.hash = computeBlockHash(cleanPayload1, doc1.previousHash!, createdAt1.getTime());
 
       // Second Block
@@ -135,7 +135,7 @@ describe('AuditService', () => {
         previousHash: doc1.hash,
       });
       const obj2 = doc2.toObject();
-      const { hash: _h2, previousHash: _ph2, _id: _id2, __v: _v2, ...cleanPayload2 } = obj2;
+      const { hash: _h2, previousHash: _ph2, _id: _id2, __v: _v2, createdAt: _c2, ...cleanPayload2 } = obj2;
       doc2.hash = computeBlockHash(cleanPayload2, doc2.previousHash!, createdAt2.getTime());
 
       const mockSort = vi.fn().mockResolvedValue([doc1, doc2]);
@@ -161,7 +161,7 @@ describe('AuditService', () => {
         previousHash: `GENESIS_BLOCK_${tenantId}`,
       });
       const obj1 = doc1.toObject();
-      const { hash: _h1, previousHash: _ph1, ...cleanPayload1 } = obj1;
+      const { hash: _h1, previousHash: _ph1, _id: _id1, __v: _v1, createdAt: _c1, ...cleanPayload1 } = obj1;
       doc1.hash = computeBlockHash(cleanPayload1, doc1.previousHash!, createdAt1.getTime());
 
       const doc2 = new AuditLog({
@@ -172,7 +172,7 @@ describe('AuditService', () => {
         previousHash: 'mismatched_prev_hash', // Broken!
       });
       const obj2 = doc2.toObject();
-      const { hash: _h2, previousHash: _ph2, ...cleanPayload2 } = obj2;
+      const { hash: _h2, previousHash: _ph2, _id: _id2, __v: _v2, createdAt: _c2, ...cleanPayload2 } = obj2;
       doc2.hash = computeBlockHash(cleanPayload2, doc2.previousHash!, createdAt2.getTime());
 
       const mockSort = vi.fn().mockResolvedValue([doc1, doc2]);
@@ -196,7 +196,7 @@ describe('AuditService', () => {
         previousHash: `GENESIS_BLOCK_${tenantId}`,
       });
       const obj = doc.toObject();
-      const { hash: _h, previousHash: _ph, ...cleanPayload } = obj;
+      const { hash: _h, previousHash: _ph, _id, __v, createdAt: _c, ...cleanPayload } = obj;
       doc.hash = computeBlockHash(cleanPayload, doc.previousHash!, createdAt.getTime());
 
       // Tamper with the document properties after hash was calculated
