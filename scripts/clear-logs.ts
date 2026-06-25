@@ -14,7 +14,7 @@ if (fs.existsSync(envPath)) {
 
 async function clearLogs() {
   try {
-    const { connectDB } = await import('@ajabadia/satellite-sdk');
+    const { connectDB } = await import('@ajabadia/satellite-sdk/db');
     const { AuditLog } = await import('../src/models/AuditLog');
 
     console.log('Connecting to DB...');

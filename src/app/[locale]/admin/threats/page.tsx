@@ -9,7 +9,8 @@
  */
 
 import React from 'react';
-import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { ThreatsDashboard } from '@/components/admin/threats/ThreatsDashboard';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';
 import { ShieldAlert, ArrowLeft } from 'lucide-react';

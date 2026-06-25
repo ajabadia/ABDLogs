@@ -4,12 +4,13 @@
  * @refactorable true (contains too many state variables and UI parts)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:3,sig:1hd8hl8
- * @lastUpdated 2026-06-24T10:31:21.501Z
+ * @fingerprint exports:1,imports:4,sig:92edy1
+ * @lastUpdated 2026-06-25T10:26:19.930Z
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { connectDB, rateLimitMongodb, computeBlockHash } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
+import { rateLimitMongodb, computeBlockHash } from '@ajabadia/satellite-sdk/utils';
 import { AuditLog } from '@/models/AuditLog';
 
 export async function GET(request: NextRequest) {

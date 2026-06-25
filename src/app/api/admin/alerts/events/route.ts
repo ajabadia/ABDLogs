@@ -1,15 +1,16 @@
 /**
- * @purpose Gestiona endpoints API para listar y gestionar alertas, incluyendo recuperar alertas activas o historia de alertas y reconocer o resolver alertas.
+ * @purpose Gestiona endpoints de API para listar y gestionar alertas, incluyendo recuperar alertas activas o historia de alertas y reconocer o resolver alertas.
  * @purpose_en Manages API endpoints for listing and managing alerts, including retrieving active alerts or alert history, and acknowledging or resolving alerts.
  * @refactorable true (contains too many state variables and UI parts)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:3,imports:3,sig:1yrlucg
- * @lastUpdated 2026-06-23T23:05:10.784Z
+ * @fingerprint exports:3,imports:4,sig:1ah0k5p
+ * @lastUpdated 2026-06-25T10:24:19.852Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { AlertService } from '@/services/tenant/alert-service';
 
 export const revalidate = 0;

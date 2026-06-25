@@ -6,11 +6,14 @@ vi.hoisted(() => {
   process.env.LOGS_SERVICE_URL = 'http://localhost:5003/api/logs';
 });
 
-vi.mock('@ajabadia/satellite-sdk', async () => {
+vi.mock('@ajabadia/satellite-sdk/db', async () => ({
+  connectDB: vi.fn(async () => {}),
+}));
+
+vi.mock('@ajabadia/satellite-sdk/utils', async () => {
   const crypto = await import('crypto');
   const stringify = (await import('fast-json-stable-stringify')).default;
   return {
-    connectDB: vi.fn(async () => {}),
     computeBlockHash: vi.fn((payload, previousHash, timestamp) => {
       const payloadString = stringify(payload);
       const entropy = timestamp
@@ -22,7 +25,7 @@ vi.mock('@ajabadia/satellite-sdk', async () => {
 });
 
 import { AuditService } from './audit-service';
-import { computeBlockHash } from '@ajabadia/satellite-sdk';
+import { computeBlockHash } from '@ajabadia/satellite-sdk/utils';
 
 // Helper type for mocked Mongoose query chain
 type MockQuery = { sort: ReturnType<typeof vi.fn> };

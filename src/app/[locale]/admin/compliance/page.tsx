@@ -1,15 +1,16 @@
 /**
  * @purpose Gestiona la página de cumplimiento administrativo para GDPR y regulaciones, maneja autenticación del usuario, selección de inquilinos y muestra una interfaz de cliente de cumplimiento.
  * @purpose_en Renders the admin compliance page for GDPR and regulation, handling user authentication, tenant selection, and displaying a compliance client interface.
- * @refactorable false
+ * @refactorable true (contains too many state variables and UI parts)
  * @classification UI Component
  * @complexity Medium
- * @fingerprint exports:2,imports:7,sig:pdbuy7
- * @lastUpdated 2026-06-22T06:30:30.058Z
+ * @fingerprint exports:2,imports:8,sig:1uf1u70
+ * @lastUpdated 2026-06-25T10:26:50.877Z
  */
 
 import React from 'react';
-import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { ComplianceClient } from '@/components/admin/compliance/ComplianceClient';
 import { ShieldAlert, ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';

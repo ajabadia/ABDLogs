@@ -1,16 +1,16 @@
 /**
- * @purpose Gestiona y recupera amenazas de anomalía para los inquilinos utilizando el AnomalyEngine, manejando autenticación del usuario y gestión de errores.
+ * @purpose Gestiona y recupera amenazas de anomalía para los inquilinos utilizando el AnomalyEngine, maneja autenticación del usuario y gestión de errores.
  * @purpose_en Manages and retrieves anomaly threats for tenants using the AnomalyEngine, handling user authentication and error management.
  * @refactorable true (contains multiple distinct actions)
  * @classification Business Service
  * @complexity Medium
  * @fingerprint exports:8,imports:3,sig:19sr3wc
- * @lastUpdated 2026-06-23T23:05:05.126Z
+ * @lastUpdated 2026-06-25T10:24:00.781Z
  */
 
 'use server';
 
-import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';
 import type { IAnomalyRecord } from '@/models/AnomalyRecord';
 

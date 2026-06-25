@@ -5,11 +5,11 @@
  * @classification UI Component
  * @complexity Medium
  * @fingerprint exports:2,imports:11,sig:boy7a8
- * @lastUpdated 2026-06-22T06:30:22.924Z
+ * @lastUpdated 2026-06-25T10:26:37.927Z
  */
 
 import React from 'react';
-import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
 import { AuditHistoryPanel } from '@/components/admin/audit/AuditHistoryPanel';
 import { IntegrityCheckPanel } from '@/components/admin/audit/IntegrityCheckPanel';
 import { AlertThresholdManager } from '@/components/admin/audit/AlertThresholdManager';
@@ -17,7 +17,7 @@ import { AlertHistoryPanel } from '@/components/admin/audit/AlertHistoryPanel';
 import { ShieldCheck, Activity, ArrowLeft, AlertTriangle, History } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AdminPageHeader } from '@ajabadia/styles';
 
 export const revalidate = 0; // Evitar el cacheado estático de la página administrativa

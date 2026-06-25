@@ -1,14 +1,14 @@
 /**
- * @purpose Valida las permisiones del usuario según reglas de Control de Acceso Base de Acceso (ABAC).
- * @purpose_en Validates user permissions based on Access-Based Access Control (ABAC) rules.
+ * @purpose Valida el acceso del usuario según las políticas ABAC.
+ * @purpose_en Validates user access based on ABAC policies.
  * @refactorable false
- * @classification Helper Utility
+ * @classification Business Service
  * @complexity Low
- * @fingerprint exports:2,imports:1,sig:xe7cw6
- * @lastUpdated 2026-06-23T23:06:31.548Z
+ * @fingerprint exports:2,imports:1,sig:1sueyld
+ * @lastUpdated 2026-06-25T09:18:15.479Z
  */
 
-import { evaluateAccess, InsufficientPrivilegesError } from '@ajabadia/satellite-sdk';
+import { evaluateAccess, InsufficientPrivilegesError } from '@ajabadia/satellite-sdk/auth-middleware';
 
 export interface AssertAccessParams {
   userId: string;
@@ -18,17 +18,13 @@ export interface AssertAccessParams {
   context?: Record<string, unknown>;
 }
 
-/**
- * Asserts that the actor has permission to perform the action on the resource.
- * Throws InsufficientPrivilegesError if the Guardian Engine denies access.
- */
 export async function assertAccess(params: AssertAccessParams): Promise<void> {
   const result = await evaluateAccess({
     tenantId: params.tenantId,
     userId: params.userId,
     resource: params.resource,
     action: params.action,
-    context: params.context
+    context: params.context,
   });
 
   if (!result.allowed) {

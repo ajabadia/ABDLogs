@@ -9,7 +9,7 @@
  */
 
 import { getTranslations } from 'next-intl/server';
-import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
 import { LayoutDashboard, ShieldCheck, Activity, ArrowLeft, ShieldAlert, BrainCircuit } from 'lucide-react';
 import { DashboardActionCard } from '@/components/admin/dashboard/DashboardActionCard';
 import { AdminPageHeader } from '@ajabadia/styles';

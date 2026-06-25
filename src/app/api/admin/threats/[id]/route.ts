@@ -4,13 +4,15 @@
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:2,imports:3,sig:1nj6301
- * @lastUpdated 2026-06-23T23:05:53.028Z
+ * @fingerprint exports:2,imports:5,sig:18uopp2
+ * @lastUpdated 2026-06-25T10:25:49.799Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';
+import { assertAccess } from '@/lib/abac';
 
 export const revalidate = 0;
 
@@ -25,6 +27,7 @@ export async function PATCH(
 ) {
   try {
     const user = await ensureIndustrialAccess('ADMIN');
+    await assertAccess({ userId: user.id || user.email || 'system', tenantId: user.tenantId, resource: 'threats', action: 'dismiss' });
     await connectDB();
 
     const { id } = await params;

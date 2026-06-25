@@ -5,7 +5,7 @@ import { AnomalyRecord } from '../../models/AnomalyRecord';
 
 // ─── Mocks ────────────────────────────────────────────────────────────────────
 
-vi.mock('@ajabadia/satellite-sdk', () => ({
+vi.mock('@ajabadia/satellite-sdk/db', () => ({
   connectDB: vi.fn().mockResolvedValue(undefined),
 }));
 

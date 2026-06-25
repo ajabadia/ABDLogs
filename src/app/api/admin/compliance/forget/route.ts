@@ -4,13 +4,16 @@
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:2,imports:3,sig:1r59m7h
- * @lastUpdated 2026-06-23T23:05:31.899Z
+ * @fingerprint exports:2,imports:6,sig:16u5kpr
+ * @lastUpdated 2026-06-25T10:24:58.221Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { GDPRService } from '@/services/tenant/gdpr-service';
+import { assertAccess } from '@/lib/abac';
 
 export const revalidate = 0;
 
@@ -29,6 +32,7 @@ export async function POST(request: Request) {
 
     // 1. Authorize: Operator must have ADMIN role minimum
     const user = await ensureIndustrialAccess('ADMIN');
+    await assertAccess({ userId: user.id || user.email || 'system', tenantId: user.tenantId, resource: 'compliance/forget', action: 'execute' });
     await connectDB();
 
     const body = await request.json();

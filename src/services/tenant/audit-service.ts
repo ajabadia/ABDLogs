@@ -8,9 +8,9 @@
  * @lastUpdated 2026-06-24T10:31:42.463Z
  */
 
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
-import { computeBlockHash } from '@ajabadia/satellite-sdk';
+import { computeBlockHash } from '@ajabadia/satellite-sdk/utils';
 import { verifyTenantChain } from './audit-chain-verifier';
 
 export class AuditService {

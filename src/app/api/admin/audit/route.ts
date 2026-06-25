@@ -4,15 +4,16 @@
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:2,imports:5,sig:14wtwfp
- * @lastUpdated 2026-06-23T23:05:21.717Z
+ * @fingerprint exports:2,imports:6,sig:vzksrm
+ * @lastUpdated 2026-06-25T10:24:40.515Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { assertAccess } from '@/lib/abac';
 import { AuditService } from '@/services/tenant/audit-service';
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 
 export const revalidate = 0; // Evitar el cacheado estático de la API
 

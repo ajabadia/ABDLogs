@@ -8,7 +8,7 @@
  * @lastUpdated 2026-06-23T23:06:35.513Z
  */
 
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AlertThreshold, IAlertThreshold } from '@/models/AlertThreshold';
 import { AlertEvent, IAlertEvent } from '@/models/AlertEvent';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';

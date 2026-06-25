@@ -1,17 +1,18 @@
 /**
- * @purpose Gestiona solicitudes GET para estadísticas de telemetría agrupadas durante los últimos N días, aplicando límites de velocidad y verificaciones de autenticación.
+ * @purpose Gestiona solicitudes GET para estadísticas de telemetry agregadas durante los últimos N días, aplicando límites de velocidad y verificaciones de autenticación.
  * @purpose_en Handles the GET request for aggregated telemetry stats over the last N days, applying rate limiting and authentication checks.
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:2,imports:4,sig:tv4gug
- * @lastUpdated 2026-06-23T23:05:46.071Z
+ * @fingerprint exports:2,imports:5,sig:10re7v9
+ * @lastUpdated 2026-06-25T10:25:23.615Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { AuditService } from '@/services/tenant/audit-service';
-import { connectDB } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 
 export const revalidate = 0; // Telemetría en vivo, sin caché estática
 

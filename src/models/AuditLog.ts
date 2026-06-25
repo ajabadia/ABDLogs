@@ -9,7 +9,7 @@
  */
 
 import { Schema, models, model } from 'mongoose';
-import { getTenantModel } from '@ajabadia/satellite-sdk';
+import { getTenantModel } from '@ajabadia/satellite-sdk/db';
 
 export interface IAuditLog {
   appId: string;                        // Aplicación origen: 'auth', 'quiz', 'gobernanza'

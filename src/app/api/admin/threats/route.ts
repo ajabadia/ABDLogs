@@ -4,13 +4,16 @@
  * @refactorable true (contains too many state variables and UI parts)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:3,imports:3,sig:1h36xz9
- * @lastUpdated 2026-06-23T23:05:49.649Z
+ * @fingerprint exports:3,imports:6,sig:174kcuq
+ * @lastUpdated 2026-06-25T10:25:43.119Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';
+import { assertAccess } from '@/lib/abac';
 
 export const revalidate = 0;
 
@@ -22,6 +25,7 @@ export const revalidate = 0;
 export async function GET(request: Request) {
   try {
     const user = await ensureIndustrialAccess('ADMIN');
+    await assertAccess({ userId: user.id || user.email || 'system', tenantId: user.tenantId, resource: 'threats', action: 'view' });
     await connectDB();
 
     const { searchParams } = new URL(request.url);
@@ -64,6 +68,7 @@ export async function POST(request: Request) {
     }
 
     const user = await ensureIndustrialAccess('ADMIN');
+    await assertAccess({ userId: user.id || user.email || 'system', tenantId: user.tenantId, resource: 'threats', action: 'scan' });
     await connectDB();
 
     let body: { tenantId?: string } = {};

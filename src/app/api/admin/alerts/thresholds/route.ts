@@ -1,15 +1,16 @@
 /**
- * @purpose Gestiona rutas API para manejar umbral de alertas, incluyendo listado, creación, actualización y eliminación de umbrales.
+ * @purpose Gestiona rutas API para manejar umbral de alertas, incluyendo listar, crear, actualizar y eliminar umbrales.
  * @purpose_en Manages API routes for handling alert thresholds, including listing, creating, updating, and deleting thresholds.
  * @refactorable true (contains multiple endpoints and business logic)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:4,imports:4,sig:nu10kg
- * @lastUpdated 2026-06-23T23:05:15.916Z
+ * @fingerprint exports:4,imports:5,sig:lhfq6l
+ * @lastUpdated 2026-06-25T10:24:29.358Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { AlertService } from '@/services/tenant/alert-service';
 import { thresholdCache } from '@/services/tenant/threshold-cache';
 

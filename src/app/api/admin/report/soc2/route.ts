@@ -4,12 +4,13 @@
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:2,imports:3,sig:1ph3tiu
- * @lastUpdated 2026-06-23T23:05:36.086Z
+ * @fingerprint exports:2,imports:4,sig:og0h9f
+ * @lastUpdated 2026-06-25T10:25:05.741Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AnomalyEngine } from '@/services/tenant/anomaly-engine';
 
 export const revalidate = 0;

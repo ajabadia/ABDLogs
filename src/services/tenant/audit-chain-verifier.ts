@@ -9,7 +9,7 @@
  */
 
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
-import { computeBlockHash } from '@ajabadia/satellite-sdk';
+import { computeBlockHash } from '@ajabadia/satellite-sdk/utils';
 
 export async function verifyTenantChain(tenantId: string): Promise<{ isValid: boolean; invalidLogsCount: number; errorDetails: string[] }> {
   try {

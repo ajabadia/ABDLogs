@@ -4,12 +4,13 @@
  * @refactorable true (contains too many state variables and UI parts)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:3,imports:4,sig:1n20kca
- * @lastUpdated 2026-06-23T23:05:40.353Z
+ * @fingerprint exports:3,imports:5,sig:1e6p7bb
+ * @lastUpdated 2026-06-25T10:25:13.714Z
  */
 
 import { NextResponse } from 'next/server';
-import { ensureIndustrialAccess, connectDB } from '@ajabadia/satellite-sdk';
+import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AuditLog, IAuditLog } from '@/models/AuditLog';
 import { AlertService } from '@/services/tenant/alert-service';
 

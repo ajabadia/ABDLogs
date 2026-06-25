@@ -18,7 +18,7 @@ import { SystemSettings } from "@/components/ui/SystemSettings";
 import { TenantSelector } from "@/components/ui/TenantSelector";
 import { LogsCommandPalette } from "@/components/layout/LogsCommandPalette";
 
-import { getIndustrialSession } from '@ajabadia/satellite-sdk';
+import { getIndustrialSession } from '@ajabadia/satellite-sdk/auth-middleware';
 import { resolveTenantBranding } from "@ajabadia/satellite-sdk";
 
 export default async function LocaleLayout({

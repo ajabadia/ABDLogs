@@ -4,14 +4,15 @@
  * @refactorable true (contains business logic and data manipulation)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:5,sig:ncdaus
- * @lastUpdated 2026-06-22T06:30:02.794Z
+ * @fingerprint exports:1,imports:6,sig:syc89t
+ * @lastUpdated 2026-06-25T10:26:13.540Z
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { connectDB, rateLimitMongodb } from '@ajabadia/satellite-sdk';
+import { connectDB } from '@ajabadia/satellite-sdk/db';
+import { rateLimitMongodb } from '@ajabadia/satellite-sdk/utils';
 import { AuditLog } from '@/models/AuditLog';
-import { computeBlockHash } from '@ajabadia/satellite-sdk';
+import { computeBlockHash } from '@ajabadia/satellite-sdk/utils';
 
 import { z } from 'zod';
 

@@ -5,10 +5,10 @@
  * @classification Business Service
  * @complexity Low
  * @fingerprint exports:2,imports:1,sig:1h1j3g5
- * @lastUpdated 2026-06-23T23:05:57.550Z
+ * @lastUpdated 2026-06-25T10:25:58.796Z
  */
 
-import { createAuthRouteHandler } from '@ajabadia/satellite-sdk';
+import { createAuthRouteHandler } from '@ajabadia/satellite-sdk/auth-middleware';
 
 /**
  * 🛰️ Catch-All SSO Auth Route Handler
