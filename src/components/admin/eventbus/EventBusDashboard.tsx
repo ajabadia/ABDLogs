@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Gestiona y renderiza un panel de control para administrar y mostrar métricas de una cola de eventos, incluyendo tipos de eventos, flujos activos, eventos totales y detalles de los flujos.
+ * @purpose_en Renders a dashboard for managing and displaying metrics of an event bus, including types of events, active streams, total events, and stream details.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Medium
+ * @fingerprint exports:1,imports:1,sig:1dbod47
+ * @lastUpdated 2026-06-26T06:17:43.108Z
+ */
+
 import { useEffect, useState, useCallback } from 'react';
 
 interface StreamInfo {

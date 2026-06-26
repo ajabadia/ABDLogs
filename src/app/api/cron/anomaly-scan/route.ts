@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona solicitudes GET para escaneos de anomalías, se conecta a la base de datos, recupera IDs únicos de tenantes, realiza escaneos completos de anomalías para cada tenante y devuelve los resultados.
+ * @purpose_en Handles the GET request for anomaly scans, connects to the database, retrieves distinct tenant IDs, runs full anomaly scans for each tenant, and returns the results.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:4,sig:9e0svr
+ * @lastUpdated 2026-06-26T06:17:30.256Z
+ */
+
 import { NextResponse } from 'next/server';
 import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AuditLog } from '@/models/AuditLog';

@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Gestiona la integración de eventos de quiz y escaneo de anomalías.
+ * @purpose_en Manages the integration of quiz events and triggers anomaly scans.
+ * @refactorable false
+ * @classification Custom Hook
+ * @complexity Low
+ * @fingerprint exports:1,imports:2,sig:smr3ky
+ * @lastUpdated 2026-06-26T06:17:45.702Z
+ */
+
 import { useEffect, useRef } from 'react';
 import { processQuizEvents } from '@/services/quiz-listener';
 

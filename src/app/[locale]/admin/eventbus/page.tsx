@@ -1,3 +1,13 @@
+/**
+ * @purpose Renderiza el panel administrativo para monitorear eventos del sistema en tiempo real.
+ * @purpose_en Renders the admin dashboard for monitoring system events in real-time.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:2,imports:7,sig:3mtopm
+ * @lastUpdated 2026-06-26T06:17:37.536Z
+ */
+
 import React from 'react';
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
 import { getTranslations } from 'next-intl/server';

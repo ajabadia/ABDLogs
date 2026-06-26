@@ -1,3 +1,15 @@
+/**
+ * @purpose Gestiona eventos de intento de quiz registrando su inicio y finalización, utilizando un consumidor de eventos desde la biblioteca Satellite SDK.
+ * @purpose_en Manages quiz attempt events by logging their start and completion, using an event consumer from the Satellite SDK.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Low
+ * @fingerprint exports:1,imports:2,sig:5yk4wm
+ * @lastUpdated 2026-06-26T06:17:49.703Z
+ */
+
+'use server';
+
 import { createConsumer, SystemEventType } from '@ajabadia/satellite-sdk/event-bus';
 import { AuditService } from '@/services/tenant/audit-service';
 

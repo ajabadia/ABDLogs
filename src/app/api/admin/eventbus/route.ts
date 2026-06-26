@@ -1,3 +1,13 @@
+/**
+ * @purpose Gestiona solicitudes HTTP GET para recuperar datos del bus de eventos, incluyendo información de flujo y recientes eventos, con control de acceso basado en roles.
+ * @purpose_en Handles HTTP GET requests to retrieve event bus data, including stream information and recent events, with role-based access control.
+ * @refactorable false
+ * @classification Business Service
+ * @complexity Medium
+ * @fingerprint exports:2,imports:3,sig:e2tjht
+ * @lastUpdated 2026-06-26T06:17:24.212Z
+ */
+
 import { NextResponse } from 'next/server';
 import { ensureIndustrialAccess } from '@ajabadia/satellite-sdk/auth-middleware';
 import { getAllStreamInfo, getStreamRecentEvents, SystemEventType } from '@ajabadia/satellite-sdk/event-bus';

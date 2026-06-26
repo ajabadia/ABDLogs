@@ -15,9 +15,9 @@
     "test:e2e": "powershell -ExecutionPolicy Bypass -File scripts/run-e2e.ps1"
   },
   "dependencies": {
-    "@ajabadia/i18n": "^1.0.0",
+    "@ajabadia/i18n": "workspace:*",
     "@ajabadia/ecosystem-widgets": "^1.0.10",
-    "@ajabadia/satellite-sdk": "workspace:*",
+    "@ajabadia/satellite-sdk": "^1.0.81",
     "@ajabadia/styles": "^1.0.15",
     "@radix-ui/react-progress": "^1.1.8",
     "adm-zip": "^0.5.17",
