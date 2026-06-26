@@ -1,11 +1,11 @@
 /**
  * @purpose Gestiona el panel de amenazas para un usuario administrativo, manejando control de acceso, resolución de inquilinos y carga inicial de datos anormales.
  * @purpose_en Renders the Threats Dashboard for an admin user, handling access control, tenant resolution, and initial anomaly data loading.
- * @refactorable false
+ * @refactorable true (contains too many state variables and UI parts)
  * @classification UI Component
  * @complexity Medium
- * @fingerprint exports:2,imports:8,sig:klsfdo
- * @lastUpdated 2026-06-22T06:30:46.400Z
+ * @fingerprint exports:2,imports:9,sig:plgox5
+ * @lastUpdated 2026-06-26T10:00:17.298Z
  */
 
 import React from 'react';

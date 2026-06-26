@@ -4,8 +4,8 @@
  * @refactorable true (contains multiple functions with distinct responsibilities)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:2,imports:3,sig:wtwnji
- * @lastUpdated 2026-06-23T23:06:41.182Z
+ * @fingerprint exports:2,imports:4,sig:po2xaf
+ * @lastUpdated 2026-06-26T10:00:26.769Z
  */
 
 import { connectDB } from '@ajabadia/satellite-sdk/db';

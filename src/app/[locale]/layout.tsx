@@ -1,11 +1,11 @@
 /**
- * @purpose Renderiza el layout para la aplicación ABDLogs, incluyendo una navegación lateral, paleta de comandos y notificaciones emergentes.
+ * @purpose Renderiza el layout para la aplicación ABDLogs, incluyendo una navegación lateral, un menú de comandos y notificaciones emergentes.
  * @purpose_en Renders the layout for the ABDLogs application, including a sidebar navigation, command palette, and toaster notifications.
  * @refactorable false
  * @classification UI Component
  * @complexity Medium
- * @fingerprint exports:1,imports:11,sig:1f3jveh
- * @lastUpdated 2026-06-22T06:30:52.091Z
+ * @fingerprint exports:1,imports:12,sig:ghum4t
+ * @lastUpdated 2026-06-26T10:00:21.650Z
  */
 
 import { NextIntlClientProvider } from "next-intl";

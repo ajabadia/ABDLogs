@@ -4,8 +4,8 @@
  * @refactorable true (contains multiple distinct functionalities)
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:5,sig:130rbq3
- * @lastUpdated 2026-06-23T23:06:45.067Z
+ * @fingerprint exports:1,imports:6,sig:10b50pz
+ * @lastUpdated 2026-06-26T10:00:30.149Z
  */
 
 import crypto from 'crypto';

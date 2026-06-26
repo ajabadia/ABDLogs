@@ -80,7 +80,7 @@ export function LogsCommandPalette() {
       shortcut: ['q', 'q'],
       icon: <LogOut className="w-4 h-4" />,
       action: () => {
-        window.location.href = '/api/auth/logout';
+        window.location.href = '/api/abd-auth/logout';
       }
     }
   ];
