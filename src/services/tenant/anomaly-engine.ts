@@ -10,6 +10,7 @@
 
 import { connectDB } from '@ajabadia/satellite-sdk/db';
 import { AuditLog } from '@/models/AuditLog';
+import { AlertEvent } from '@/models/AlertEvent';
 import { AnomalyRecord, IAnomalyRecord, AnomalyType, AnomalySeverity } from '@/models/AnomalyRecord';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -296,8 +297,10 @@ export class AnomalyEngine {
   /**
    * Run all 4 detectors for the given tenant, persist new AnomalyRecords,
    * and return the list of newly created anomalies.
+   * When `createAlerts` is true, HIGH/CRITICAL anomalies also create AlertEvent entries
+   * so they appear on the Alert History panel.
    */
-  static async runFullScan(tenantId: string): Promise<IAnomalyRecord[]> {
+  static async runFullScan(tenantId: string, createAlerts = false): Promise<IAnomalyRecord[]> {
     await connectDB();
     const now = new Date();
 
@@ -336,7 +339,35 @@ export class AnomalyEngine {
       { ordered: false } // Continue even if some fail due to cooldown race
     );
 
-    return inserted.map(doc => ({ ...doc.toObject(), _id: doc._id.toString() })) as IAnomalyRecord[];
+    const records = inserted.map(doc => ({ ...doc.toObject(), _id: doc._id.toString() })) as IAnomalyRecord[];
+
+    // Optionally escalate HIGH/CRITICAL anomalies to AlertEvent
+    if (createAlerts) {
+      const escalable = records.filter(r => r.severity === 'HIGH' || r.severity === 'CRITICAL');
+      if (escalable.length > 0) {
+        await Promise.all(
+          escalable.map(r =>
+            AlertEvent.create({
+              tenantId: r.tenantId,
+              thresholdId: `anomaly:${r.type}`,
+              thresholdName: `Anomalía: ${r.type}`,
+              severity: r.severity === 'CRITICAL' ? 'CRITICAL' : 'WARNING',
+              status: 'ACTIVE',
+              message: r.description,
+              appId: r.appId || 'abdlogs',
+              matchCount: r.count,
+              windowMinutes: 60,
+              matchingLogIds: r.relatedLogIds || [],
+              createdAt: new Date(),
+            }).catch(err => {
+              console.error(`[ANOMALY_ESCALATE] Failed to create AlertEvent for ${r._id}:`, err);
+            })
+          )
+        );
+      }
+    }
+
+    return records;
   }
 
   /**
