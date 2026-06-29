@@ -11,11 +11,17 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { getLocale } from "next-intl/server";
-import { getIndustrialSession } from "@ajabadia/satellite-sdk/auth-middleware";
+import { getIndustrialSession, configureLogger } from "@ajabadia/satellite-sdk";
 import { BrandingStyles } from "@ajabadia/satellite-sdk/styles";
 import { SessionProvider } from "@ajabadia/satellite-sdk/client";
 import { ThemeProvider } from "@ajabadia/ecosystem-widgets";
 import "./globals.css";
+
+configureLogger({
+  endpoint: process.env.LOGS_SERVICE_URL || 'http://localhost:5003/api/logs',
+  token: process.env.LOGS_SECRET_TOKEN,
+  appId: 'ABDLogs',
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
