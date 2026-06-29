@@ -14,7 +14,7 @@ import { getLocale } from "next-intl/server";
 import { getIndustrialSession } from "@ajabadia/satellite-sdk/auth-middleware";
 import { BrandingStyles } from "@ajabadia/satellite-sdk/styles";
 import { SessionProvider } from "@ajabadia/satellite-sdk/client";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@ajabadia/ecosystem-widgets";
 import "./globals.css";
 
 const geistSans = Geist({

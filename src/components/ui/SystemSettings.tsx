@@ -14,6 +14,7 @@ import { useTheme } from 'next-themes';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { SystemSettings as SharedSystemSettings } from '@ajabadia/ecosystem-widgets';
+import { setLocaleCookie } from '@ajabadia/i18n';
 
 interface SystemSettingsProps {
   isAuthenticated?: boolean;
@@ -27,16 +28,7 @@ export function SystemSettings({ isAuthenticated = false }: SystemSettingsProps)
   const pathname = usePathname();
 
   const handleLocaleChange = (newLoc: string) => {
-    let domainSuffix = "";
-    const hostname = window.location.hostname;
-    if (hostname !== "localhost" && hostname !== "127.0.0.1") {
-      const parts = hostname.split('.');
-      if (parts.length >= 2) {
-        domainSuffix = `; domain=.${parts.slice(-2).join('.')}`;
-      }
-    }
-    document.cookie = `NEXT_LOCALE=${newLoc}; path=/; max-age=31536000; SameSite=Lax${domainSuffix}`;
-    
+    setLocaleCookie(newLoc);
     const search = typeof window !== 'undefined' ? window.location.search : '';
     router.replace(`${pathname}${search}`, { locale: newLoc });
   };
