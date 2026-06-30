@@ -31,7 +31,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <HeroHeader
         statusText={h('status')}
         title={
-          <>{'ABD'} <span className="text-[#2dd4bf]">{h('tenants')}</span></>
+          <>{'ABD'} <span className="text-primary">{'Logs'}</span></>
         }
         description={h('tagline')}
       />
@@ -47,7 +47,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6" role="region" aria-label="System Capabilities">
           <div className="p-6 bg-card border border-border rounded-xl flex flex-col gap-4">
-            <div className="p-2.5 bg-secondary/10 border border-border text-[#2dd4bf] w-fit rounded-lg">
+            <div className="p-2.5 bg-secondary/10 border border-border text-primary w-fit rounded-lg">
               <Cpu className="w-5 h-5" />
             </div>
             <h2 className="text-sm font-black uppercase tracking-wider text-foreground">
@@ -61,7 +61,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
 
           <div className="p-6 bg-card border border-border rounded-xl flex flex-col gap-4">
-            <div className="p-2.5 bg-secondary/10 border border-border text-[#2dd4bf] w-fit rounded-lg">
+            <div className="p-2.5 bg-secondary/10 border border-border text-primary w-fit rounded-lg">
               <Database className="w-5 h-5" />
             </div>
             <h2 className="text-sm font-black uppercase tracking-wider text-foreground">
@@ -75,7 +75,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
 
           <div className="p-6 bg-card border border-border rounded-xl flex flex-col gap-4">
-            <div className="p-2.5 bg-secondary/10 border border-border text-[#2dd4bf] w-fit rounded-lg">
+            <div className="p-2.5 bg-secondary/10 border border-border text-primary w-fit rounded-lg">
               <Sliders className="w-5 h-5" />
             </div>
             <h2 className="text-sm font-black uppercase tracking-wider text-foreground">
