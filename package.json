@@ -15,10 +15,10 @@
     "test:e2e": "powershell -ExecutionPolicy Bypass -File scripts/run-e2e.ps1"
   },
   "dependencies": {
-    "@ajabadia/ecosystem-widgets": "workspace:^",
-    "@ajabadia/i18n": "workspace:^",
+    "@ajabadia/ecosystem-widgets": "^1.0.83",
+    "@ajabadia/i18n": "^1.0.42",
     "@ajabadia/satellite-sdk": "^1.0.90",
-    "@ajabadia/styles": "workspace:^",
+    "@ajabadia/styles": "^1.0.93",
     "@radix-ui/react-progress": "^1.1.8",
     "adm-zip": "^0.5.17",
     "class-variance-authority": "0.7.1",
