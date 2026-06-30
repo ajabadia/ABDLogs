@@ -4,8 +4,8 @@
  * @refactorable false
  * @classification UI Component
  * @complexity Medium
- * @fingerprint exports:2,imports:8,sig:1j5afjm
- * @lastUpdated 2026-06-25T10:26:27.461Z
+ * @fingerprint exports:2,imports:8,sig:4wuisx
+ * @lastUpdated 2026-06-30T05:49:32.425Z
  */
 
 import type { Metadata } from "next";

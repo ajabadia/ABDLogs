@@ -1,13 +1,13 @@
 'use client';
 
 /**
- * @purpose Renderiza una pestaña de comandos con varios comandos relacionados a la registro, navegación y configuración del usuario.
+ * @purpose Renderiza una pestaña de comandos con varios comandos relacionados con registro, navegación y configuración del usuario.
  * @purpose_en Renders a command palette with various commands related to logging, navigation, and user settings.
- * @refactorable true (contains too many state variables and UI parts)
+ * @refactorable false
  * @classification UI Component
  * @complexity Low
- * @fingerprint exports:1,imports:5,sig:18ph8v1
- * @lastUpdated 2026-06-23T16:27:11.890Z
+ * @fingerprint exports:1,imports:5,sig:aw6sm2
+ * @lastUpdated 2026-06-30T05:49:35.141Z
  */
 
 import React from 'react';
