@@ -1,3 +1,13 @@
+/**
+ * @purpose Renderiza la página de aterrizaje para la aplicación ABDLogs, incluyendo un encabezado heroico, botón de inicio de sesión y sección de capacidades del sistema.
+ * @purpose_en Renders the landing page for the ABDLogs application, including a hero header, login button, and system capabilities section.
+ * @refactorable true (contains too many state variables and UI parts)
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:6,sig:15x2gnp
+ * @lastUpdated 2026-06-29T22:24:09.629Z
+ */
+
 import { getTranslations } from 'next-intl/server';
 import { ArrowRight, Cpu, Sliders, Database, ShieldCheck } from 'lucide-react';
 import { HeroHeader, LandingPageLayout, SubtleLoginButton } from '@ajabadia/styles';

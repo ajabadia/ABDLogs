@@ -1,5 +1,15 @@
 'use client';
 
+/**
+ * @purpose Renderiza un componente de navegación lateral con enlaces y branding según la sesión del usuario.
+ * @purpose_en Renders a sidebar navigation component with links and branding based on user session.
+ * @refactorable false
+ * @classification UI Component
+ * @complexity Low
+ * @fingerprint exports:1,imports:4,sig:1ayl8pj
+ * @lastUpdated 2026-06-29T22:24:11.700Z
+ */
+
 import React from 'react';
 import { Home, Terminal, ShieldCheck } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
@@ -60,7 +70,7 @@ export function SidebarNavigation({ session, logoUrl, tenantSelectorSlot, settin
       session={session}
       logoUrl={finalLogoUrl}
       links={allLinks}
-      brandName={t('appTitle') || 'ABD SYSTEM'}
+      brandName={t('appTitle') || 'ABD Suite'}
       appBadge="LOGS"
       tenantSelectorSlot={tenantSelectorSlot}
       settingsSlot={settingsSlot}

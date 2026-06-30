@@ -52,7 +52,7 @@ export default async function RootLayout({
       <head>
         <BrandingStyles />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased navbar-top-layout`} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased navbar-top-layout selection:bg-primary/30`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
