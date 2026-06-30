@@ -1,19 +1,20 @@
 'use client';
 
 /**
- * @purpose Renderiza un panel de control que muestra datos de telemetry para una aplicación, incluyendo gráficas de actividad y gráficas de distribución de aplicaciones.
+ * @purpose Renderiza un panel de control que muestra datos de telemetry para una aplicación, incluyendo gráficas de actividad y distribución de aplicaciones.
  * @purpose_en Renders a dashboard displaying telemetry data for an application, including activity charts and app distribution charts.
  * @refactorable true (contains too many state variables and UI parts)
  * @classification UI Component
  * @complexity Medium
- * @fingerprint exports:1,imports:6,sig:1ef932h
- * @lastUpdated 2026-06-22T06:32:34.537Z
+ * @fingerprint exports:1,imports:7,sig:1ree079
+ * @lastUpdated 2026-06-30T13:01:41.490Z
  */
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { ActivityChart } from './ActivityChart';
 import { AppDistributionChart } from './AppDistributionChart';
+import { StorageProviderBadge } from './storage-provider-badge';
 import { Activity, ShieldAlert, BarChart3, Loader2, CalendarDays } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -103,6 +104,10 @@ export function TelemetryDashboard({ tenantId }: { tenantId: string }) {
             <AppDistributionChart data={barChartData} />
           </div>
         </div>
+      </div>
+
+      <div className="w-full max-w-xs">
+        <StorageProviderBadge />
       </div>
     </div>
   );
