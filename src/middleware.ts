@@ -4,13 +4,14 @@
  * @refactorable false
  * @classification Business Service
  * @complexity Medium
- * @fingerprint exports:1,imports:3,sig:11ojn7g
- * @lastUpdated 2026-06-23T16:27:19.707Z
+ * @fingerprint exports:2,imports:4,sig:p20w7n
+ * @lastUpdated 2026-07-01T08:40:54.777Z
  */
 
 import { withIndustrialAuth } from '@ajabadia/satellite-sdk/auth-middleware';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
+import { NextRequest } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -23,7 +24,16 @@ const proxy = withIndustrialAuth({
   intlMiddleware,
 } as unknown as Parameters<typeof withIndustrialAuth>[0]);
 
-export default proxy;
+export default async function middleware(request: NextRequest) {
+  const response = await proxy(request);
+  if (response.headers.get('content-type')?.includes('text/html')) {
+    response.headers.set(
+      'Content-Security-Policy',
+      "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' *; object-src 'none'; base-uri 'self'; form-action 'self'"
+    );
+  }
+  return response;
+}
 
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|.*\\.svg$).*)'],
